@@ -51,7 +51,6 @@ final class OEmbed
                 $embedCode = $oembed->oembed;
 
                 if (! $embedCode) {
-                    Cache::forget("opengraph_{$href}");
                     $embedCode = Cache::remember('opengraph_' . $href, now()->addDay(), function() use ($oembed) {
                         return static::getOpenGraphBlock($oembed->html);
                     });
