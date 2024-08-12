@@ -1,7 +1,7 @@
 ---
 title: 3 Rules For Efficient Communication
 slug: 3-rules-for-efficient-communication
-published_at: 
+published_at: 2024-07-12
 updated_at: 
 strapline: 
 synopsis: No hello, don't ask to ask, and the XY problem.
