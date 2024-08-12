@@ -59,7 +59,7 @@ Route::get('/{article:slug}.png', function (Article $article) {
         ->accentColor('#f97316')
         ->url($article->getUrl())
         ->title($article->getAlternateTitle())
-        ->description($article->synopsis)
+        ->description($article->synopsis ?? '')
         ->background(new SimonHamp\TheOg\Theme\Background(storage_path('opengraph-background.png')))
         ->layout(new OpengraphImageLayout)
         ->border(BorderPosition::None)

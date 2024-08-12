@@ -22,35 +22,51 @@ class OpengraphImageLayout extends AbstractLayout
 
     public function features(): void
     {
-        $this->addFeature((new TextBox())
-            ->name('title-shadow')
-            ->text($this->title())
-            ->color($this->config->theme->getUrlColor())
-            ->font(new OpengraphOstrichSansRoundedFont())
-            ->size(60)
-            ->vAlign('center')
-            ->hAlign('center')
-            ->box($this->mountArea()->box->width(), 600)
-            ->position(
-                x: 642,
-                y: 302,
-            )
-        );
+        $titleCharacterLength = strlen($this->title());
 
-        $this->addFeature((new TextBox())
-            ->name('title')
-            ->text($this->title())
-            ->color($this->config->theme->getTitleColor())
-            ->font(new OpengraphOstrichSansRoundedFont())
-            ->size(60)
-            ->vAlign('center')
-            ->hAlign('center')
-            ->box($this->mountArea()->box->width(), 600)
-            ->position(
-                x: 640,
-                y: 300,
-            )
-        );
+        $titleSize = match (true) {
+            $titleCharacterLength >= 80 => 40,
+            $titleCharacterLength >= 60 => 50,
+            $titleCharacterLength >= 40 => 60,
+            $titleCharacterLength >= 30 => 70,
+            default => 80,
+        };
+
+        for ($i = -1; $i <= 1; $i++) {
+            for ($j = -1; $j <= 1; $j++) {
+                $this->addFeature((new TextBox())
+                    ->name("title-shadow-{$i}-{$j}")
+                    ->text($this->title())
+                    ->color($this->config->theme->getUrlColor())
+                    ->font(new OpengraphOstrichSansRoundedFont())
+                    ->size($titleSize)
+                    ->hAlign('center')
+                    ->box(600, 600)
+                    ->position(
+                        x: 642 + $i,
+                        y: 302 + $j,
+                    )
+                );
+            }
+        }
+
+        for ($i = -1; $i <= 1; $i++) {
+            for ($j = -1; $j <= 1; $j++) {
+                $this->addFeature((new TextBox())
+                    ->name("title-{$i}-{$j}")
+                    ->text($this->title())
+                    ->color($this->config->theme->getTitleColor())
+                    ->font(new OpengraphOstrichSansRoundedFont())
+                    ->size($titleSize)
+                    ->hAlign('center')
+                    ->box(600, 600)
+                    ->position(
+                        x: 640 + $i,
+                        y: 300 + $j,
+                    )
+                );
+            }
+        }
 
         if ($description = $this->description()) {
             $this->addFeature((new TextBox())
@@ -58,14 +74,14 @@ class OpengraphImageLayout extends AbstractLayout
                 ->text($description)
                 ->color($this->config->theme->getDescriptionColor())
                 ->font($this->config->theme->getDescriptionFont())
-                ->size(28)
+                ->size(40)
                 ->vAlign('center')
                 ->hAlign('center')
                 ->box($this->mountArea()->box->width(), 240)
                 ->position(
                     x: 0,
                     y: 80,
-                    relativeTo: fn() => $this->getFeature('title')->anchor(Position::BottomLeft),
+                    relativeTo: fn() => $this->getFeature('title-0-0')->anchor(Position::BottomLeft),
                 )
             );
         }
