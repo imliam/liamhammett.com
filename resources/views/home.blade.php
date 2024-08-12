@@ -36,20 +36,17 @@
     </x-slot>
 
     <x-container>
-        <div class="py-24 sm:py-32">
-            <div class="px-6 mx-auto max-w-7xl lg:px-8">
-                <div class="max-w-2xl mx-auto">
-                    <div class="pt-10 mt-10 space-y-16 sm:mt-16 sm:pt-16">
-                        @foreach ($articlesByYear as $year => $articles)
-                            <x-divider>{{ $year }}</x-divider>
-                            <div class="grid gap-16 sm:gap-8">
-                                @foreach ($articles as $article)
-                                    <x-short-listing :article="$article" />
-                                    {{-- <x-divider /> --}}
-                                @endforeach
-                            </div>
-                        @endforeach
-                    </div>
+        <div class="px-6 mx-auto max-w-7xl lg:px-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="pt-10 mt-10 space-y-16 sm:mt-16 sm:pt-16">
+                    @foreach ($articlesByYear as $year => $articles)
+                        <x-divider>{{ $year }}</x-divider>
+                        <div class="grid gap-16 sm:gap-8">
+                            @foreach ($articles as $article)
+                                <x-short-listing :article="$article" />
+                            @endforeach
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

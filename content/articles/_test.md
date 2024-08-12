@@ -60,7 +60,7 @@ This is a normal element.
 {.bg-red-300 .mx-break-out .rounded-2xl .px-8 .py-4}
 This is a breakout element.
 
-<div class="bg-blue-300 text-blue-900 mx-full py-16 my-16 full-width-quote">
+<div class="bg-blue-300 text-blue-900 mx-full py-16 my-16 px-8 full-width-quote">
 <div class="container mx-auto max-w-3xl">
 <h2>Full-width element</h2>
 

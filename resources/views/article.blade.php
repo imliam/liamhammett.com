@@ -52,7 +52,7 @@
     </x-slot>
 
     <x-container>
-        <div class="px-6 py-32 lg:px-8">
+        <div class="px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-base leading-7 text-gray-700 space-y-8 relative">
                 <span class="size-80 text-gray-50 absolute right-0 rotate-[35deg] -z-10 -mt-16">
                     {!! svg('article-types.' . $article->type ?? 'article') !!}
