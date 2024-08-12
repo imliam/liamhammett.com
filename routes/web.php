@@ -42,6 +42,43 @@ Route::feeds();
 
 require_once __DIR__ . '/redirects.php';
 
+Route::get('/{article:slug}.png', function (Article $article) {
+    if ($article->hasOpengraphImage()) {
+        return response(file_get_contents($article->getOpengraphImageLocalPath()))->header('Content-Type', 'image/png');
+    }
+
+    $image = (new SimonHamp\TheOg\Image())
+        ->accentColor('#f97316')
+        ->border()
+        ->url($article->getUrl())
+        ->title($article->getAlternateTitle())
+        ->description($article->synopsis)
+        ->background(SimonHamp\TheOg\Background::GridMe, 0.2)
+        ->layout(new SimonHamp\TheOg\Layout\Layouts\GitHubBasic)
+        ->save($article->getOpengraphImageLocalPath());
+
+    return response($image->toString())->header('Content-Type', 'image/png');
+});
+
+Route::get('/{article:slug}.html', function (Article $article) {
+    return $article->render();
+});
+
+Route::get('/{article:slug}.txt', function (Article $article) {
+    // strip tags from $article->render() but make any <a> tags into the format "text (link)" in plaintext
+    $renderedContent = $article->render();
+
+    $renderedContent = preg_replace_callback('/<a\s+(?:[^>]*?\s+)?href=(["\'])(.*?)\1[^>]*>(.*?)<\/a>/i', function ($matches) {
+        $linkText = $matches[3];
+        $linkUrl = $matches[2];
+        return "$linkText ($linkUrl)";
+    }, $renderedContent);
+
+    $renderedContent = strip_tags($renderedContent);
+
+    return response($renderedContent)->header('Content-Type', 'text/plain');
+});
+
 Route::get('/{article:slug}', function (Article $article) {
     return view('article', [
         'article' => $article

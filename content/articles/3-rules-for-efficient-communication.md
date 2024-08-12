@@ -6,12 +6,12 @@ updated_at:
 strapline: 
 synopsis: No hello, don't ask to ask, and the XY problem.
 tags:
-    - 
+    - Productivity
 ---
 
 If you work remotely and talk to a lot of different people throughout the day, you'll know that people can take up your time with unnecessary pleasantries and formalities.
 
-It might be polite, but when you're talking to 20 people a day who do the same thing, it can eat up your time. Here are three rules for efficient communication that can help you save time and get to the point faster.
+It might be polite, but when you're talking to 20 people a day who do the same thing, you'll be losing half your day without realising it. Here are three rules for efficient communication that can help you save time and get to the point faster.
 
 - **[No hello](https://nohello.net/en/)** is the idea that you should get straight to the point when messaging someone asynchronously. If you're sending a chat message, don't start with "Hello" or "Hi" and wait for a response before getting to the point. Just start with the point you want to make, and the recipient can respond when they're ready.
 

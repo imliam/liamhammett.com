@@ -21,7 +21,7 @@
         @isset($article->synopsis)
             <meta name="twitter:description" content="{{ $article->synopsis }}">
         @endisset
-        {{-- <meta name="twitter:image" content="https://mywebsite.com/images/blog-1/cover-image.webp"> --}}
+        <meta name="twitter:image" content="{{ $article->getOpengraphImageUrl() }}">
 
         <!-- Open Graph -->
         <meta property="og:type" content="website">
@@ -29,8 +29,7 @@
         @isset($article->synopsis)
             <meta property="og:description" content="Theres really a lot of great stuff in here...">
         @endisset
-        {{-- <meta property="og:image" content="https://mywebsite.com/images/blog-1/cover-image.webp"> --}}
-        {{-- <meta property="og:image" content="https://mywebsite.com/images/blog-1/another-image.webp"> --}}
+        <meta property="og:image" content="{{ $article->getOpengraphImageUrl() }}">
         <meta property="og:url" content="{{ $article->getUrl() }}">
 
         <!-- JSON-LD -->
@@ -80,7 +79,7 @@
                 <div class="prose max-w-[65ch] mx-auto">
                     {!! $article->render() !!}
                 </div>
-                <x-divider class="flex flex-col gap-4 items-center justify-center">
+                <x-divider class="flex flex-col gap-4 items-center justify-center bg-noise before:opacity-25">
                     <img src="https://res.cloudinary.com/liam/image/upload/v1675208772/liamhammett.com/avatar.jpg" alt="Photo of Liam Hammett" class="rounded-full size-32 {{ random_rotation() }}" />
                     <div class="text-center">
                         <div class="text-sm font-light">written by</div>

@@ -200,7 +200,7 @@ class Article extends Model implements Feedable
                 $arrowAfter = '';
 
                 if (random_int(0, 1) === 1) {
-                    $arrowBefore = '<span class="-mt-4 h-4 w-4 flex-none text-gray-400 ' . random_rotation() . '">' . $arrow . '</span>';
+                    $arrowBefore = '<span class="flex-none w-4 h-4 -mt-4 text-gray-400 ' . random_rotation() . '">' . $arrow . '</span>';
                 } else {
                     $arrowAfter = '<span class="scale-x-[-1] -mt-4 h-4 w-4 flex-none text-gray-400 ' . random_rotation() . '">' . $arrow . '</span>';
                 }
@@ -246,7 +246,7 @@ class Article extends Model implements Feedable
                 $attributes .= ' class="' . htmlspecialchars($newHeadingClasses) . '"';
             }
 
-            $anchorLink = '<a href="#' . htmlspecialchars($id) . '" class="text-orange-500 no-underline absolute ' . $offset . ' invisible group-hover:visible" aria-hidden="true">'
+            $anchorLink = '<a href="#' . htmlspecialchars($id) . '" class="absolute text-orange-500 no-underline ' . $offset . ' invisible group-hover:visible" aria-hidden="true">'
                 . str_repeat('#', $level)
                 . '</a>';
 
@@ -270,7 +270,7 @@ class Article extends Model implements Feedable
         $callback = function ($matches) {
             $codeBlock = $matches[3];
 
-            $button = '<button class="absolute top-4 right-4 px-2 py-1 rounded-xl text-xs bg-gray-700 text-gray-400 uppercase font-semibold tracking-wide size-8 flex items-center justify-center hover:bg-gray-600" aria-label="Copy code to clipboard" title="Copy code to clipboard" x-on:click="$clipboard($root.textContent.trim())">' . svg('clipboard') . '</button>';
+            $button = '<button class="absolute flex items-center justify-center px-2 py-1 text-xs font-semibold tracking-wide text-gray-400 uppercase bg-gray-700 top-4 right-4 rounded-xl size-8 hover:bg-gray-600" aria-label="Copy code to clipboard" title="Copy code to clipboard" x-on:click="$clipboard($root.textContent.trim())">' . svg('clipboard') . '</button>';
 
             return "<div class=\"relative\" x-data><pre{$matches[1]}><code{$matches[2]}>{$codeBlock}</code></pre>{$button}</div>";
         };
@@ -326,5 +326,20 @@ class Article extends Model implements Feedable
     public static function getFeedItems()
     {
         return Article::query()->whereNotNull('published_at')->get();
+    }
+
+    public function getOpengraphImageUrl(): string
+    {
+        return $this->getUrl() . '.png';
+    }
+
+    public function getOpengraphImageLocalPath(): string
+    {
+        return "images/opengraph/{$this->slug}.png";
+    }
+
+    public function hasOpengraphImage(): bool
+    {
+        return file_exists(public_path($this->getOpengraphImageLocalPath()));
     }
 }

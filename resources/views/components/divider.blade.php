@@ -4,7 +4,7 @@
     </div>
     @isset($slot)
         <div class="relative flex justify-center">
-            <span class="px-3 text-base font-semibold leading-6 text-gray-900 bg-white rounded-2xl bg-noise">{{ $slot }}</span>
+            <span class="px-3 text-base font-semibold leading-6 text-gray-900 bg-white rounded-2xl">{{ $slot }}</span>
         </div>
     @endisset
 </div>

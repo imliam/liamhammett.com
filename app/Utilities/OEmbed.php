@@ -24,6 +24,7 @@ final class OEmbed
         $anchors = $xpath->query('//p/a[@href]');
 
         foreach ($anchors as $node) {
+            /** @var \DOMElement $node */
             if (! $node->hasAttribute('href')) {
                 continue;
             }
