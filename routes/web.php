@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\Article;
+use App\Utilities\OpengraphImageLayout;
 use App\ValueObjects\Tag;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Route;
+use SimonHamp\TheOg\BorderPosition;
+use SimonHamp\TheOg\Theme\Theme;
 
 Route::get('/', function () {
     $articlesByYear = Article::query()->whereNotNull('published_at')->get()->sortByDesc('published_at')->groupBy(fn (Article $article) => $article->published_at->year)->all();
@@ -44,7 +47,7 @@ Route::feeds();
 require_once __DIR__ . '/redirects.php';
 
 Route::get('/{article:slug}.png', function (Article $article) {
-    if ($article->hasOpengraphImage()) {
+    if (!app()->environment('local') && $article->hasOpengraphImage()) {
         return response(file_get_contents($article->getOpengraphImageLocalPath()))->header('Content-Type', 'image/png');
     }
 
@@ -54,12 +57,12 @@ Route::get('/{article:slug}.png', function (Article $article) {
 
     $image = (new SimonHamp\TheOg\Image())
         ->accentColor('#f97316')
-        ->border()
         ->url($article->getUrl())
         ->title($article->getAlternateTitle())
         ->description($article->synopsis)
-        ->background(SimonHamp\TheOg\Background::GridMe, 0.2)
-        ->layout(new SimonHamp\TheOg\Layout\Layouts\GitHubBasic)
+        ->background(new SimonHamp\TheOg\Theme\Background(storage_path('opengraph-background.png')))
+        ->layout(new OpengraphImageLayout)
+        ->border(BorderPosition::None)
         ->save($article->getOpengraphImageLocalPath());
 
     return response($image->toString())->header('Content-Type', 'image/png');
