@@ -1,10 +1,10 @@
-<article class="rounded-2xl hover:bg-gray-100 px-8 py-4 relative -mx-8 -my-4 group">
+<article class="rounded-2xl hover:bg-gray-100 px-2 sm:px-8 py-4 relative group">
     <a href="{{ $article->getUrl() }}" class="flex flex-col sm:flex-row items-center justify-center content-center">
         <span class="size-6 text-gray-200 sm:mr-8">
             {!! svg('article-types.' . $article->type ?? 'article') !!}
         </span>
 
-        <span class="flex-1 text-lg font-semibold text-gray-900 group-hover:text-gray-600">
+        <span class="flex-1 text-lg text-center sm:text-left font-semibold text-gray-900 group-hover:text-gray-600">
             {{ $article->title }}
         </span>
 

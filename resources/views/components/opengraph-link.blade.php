@@ -1,6 +1,6 @@
-<a href="{{ $url }}" class="flex flex-col md:flex-row rounded-2xl p-4 border border-gray-400 font-sans text-sm bg-white hover:bg-gray-100 no-markup justify-center items-center no-underline" target="_blank">
+<a href="{{ $url }}" class="flex flex-col sm:flex-row rounded-2xl p-4 border border-gray-400 font-sans text-sm shadow-depth bg-white hover:bg-gray-100 no-markup justify-center items-center no-underline" target="_blank">
     @if ($imageUrl)
-        <img src="{{ $imageUrl }}" class="my-0 md:mr-8 h-32 rounded object-contain no-shadow" alt="{{ $siteName }}">
+        <img src="{{ $imageUrl }}" class="my-0 sm:mr-8 h-32 rounded object-contain no-shadow" alt="{{ $siteName }}">
     @endif
 
     <div class="flex flex-col justify-center">

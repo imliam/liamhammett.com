@@ -7,13 +7,13 @@
         <link rel="canonical" href="{{ $article->getUrl() }}">
         <meta name="keywords" content="{{ implode(',', $article->tags) }}">
 
-        @isset ($article->next_article)
-            <link rel="next" href="{{ $article->next_article->getUrl() }}" >
-        @endisset
+        @if ($article->hasNextArticle())
+            <link rel="next" href="{{ $article->getNextArticle()->getUrl() }}" >
+        @endif
 
-        @isset ($article->previous_article)
-            <link rel="prev" href="{{ $article->previous_article->getUrl() }}" >
-        @endisset
+        @if ($article->hasPreviousArticle())
+            <link rel="prev" href="{{ $article->getPreviousArticle()->getUrl() }}" >
+        @endif
 
         <!-- Twitter Cards -->
         <meta name="twitter:card" content="summary_large_image">

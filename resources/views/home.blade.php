@@ -41,7 +41,7 @@
                 <div class="pt-10 mt-10 space-y-16 sm:mt-16 sm:pt-16">
                     @foreach ($articlesByYear as $year => $articles)
                         <x-divider>{{ $year }}</x-divider>
-                        <div class="grid gap-16 sm:gap-8">
+                        <div class="flex flex-col gap-8">
                             @foreach ($articles as $article)
                                 <x-short-listing :article="$article" />
                             @endforeach

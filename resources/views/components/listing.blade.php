@@ -1,4 +1,4 @@
-<article class="rounded-2xl hover:bg-gray-100 px-8 py-4 relative -mx-8 -my-4">
+<article class="rounded-2xl hover:bg-gray-100 px-8 py-4 relative">
     <a href="{{ $article->getUrl() }}" class="flex flex-col items-start justify-between">
         <div class="flex items-center text-xs gap-x-4">
             <time datetime="{{ $article->published_at->toDateString() }}" class="text-gray-500">{{ $article->published_at->toFormattedDateString() }}</time>
