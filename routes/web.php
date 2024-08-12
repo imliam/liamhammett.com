@@ -2,6 +2,7 @@
 
 use App\Models\Article;
 use App\ValueObjects\Tag;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,6 +46,10 @@ require_once __DIR__ . '/redirects.php';
 Route::get('/{article:slug}.png', function (Article $article) {
     if ($article->hasOpengraphImage()) {
         return response(file_get_contents($article->getOpengraphImageLocalPath()))->header('Content-Type', 'image/png');
+    }
+
+    if (!file_exists(dirname($article->getOpengraphImageLocalPath()))) {
+        mkdir(dirname($article->getOpengraphImageLocalPath()), 0777, true);
     }
 
     $image = (new SimonHamp\TheOg\Image())
