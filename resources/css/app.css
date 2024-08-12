@@ -20,8 +20,14 @@
 }
 
 html {
-    font-size: 20px;
+    font-size: 18px;
     hanging-punctuation: first last;
+}
+
+@media screen(sm) {
+    html {
+        font-size: 20px;
+    }
 }
 
 img {

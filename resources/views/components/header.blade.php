@@ -4,7 +4,7 @@
     <div class="-rotate-12 sm:-rotate-3 -mx-64 -mt-36 left-0 right-0 bg-noise">
         <div class="{{ $homepage ? 'h-96' : 'h-64' }} w-full bg-orange-500 z-20 relative flex items-end justify-center -ml-4">
             <div class="flex flex-col gap-2 font-title text-center px-4">
-                <h1 class="{{ $homepage ? 'text-6xl sm:text-8xl' : 'text-4xl sm:text-6xl' }} font-semibold uppercase tracking-wide leading-1 text-pretty mt-8">
+                <h1 class="{{ $homepage ? 'text-8xl' : 'text-6xl' }} font-semibold uppercase tracking-wide leading-1 text-pretty mt-8">
                     <a href="{{ url('/') }}" class="text-shadow-sq shadow-orange-500 hover:text-orange-500 hover:shadow-gray-900">
                         Hi, I'm
                         <span class="font-black">Liam</span>
