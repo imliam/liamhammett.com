@@ -11,6 +11,9 @@
         <title>{{ config('app.name') }}</title>
     @endisset
 
+    <link rel="icon" type="image/svg+xml" href="{{ url('favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ url('favicon.png') }}">
+
     @foreach (config('feed.feeds') as $feed)
         <link rel="alternate" type="application/rss+{{ $feed['format'] }}" title="{{ $feed['title'] }}" href="{{ $feed['url'] }}" />
     @endforeach
