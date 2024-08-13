@@ -6,7 +6,7 @@ updated_at:
 strapline: 
 synopsis: A collection of quotes that I've found interesting and insightful.
 tags:
-    - 
+    - Productivity
 ---
 
 This page contains a collection of quotes that I've found interesting and insightful. I'll keep adding to it as I come across more.
@@ -54,6 +54,8 @@ This page contains a collection of quotes that I've found interesting and insigh
 <x-quote name="Frederic Marx">The most beautiful piece of art is not gonna do you any favors if it blocks the entrance to your house.</x-quote>
 
 <x-quote name="Sahil Lavingia" title="Founder of Gumroad">If you build a product to solve your own problem, you will have at least one user - more than most startups ever get.</x-quote>
+
+<x-quote name="Seth Goden">Whoever fails the most wins.</x-quote>
 
 ## Quotes About Communication
 
