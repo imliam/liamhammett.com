@@ -5,7 +5,7 @@ published_at: 2023-01-31
 strapline: ""
 synopsis: ""
 tags:
-    -
+    - Personal
 ---
 
 It feels weird to write a "2022 in review" post on a blog where I haven't posted at all for the year in question, let alone at the very end of January when most people write posts like this at the start of the year, but hey, and it's better to write something late rather than never!
