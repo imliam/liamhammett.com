@@ -325,7 +325,7 @@ class Article extends Model implements Feedable
 
     public static function getFeedItems()
     {
-        return Article::query()->whereNotNull('published_at')->get();
+        return Article::query()->whereNotNull('published_at')->orderByDesc('published_at')->get();
     }
 
     public function getOpengraphImageUrl(): string
