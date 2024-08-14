@@ -1,7 +1,7 @@
 ---
 title: A URL is valid PHP code?!
 slug: a-url-is-valid-php-code
-published_at: 
+published_at: 2024-08-14
 updated_at: 
 strapline: 
 synopsis: You can put a link straight into your PHP code, and it'll be fine, even if it's not in a comment!
