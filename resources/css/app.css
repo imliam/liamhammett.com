@@ -188,24 +188,22 @@ img {
 }
 
 .shiki .add {
-    @apply bg-green-600;
+    @apply bg-green-800;
     padding: 3px 0;
 
     &:after {
         content: "+";
-        left: 0;
-        @apply absolute -ml-2 text-green-300;
+        @apply absolute left-2 text-green-300;
     }
 }
 
 .shiki .del {
-    @apply bg-red-600;
+    @apply bg-red-800;
     padding: 3px 0;
 
     &:after {
         content: "-";
-        left: 0;
-        @apply absolute -ml-2 text-red-300;
+        @apply absolute left-2 text-red-300;
     }
 }
 
