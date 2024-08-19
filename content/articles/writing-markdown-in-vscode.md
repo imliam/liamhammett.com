@@ -1,10 +1,10 @@
 ---
 title: Writing Markdown in VSCode
 slug: writing-markdown-in-vscode
-published_at: 
+published_at: 2024-08-19
 updated_at: 
 strapline: 
-synopsis: 
+synopsis: Some tips to make writing Markdown prose in VSCode a little bit nicer
 tags:
     - VSCode
     - Markdown
@@ -37,7 +37,7 @@ I like to give myself:
 
 The result of this is a nice, clean, distraction-free writing environment that's easy on the eyes. Even better than that, it's something you can put side-by-side with your code without affecting the coding experience at all.
 
-![Code and markdown side-by-side in VSCode](https://res.cloudinary.com/liam/image/upload/v1723250036/vscode-markdown-code-side-by-side.png)
+![A screenshot of my real VSCode window showing code and markdown side-by-side](https://res.cloudinary.com/liam/image/upload/v1723250036/vscode-markdown-code-side-by-side.png)
 
 ```json
 // settings.json
