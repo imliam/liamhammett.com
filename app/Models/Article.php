@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Orbit\Concerns\Orbital;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Schema\Blueprint;
 use Spatie\LaravelMarkdown\MarkdownRenderer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -325,7 +326,7 @@ class Article extends Model implements Feedable
 
     public static function getFeedItems()
     {
-        return Article::query()->whereNotNull('published_at')->orderByDesc('published_at')->get();
+        return Article::query()->published()->orderByDesc('published_at')->get();
     }
 
     public function getOpengraphImageUrl(): string
@@ -341,5 +342,18 @@ class Article extends Model implements Feedable
     public function hasOpengraphImage(): bool
     {
         return file_exists(public_path($this->getOpengraphImageLocalPath()));
+    }
+
+    public function scopePublished(Builder $query): void
+    {
+        $query->where('published_at', '<=', now()->format('Y-m-d'))->whereNotNull('published_at');
+    }
+
+    public function scopeUnpublished(Builder $query): void
+    {
+        $query->where(function (Builder $q) {
+            return $q->where('published_at', '>', now()->format('Y-m-d'))
+                ->orWhereNull('published_at');
+        });
     }
 }

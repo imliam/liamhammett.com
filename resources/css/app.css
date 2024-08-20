@@ -137,8 +137,7 @@ img {
     }
 
     mark {
-        @apply px-2 py-1 bg-orange-500 text-orange-50 from-orange-400 to-orange-600 bg-gradient-to-br;
-        border-radius: 0.75rem 0.25rem;
+        @apply px-2 py-1 bg-orange-500 text-orange-50 from-orange-400 to-orange-600 bg-gradient-to-br rounded-tr-md rounded-bl-md rounded-tl-xl rounded-br-xl box-decoration-clone;
     }
 
     u {

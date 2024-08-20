@@ -9,10 +9,10 @@ use SimonHamp\TheOg\BorderPosition;
 use SimonHamp\TheOg\Theme\Theme;
 
 Route::get('/', function () {
-    $articlesByYear = Article::query()->whereNotNull('published_at')->get()->sortByDesc('published_at')->groupBy(fn (Article $article) => $article->published_at->year)->all();
+    $articlesByYear = Article::query()->published()->orderByDesc('published_at')->get()->groupBy(fn (Article $article) => $article->published_at->year)->all();
 
     if (app()->environment('local')) {
-        foreach (Article::query()->whereNull('published_at')->get() as $article) {
+        foreach (Article::query()->unpublished()->orderByDesc('published_at')->get() as $article) {
             if (!isset($articlesByYear['Draft'])) {
                 $articlesByYear = ['Draft' => collect()] + $articlesByYear;
             }
@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 
 Route::get('/tags/{tag}', function (string $tag) {
-    $articles = Article::whereNotNull('published_at')->get()
+    $articles = Article::query()->published()->get()
         ->filter(
             fn (Article $article) => collect($article->getTags())->contains(
                 fn (Tag $articleTag) => $articleTag->getSlug() === $tag
