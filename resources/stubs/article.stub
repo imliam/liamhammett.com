@@ -1,10 +1,13 @@
 ---
 title: DummyTitle
+alternate_title: 
 slug: DummySlug
 published_at: DummyPublishedAt
 updated_at: 
 strapline: 
 synopsis: 
+previous_article: 
+next_article: 
 tags:
     - 
 ---
