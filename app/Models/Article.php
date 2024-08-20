@@ -317,7 +317,7 @@ class Article extends Model implements Feedable
         return FeedItem::create()
             ->id($this->slug)
             ->title($this->title)
-            ->summary($this->synopsis)
+            ->summary($this->synopsis ?? '')
             ->updated($this->updated_at ?? $this->published_at)
             ->link($this->getUrl())
             ->authorName('Liam Hammett')
@@ -346,13 +346,13 @@ class Article extends Model implements Feedable
 
     public function scopePublished(Builder $query): void
     {
-        $query->where('published_at', '<=', now()->format('Y-m-d'))->whereNotNull('published_at');
+        $query->where('published_at', '<=', now()->timestamp)->whereNotNull('published_at');
     }
 
     public function scopeUnpublished(Builder $query): void
     {
         $query->where(function (Builder $q) {
-            return $q->where('published_at', '>', now()->format('Y-m-d'))
+            return $q->where('published_at', '>', now()->timestamp)
                 ->orWhereNull('published_at');
         });
     }
