@@ -3,10 +3,8 @@
 use App\Models\Article;
 use App\Utilities\OpengraphImageLayout;
 use App\ValueObjects\Tag;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Route;
 use SimonHamp\TheOg\BorderPosition;
-use SimonHamp\TheOg\Theme\Theme;
 
 Route::get('/', function () {
     $articlesByYear = Article::query()->published()->orderByDesc('published_at')->get()->groupBy(fn (Article $article) => $article->published_at->year)->all();

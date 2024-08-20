@@ -1,7 +1,7 @@
 ---
 title: "CSS box-decoration-break: clone - Styling Inline Elements That Line Break"
 slug: css-box-decoration-break-clone
-published_at: 
+published_at: 2024-08-21
 updated_at: 
 strapline: 
 synopsis: 
