@@ -5,5 +5,5 @@
         <span class="inline group-hover:hidden">tyop?</span>
         <span class="hidden group-hover:inline">typo?</span>
     </span>
-    <a href="https://github.com/imliam/liamhammett.com/blob/master/content/articles/{{ $slug }}.md" class="font-semibold text-orange-700 hover:text-orange-500">Suggest a fix here!</a>
+    <a href="https://github.com/imliam/liamhammett.com/blob/main/content/articles/{{ $slug }}.md" class="font-semibold text-orange-700 hover:text-orange-500">Suggest a fix here!</a>
 </div>
