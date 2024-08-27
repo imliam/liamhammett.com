@@ -16,7 +16,7 @@ class Tag
 
     public function getUrl(): string
     {
-        return url('/tags/' . Str::slug($this->name));
+        return url('/tags/' . $this->getSlug());
     }
 
     /** @return Tag[] */
