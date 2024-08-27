@@ -1,7 +1,7 @@
 ---
 title: The First Useful Test is Empty
 slug: the-first-useful-test-is-empty
-published_at: 
+published_at: 2024-08-27
 updated_at: 
 strapline: 
 synopsis: 
@@ -10,7 +10,7 @@ tags:
     - Testing
 ---
 
-Getting started with anything is hard, but writing the first test for a new project? Daunting.
+Getting started with anything is hard, but writing the first test for any project? Daunting.
 
 When do you run your first test on a new project? When do you write your first test? When do you set it up to run automatically in CI?
 
