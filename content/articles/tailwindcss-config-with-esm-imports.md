@@ -1,7 +1,7 @@
 ---
 title: TailwindCSS Config with ESM Imports
 slug: tailwindcss-config-with-esm-imports
-published_at: 
+published_at: 2024-09-05
 updated_at: 
 strapline: 
 synopsis: How to change TailwindCSS' configuration file to use ECMAScript modules (ESM) imports.
@@ -59,7 +59,7 @@ module.exports = {
 };
 ```
 
-1. Replace the `module.exports` statement with an `export default` statement.
+2. Replace the `module.exports` statement with an `export default` statement.
 
 ```js
 import { default as typographyPlugin } from "@tailwindcss/typography";
