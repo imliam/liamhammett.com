@@ -7,7 +7,7 @@ updated_at:
 strapline: Let your PHP papercuts be healed
 synopsis: 
 previous_article: 
-next_article: 
+next_article: temphpest-for-vscode-showcase
 tags:
     - PHP
     - VSCode
