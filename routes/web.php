@@ -24,6 +24,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::view('/cv', 'cv');
+
 Route::get('/tags/{tag}', function (string $tag) {
     $articles = Article::query()->published()->get()
         ->filter(
