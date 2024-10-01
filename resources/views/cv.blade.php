@@ -34,6 +34,7 @@
                                 <li>Leading internationalisation across multiple high-profile brands and applications to bring them to market in various new regions</li>
                                 <li>Refacting major flagship legacy application over multiple years to increase performance multiple times and improve development experience and environment for large development teams, enabling them to do more faster</li>
                                 <li>Driving the team towards a component-based application structure to help the larger team move quicker without conflicting as much</li>
+                                <li>Maintaining and updating frontend code using Sass/PostCSS and React/VueJS for different projects, steering towards TailwindCSS and Alpine.js</li>
                             </ul>
                         </div>
                     </div>
@@ -96,7 +97,6 @@
                         <li><a href="https://www.youtube.com/@imliamhammett">YouTube</a></li>
                         <li><a href="mailto:liam@liamhammett.com">Email</a></li>
                     </ul>
-
                 </div>
             </div>
         </div>
