@@ -271,7 +271,7 @@ class Article extends Model implements Feedable
         $callback = function ($matches) {
             $codeBlock = $matches[3];
 
-            $button = '<button class="absolute flex items-center justify-center px-2 py-1 text-xs font-semibold tracking-wide text-gray-400 uppercase bg-gray-700 top-4 right-4 rounded-xl size-8 hover:bg-gray-600" aria-label="Copy code to clipboard" title="Copy code to clipboard" x-on:click="$clipboard($root.textContent.trim())">' . svg('clipboard') . '</button>';
+            $button = '<button class="absolute flex items-center justify-center px-2 py-1 text-xs font-semibold tracking-wide text-gray-400 uppercase bg-gray-700 top-2 right-2 rounded-xl size-8 hover:bg-gray-600" aria-label="Copy code to clipboard" title="Copy code to clipboard" x-on:click="$clipboard($root.textContent.trim())">' . svg('clipboard') . '</button>';
 
             return "<div class=\"relative\" x-data><pre{$matches[1]}><code{$matches[2]}>{$codeBlock}</code></pre>{$button}</div>";
         };
