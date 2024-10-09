@@ -1,7 +1,7 @@
 ---
 title: Test Article
 slug: test
-published_at: 
+published_at:
 strapline: "Today, I'm testing something in a…"
 synopsis: A test article to see how things look
 tags:
@@ -56,8 +56,8 @@ This is a normal element.
 {.bg-red-300 .mx-break-out .rounded-2xl .px-8 .py-4}
 This is a breakout element.
 
-<div class="bg-blue-300 text-blue-900 mx-full py-16 my-16 px-8 full-width-quote">
-<div class="container mx-auto max-w-3xl">
+<div class="px-8 py-16 my-16 text-blue-900 bg-blue-300 mx-full full-width-quote">
+<div class="container max-w-3xl mx-auto">
 <h2>Full-width element</h2>
 
 This is a full-width element.
