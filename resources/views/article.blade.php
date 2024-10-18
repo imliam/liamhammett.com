@@ -94,7 +94,14 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                                 <div class="flex flex-col grow gap-2">
-                                    <span class="font-semibold text-sm text-gray-700 uppercase tracking-wide group-hover:text-orange-100">Previous article</span>
+                                    <span class="font-semibold text-sm text-gray-700 uppercase tracking-wide group-hover:text-orange-100">
+                                        Previous
+                                        {{ match($article->type) {
+                                            'podcast' => 'episode',
+                                            'video' => 'video',
+                                            default => 'article',
+                                        } }}
+                                    </span>
                                     <span class="grow">{{ $article->getPreviousArticle()->getAlternateTitle() }}</span>
                                 </div>
                             </a>
@@ -104,7 +111,14 @@
                         @if ($article->hasNextArticle())
                             <a href="{{ $article->getNextArticle()->getUrl() }}" class="h-full border border-1 rounded-2xl px-6 py-4 flex gap-8 items-center justify-center group hover:bg-orange-500 hover:text-orange-50">
                                 <div class="flex flex-col grow gap-2">
-                                    <span class="font-semibold text-sm text-gray-700 uppercase tracking-wide group-hover:text-orange-100">Next article</span>
+                                    <span class="font-semibold text-sm text-gray-700 uppercase tracking-wide group-hover:text-orange-100">
+                                        Next
+                                        {{ match($article->type) {
+                                            'podcast' => 'episode',
+                                            'video' => 'video',
+                                            default => 'article',
+                                        } }}
+                                    </span>
                                     <span class="grow">{{ $article->getNextArticle()->getAlternateTitle() }}</span>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-left text-gray-600 group-hover:text-orange-200">

@@ -9,7 +9,7 @@
         /
         <a href="https://github.com/imliam" class="font-semibold text-orange-700 hover:text-orange-500">GitHub</a>
         /
-        <a href="https://www.linkedin.com/in/liam-hammett-79691137/" class="relative group font-semibold text-orange-700 hover:text-orange-500">
+        <a href="https://www.linkedin.com/in/liam-hammett/" class="relative group font-semibold text-orange-700 hover:text-orange-500">
             LinkedIn
             <span class="hidden group-hover:inline-block absolute text-center bg-white text-red-300 p-2 rounded shadow-lg top-4 -left-24 -right-24 text-xs">If you're a corporate kind of person</span>
         </a>

@@ -25,6 +25,7 @@ Route::get('/', function () {
 });
 
 Route::view('/cv', 'cv');
+Route::redirect('.well-known/avatar', '/images/avatar.jpg');
 
 Route::get('/tags/{tag}', function (string $tag) {
     $articles = Article::query()->published()->get()

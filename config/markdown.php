@@ -77,6 +77,7 @@ return [
         League\CommonMark\Extension\Footnote\FootnoteExtension::class,
         League\CommonMark\Extension\Attributes\AttributesExtension::class,
         League\CommonMark\Extension\DescriptionList\DescriptionListExtension::class,
+        RyanChandler\CommonmarkBladeBlock\BladeExtension::class,
     ],
 
     /*

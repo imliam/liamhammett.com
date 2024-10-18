@@ -27,6 +27,7 @@
                             <p>Developing and maintaining a platform for a top publisher serving millions of pages per hour.</p>
                             <ul>
                                 <li>Leading and line-managing 10+ engineers, mentoring and growing them towards more senior roles</li>
+                                <li>Work with a variety of PHP applications, including a large bespoke one, and several high-traffic services and applications with a mix of Laravel and Symfony frameworks</li>
                                 <li>Bespoke distributed stack involving PHP, Golang and TypeScript. Use of various database technologies such as MySQL, MongoDB, Solr, ArangoDB and Riak. Served from Kubernetes, with Varnish and Fastly as a caching layer</li>
                                 <li>Use of a wide array of telemetry and tooling (such as Sentry, Prometheus, Jaeger, Kibana, KEDA, Incident.io and more) to ensure uptime SLAs are met and any issues get resolved promptly</li>
                                 <li>Building and using complex CI/CD processes to orchestrate deploys across multiple services</li>
@@ -35,6 +36,7 @@
                                 <li>Refacting major flagship legacy application over multiple years to increase performance multiple times and improve development experience and environment for large development teams, enabling them to do more faster</li>
                                 <li>Driving the team towards a component-based application structure to help the larger team move quicker without conflicting as much</li>
                                 <li>Maintaining and updating frontend code using Sass/PostCSS and React/VueJS for different projects, steering towards TailwindCSS and Alpine.js</li>
+                                <li>Organising internal talks and conferences, hack days, etc. to boost team growth, innovation and productivity</li>
                             </ul>
                         </div>
                     </div>
@@ -48,7 +50,7 @@
                             <p class="text-gray-500"><strong>Full Stack Developer </strong> (<em>2018 &mdash; 2019</em>)</p>
                             <p>Building a SaaS ticketing platform.</p>
                             <ul>
-                                <li>Working with Yii 2 framework, VueJS, and introducing Docker for local and staging environments, using CD to deploy production applications to AWS</li>
+                                <li>Working with Laravel and Yii frameworks, VueJS, and introducing Docker for local and staging environments, using CD to deploy production applications to AWS</li>
                                 <li>Developing deep in-app integration to support multicurrency payments through Stripe Connect in a whitelabelled, user-friendly manner</li>
                                 <li>Overhauling and refactoring both legacy backend and frontend to allow quicker feature development, improve runtime performance and to help onboard new developers</li>
                                 <li>Internationalisation and localisation of flagship application to work in more markets, leading to wider sales reach</li>
@@ -93,7 +95,7 @@
                         <li><a href="https://liamhammett.com/">Personal Blog</a></li>
                         <li><a href="https://twitter.com/LiamHammett">Twitter</a></li>
                         <li><a href="https://www.github.com/imliam">GitHub</a></li>
-                        <li><a href="https://www.linkedin.com/in/liam-hammett-79691137/">LinkedIn</a></li>
+                        <li><a href="https://www.linkedin.com/in/liam-hammett/">LinkedIn</a></li>
                         <li><a href="https://www.youtube.com/@imliamhammett">YouTube</a></li>
                         <li><a href="mailto:liam@liamhammett.com">Email</a></li>
                     </ul>
