@@ -9,7 +9,7 @@ tags:
     - Gmail
 ---
 
-![How an email address is split into two parts; the username and domain](https://res.cloudinary.com/liam/image/upload/v1560626645/liamhammett.com/email-parts.png){.no-shadow}
+![How an email address is split into two parts; the username and domain](/images/articles/email-parts.png){.no-shadow}
 
 How an email address is split into two parts; the username and domain
 

@@ -38,11 +38,11 @@ npm run dev
 
 The auth pages and components come with a beautiful template from Tailwind UI that Adam Wathan & Steve Schoger agreed we could provide in this preset's boilerplate.
 
-![TALL preset sign-in page](https://res.cloudinary.com/liam/image/upload/v1588944798/liamhammett.com/tall-login.png)
+![TALL preset sign-in page](/images/articles/tall-login.png)
 
 We've also put some effort into writing tests that covers all the auth logic - you don't even get that with Laravel's own auth presets!
 
-![Tests running in GitHub Actions](https://res.cloudinary.com/liam/image/upload/v1588944791/liamhammett.com/tall-ci.png)
+![Tests running in GitHub Actions](/images/articles/tall-ci.png)
 
 There's a bunch of other awesome things about the preset too:
 

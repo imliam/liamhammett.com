@@ -15,7 +15,7 @@ But over the years, they've all mostly faded away with two standing at the foref
 
 I use both on a daily basis, but strongly prefer Discord out of these two options, for both general use and coding discussion. Here I'm going to explain why Discord is better.
 
-![Discord — free voice and text chat for gamers](https://res.cloudinary.com/liam/image/upload/v1560623418/liamhammett.com/discord-banner.png)
+![Discord — free voice and text chat for gamers](/images/articles/discord-banner.png)
 
 ## Multiple servers work seamlessly
 
@@ -33,7 +33,7 @@ I'm a programmer, so in any given day there's a good chance I'll write or paste 
 
 **Discord** feels a lot more natural. There's no popup window to insert code — you do it all from the chat bar. You can write GitHub Flavored Markdown to tell what language it's in and therefore the syntax highlighting. There's little things that stop you from messing up too, like when you're writing a multi-line code block, hitting the 'return' key will insert a new line instead of submitting the message.
 
-![Writing a multi-line code block in Discord's chat](https://res.cloudinary.com/liam/image/upload/v1560623418/liamhammett.com/discord-code.gif)
+![Writing a multi-line code block in Discord's chat](/images/articles/discord-code.gif)
 
 ## It's free
 
@@ -63,13 +63,13 @@ How can an application have personality? There's lots of ways — how things are
 
 **Slack** has personality. It's playful and friendly in some places, like in the wording when you add too many reactions to a message. It's very limited though, the application itself still feels *corporate* and impersonal — which is perfect for its target audience, but not for everyone.
 
-![Slack popup upon adding too many reactions](https://res.cloudinary.com/liam/image/upload/v1560623418/liamhammett.com/slack-reaction-limit.png)
+![Slack popup upon adding too many reactions](/images/articles/slack-reaction-limit.png)
 
 **Discord** on the other hand has a ton of personality. Its target market is gamers, and it plays on that well. The application is full of personality, from the random community-submitted loading messages, playful custom emoji and colourful members lists. There's memes and jokes all around, a solid and fun art style, the changelogs are an absolute pleasure to read, and there's so many *little things* that're in the application that you wouldn't expect, but are nice when you come across one — like the emoji picker changes to a random emoji whenever you mouse over it.
 
-![Discord emoji picker](https://res.cloudinary.com/liam/image/upload/v1560623417/liamhammett.com/discord-emoji-picker.gif)
+![Discord emoji picker](/images/articles/discord-emoji-picker.gif)
 
-![Discord changelog excerpt from August 8 2018](https://res.cloudinary.com/liam/image/upload/v1560625310/liamhammett.com/discord-changelog.png)
+![Discord changelog excerpt from August 8 2018](/images/articles/discord-changelog.png)
 
 ## (Edit) More points
 

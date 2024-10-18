@@ -91,7 +91,7 @@ Now we can apply the `.filter` class to any element, then add any combination of
 
 As an example of this in action, here is a photo ([taken by Cody Board](https://unsplash.com/photos/jORYUUvgfpA)) with examples of different filters applied through utility classes.
 
-![Examples of different filters being combined on the same image](https://res.cloudinary.com/liam/image/upload/v1560623248/liamhammett.com/filter-examples.png)
+![Examples of different filters being combined on the same image](/images/articles/filter-examples.png)
 
 Examples of different filters being combined on the same image
 

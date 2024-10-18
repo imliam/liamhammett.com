@@ -66,7 +66,7 @@ Here we can have some kind of long lorem-ipsum text to make this span a few line
 </div>
 </div>
 
-<x-quote name="Liam Hammett" title="Tech Lead" avatar-url="https://res.cloudinary.com/liam/image/upload/v1675208772/liamhammett.com/avatar.jpg">Don't die, it's bad for your health.</x-quote>
+<x-quote name="Liam Hammett" title="Tech Lead" avatar-url="{{ url('images/avatar.jpg') }}">Don't die, it's bad for your health.</x-quote>
 
 {.space-y-4}
 - 🇩🇪 **Germany** is a country, and this is a list of countries, but this one is first on the list.

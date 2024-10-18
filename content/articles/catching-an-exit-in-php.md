@@ -8,7 +8,7 @@ tags:
     - PHP
 ---
 
-![Catching an exit statement in a glove](https://res.cloudinary.com/liam/image/upload/v1560558841/liamhammett.com/catch-exit.jpg)
+![Catching an exit statement in a glove](/images/articles/catch-exit.jpg)
 
 What do you do when something goes wrong in your PHP application? Probably throwing an exception, so it can be caught at a higher level and handled appropriately.
 

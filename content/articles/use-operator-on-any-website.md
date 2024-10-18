@@ -15,7 +15,7 @@ One way it helped stand out from the crowd is how certain italic glyphs take ins
 
 Improve it again by adding coding ligatures to it with [Operator Mono Lig](https://github.com/kiliman/operator-mono-lig) and you've got one swish font to code in!
 
-![Part of a Vue.js component, shown in Operator Mono Lig, in VS Code](https://res.cloudinary.com/liam/image/upload/v1560620975/liamhammett.com/operator-in-vscode.png)
+![Part of a Vue.js component, shown in Operator Mono Lig, in VS Code](/images/articles/operator-in-vscode.png)
 
 It's a bit pricier than most typical folk would think of paying for a typeface, at between $200  —$800 depending on the package, but well worth it if you spend all day every day looking at code.
 
@@ -37,7 +37,7 @@ Luckily, there are a handful of common Javascript plugins such as [Prism](https:
 
 These libraries add predictable CSS classes to the code in order to colour them according to the syntax highlighting theme, so luckily we can make use of these to make certain parts of code italic where we want.
 
-![The Laravel documentation with Operator Mono Lig](https://res.cloudinary.com/liam/image/upload/f_auto,q_auto/v1/liamhammett.com/operator-on-laravel-com)
+![The Laravel documentation with Operator Mono Lig](/images/articles/operator-on-laravel-com)
 
 If you want to enable this yourself, you can install the user style or get the Gist to use to modify and see what it affects below.
 

@@ -16,7 +16,7 @@ In this post, I'll be going over some of the typical shortcuts I have set up and
 
 First thing's first — in MacOS' keyboard settings, I always enable full keyboard access for windows and dialogues to be able to control any popups fluidly and not having to grab my mouse. Why this isn't the default option is a mystery to me.
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/popups-and-modals.png)
+![](/images/articles/popups-and-modals.png)
 
 ## Default MacOS Keyboard Shortcuts
 
@@ -29,7 +29,7 @@ There are a couple of shortcuts I do set though — particularly from the "App S
 - **Emojis & Symbols** — Command ⌘ + Semicolon ; (in Windows 10, this is available with the Windows key + semicolon)
 - **Show Help menu** — F1
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/macos-keyboard-shortcuts.png)
+![](/images/articles/macos-keyboard-shortcuts.png)
 
 ## The "Super" Key — Goodbye Caps Lock
 
@@ -41,7 +41,7 @@ Using the fantastic free software "[Karabiner Elements](https://pqrs.org/osx/kar
 
 This modification makes it single convenient key to use for other unique hotkeys, instead of needing to remember awkward key combinations with multiple modifiers held down at once.
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/super-key.png)
+![](/images/articles/super-key.png)
 
 ## Default Application Shortcuts
 
@@ -58,13 +58,13 @@ A lot of applications have built-in shortcuts to bring them to focus or perform 
 
 I typically use a Magic Mouse day-to-day, so have a handful of gestures I've set up to be able to access various functions, quickly see my notifications, change volume, and more.
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/btt-magic-mouse.png)
+![](/images/articles/btt-magic-mouse.png)
 
 A lot of the keyboard shortcuts I have set up help replace missing shortcuts that I used in Windows all the time, while not being 100% the same, at least making them similar in a way that I can remember them and switch between Windows and MacOS computers easily.
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/btt-keyboard.png)
+![](/images/articles/btt-keyboard.png)
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/btt-keyboard-chrome.png)
+![](/images/articles/btt-keyboard-chrome.png)
 
 I use Super ⇪ + Apostrophe ' to bring [Visual Studio Code](https://code.visualstudio.com/), my code editor of choice, to focus. Being the application I spend most of my time focused on in any given day; it's of paramount importance to me that I can get to it within a single keystroke.
 
@@ -81,9 +81,9 @@ There are a couple that are my favourites, which are a little bit special as the
 - `:#:` to get my phone number
 - `:sig:` to add my email signature
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/snippets-1.png)
+![](/images/articles/snippets-1.png)
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/snippets-2.png)
+![](/images/articles/snippets-2.png)
 
 ## Wrapping Up
 
@@ -91,13 +91,13 @@ There are some other specific shortcuts I use day-in, day-out.
 
 **Alfred** has a ton of workflows to do anything from changing to a browser tab to picking a playlist on Spotify.
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/alfred-tabs.png)
+![](/images/articles/alfred-tabs.png)
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/alfred-spotify.png)
+![](/images/articles/alfred-spotify.png)
 
 **Visual Studio Code** lets you inject code snippets and prebuilt directly into an existing code file. It also has [Emmet](https://emmet.io/) built-in, to generate HTML and CSS snippets with a mere couple of keystrokes.
 
-![](https://res.cloudinary.com/liam/image/upload/v1560626073/liamhammett.com/vscode-shortcuts.png)
+![](/images/articles/vscode-shortcuts.png)
 
 The Chrome extension [**Vimium**](https://vimium.github.io/) adds a handful of hotkeys for quickly browsing the web with just a keyboard.
 

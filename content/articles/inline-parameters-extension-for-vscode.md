@@ -73,7 +73,7 @@ After scouring some of the VSCode source code and documentation, I eventually ca
 
 With this command, you can give it a position in a file, and it'll return the same text that's displayed in a popup when you hover over that position with your cursor.
 
-![VSCode function hover popup](https://res.cloudinary.com/liam/image/upload/v1591467378/liamhammett.com/vscode-hover.png.png)
+![VSCode function hover popup](/images/articles/vscode-hover.png.png)
 
 This is perfect, as this includes all of the information we need! We get the parameter names that we can extract, plus some additional information like whether a parameter is variadic and can be repeated infinitely, which we can also use to improve the experience in the extension.
 

@@ -19,7 +19,7 @@ Here are a few of my favourites that I find myself using all the time.
 
 ## Octotree - Code tree on steroids
 
-![A GitHub repository with the Octotree sidebar open to the left](https://res.cloudinary.com/liam/image/upload/v1560627150/liamhammett.com/octotree.png)
+![A GitHub repository with the Octotree sidebar open to the left](/images/articles/octotree.png)
 
 Octotree might seem pretty basic at first - when you're browsing a repository, it just shows the repository's file tree in a sidebar. What's so special about that?
 
@@ -31,7 +31,7 @@ It's also pretty smart and has special behaviour in a couple of different places
 
 ## SourceGraph - IDE-style "Go-to-definition"
 
-![Source code in GitHub with a "Go to definition" and "Find references" button in a popover](https://res.cloudinary.com/liam/image/upload/v1560627150/liamhammett.com/sourcegraph.png)
+![Source code in GitHub with a "Go to definition" and "Find references" button in a popover](/images/articles/sourcegraph.png)
 
 If there's one thing that's great about browsing a code project in an IDE that understands the language, it's being able to quickly find where a symbol came from and where it's used.
 
@@ -43,7 +43,7 @@ SourceGraph does just that - just hovering over a symbol in any supported langua
 
 ## OctoLinker - Quickly open dependencies
 
-![Hovering over a dependency name in a package.json file shows that it is a hyperlink](https://res.cloudinary.com/liam/image/upload/v1560627150/liamhammett.com/octolinker.png)
+![Hovering over a dependency name in a package.json file shows that it is a hyperlink](/images/articles/octolinker.png)
 
 OctoLinker allows you to click on a require statement in a NodeJS project or dependency file like `package.json`, making it just that little bit easier to get around files, even if they're in a different repository entirely.
 
@@ -51,7 +51,7 @@ OctoLinker allows you to click on a require statement in a NodeJS project or dep
 
 ## Code Folding
 
-![Hiding blocks of code on GitHub by folding them](https://res.cloudinary.com/liam/image/upload/v1560627150/liamhammett.com/code-folding.png)
+![Hiding blocks of code on GitHub by folding them](/images/articles/code-folding.png)
 
 GitHub Code Folding adds carets to let you selectively hide and show blocks of code. That's all there is to it.
 
@@ -59,7 +59,7 @@ GitHub Code Folding adds carets to let you selectively hide and show blocks of c
 
 ## Issue Link Status
 
-![Issues and pull requests in a GitHub comment showing their status](https://res.cloudinary.com/liam/image/upload/v1560627150/liamhammett.com/issue-link-status.png)
+![Issues and pull requests in a GitHub comment showing their status](/images/articles/issue-link-status.png)
 
 GitHub Issue Link Status finds any links to issues or pull requests within issues and pull requests, and shows the status of them by adding an icon and changing their colour.
 
@@ -69,7 +69,7 @@ This lets you easily see the status of the given issue or pull request without h
 
 ## Refined GitHub
 
-![Some of Refined GitHub's features](https://res.cloudinary.com/liam/image/upload/v1560627150/liamhammett.com/refined-github.png)
+![Some of Refined GitHub's features](/images/articles/refined-github.png)
 
 Refined GitHub... well... it refines GitHub. It has hundreds of small tweaks and improvements that make every part of the platform more pleasant to use.
 
@@ -88,7 +88,7 @@ Check out the repository to see the full list of features, there are *a lot* of 
 
 ## ZenHub - Kanban for Issues
 
-![Kanban board in a GitHub repository's tabs](https://res.cloudinary.com/liam/image/upload/v1560627150/liamhammett.com/zenhub.png)
+![Kanban board in a GitHub repository's tabs](/images/articles/zenhub.png)
 
 ZenHub is an extension with a pretty good goal - to reduce the number of applications you need to use to manage your project.
 
@@ -98,7 +98,7 @@ Note that GitHub does have a built-in "projects" board that can be used for kanb
 
 ## CodeCopy - Quickly add snippets to your clipboard
 
-!["Copy to clipboard" button on a code block](https://res.cloudinary.com/liam/image/upload/v1560627149/liamhammett.com/codecopy.png)
+!["Copy to clipboard" button on a code block](/images/articles/codecopy.png)
 
 This extension adds a button to any snippet block on a handful of sites that will immediately copy the snippet to your clipboard - including sites like GitHub and StackOverflow.
 

@@ -10,7 +10,7 @@ tags:
 
 A jQuery plugin to recreate the commonly used "pull-to-refresh" found in mobile devices, but this time for the desktop browser.
 
-    ![An example of the plugin in action](https://res.cloudinary.com/liam/image/upload/v1560619221/liamhammett.com/1_Y2azDs4FFBlf7UgEFHd45g.gif)
+![An example of the plugin in action](/images/articles/jquery-scrollup.gif)
 
 
 The "pull-to-refresh" pattern and similar variations are commonly used all over mobile devices to perform a variety of functions such as refreshing a web page, checking for new mail and loading old chat messages as you're scrolling through, but rarely makes its way over to desktop devices for one reason or another.

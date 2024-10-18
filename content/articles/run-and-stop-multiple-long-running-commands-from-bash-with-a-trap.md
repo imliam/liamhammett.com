@@ -96,7 +96,7 @@ npm run watch
 
 Here, we can see that when we execute our script, all of the long-running commands end up running in parallel, but only after their prerequisites are finished.)
 
-![Starting the script](https://res.cloudinary.com/liam/image/upload/v1563024031/liamhammett.com/start%20dev.sh.gif)
+![Starting the script](/images/articles/start%20dev.sh.gif)
 
 ## Keep the process running
 
@@ -174,7 +174,7 @@ quitjobs() {
 
 Here, we can see that with the script already running and watching, we only need to cancel the script with the CTRL+C hotkey, and it'll stop all of the sub-processes running gracefully.
 
-![Stopping the script](https://res.cloudinary.com/liam/image/upload/v1563024036/liamhammett.com/stop%20dev.sh.gif)
+![Stopping the script](/images/articles/stop%20dev.sh.gif)
 
 ## Final script
 

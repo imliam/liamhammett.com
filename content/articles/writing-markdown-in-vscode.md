@@ -37,7 +37,7 @@ I like to give myself:
 
 The result of this is a nice, clean, distraction-free writing environment that's easy on the eyes. Even better than that, it's something you can put side-by-side with your code without affecting the coding experience at all.
 
-![A screenshot of my real VSCode window showing code and markdown side-by-side](https://res.cloudinary.com/liam/image/upload/v1723250036/vscode-markdown-code-side-by-side.png)
+![A screenshot of my real VSCode window showing code and markdown side-by-side](/images/articles/vscode-markdown-code-side-by-side.png)
 
 ```json
 // settings.json

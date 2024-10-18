@@ -33,15 +33,15 @@ I'd recommend checking out the VSCode Extension Marketplace page, as it will alw
 
 Some of my favourite highlights:
 
-![New PHP files are filled out with stubs as you would expect. There's also rich Laravel support!](https://res.cloudinary.com/liam/image/upload/v1725928075/file-template-with-namespace.gif)
+![New PHP files are filled out with stubs as you would expect. There's also rich Laravel support!](/images/articles/file-template-with-namespace.gif)
 
-![Code actions and quick fixes let you quickly whip your code into shape!](https://res.cloudinary.com/liam/image/upload/v1725928075/code-actions.gif)
+![Code actions and quick fixes let you quickly whip your code into shape!](/images/articles/code-actions.gif)
 
-![The REPL runs your code and shows you the results inline](https://res.cloudinary.com/liam/image/upload/v1725928075/repl.gif)
+![The REPL runs your code and shows you the results inline](/images/articles/repl.gif)
 
-![Trying to interpolate a value within single quotes will fix it to double quotes automatically](https://res.cloudinary.com/liam/image/upload/v1725928075/auto-interpolation.gif)
+![Trying to interpolate a value within single quotes will fix it to double quotes automatically](/images/articles/auto-interpolation.gif)
 
-![Heredoc strings finally can render Laravel Blade syntax highlighting](https://res.cloudinary.com/liam/image/upload/v1725928075/blade-heredoc.png)
+![Heredoc strings finally can render Laravel Blade syntax highlighting](/images/articles/blade-heredoc.png)
 
 What are you waiting for? Check it out now!
 

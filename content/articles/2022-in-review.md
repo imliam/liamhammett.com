@@ -22,17 +22,17 @@ While most of my time over the last year was spent growing and doing my day job,
 - The biggest thing that happened to me this year, while in Norway with my girlfriend, I proposed to her and am ecstatic to say we're now engaged!
 
 {.increased-legibility}
-![View over Bergen](https://res.cloudinary.com/liam/image/upload/w_1600/v1/liamhammett.com/IMG_4942.webp)
+![View over Bergen](/images/articles/norway-bergen.jpg)
 
-![Town of Reine in Lofoten](https://res.cloudinary.com/liam/image/upload/w_1600/v1/liamhammett.com/IMG_5522.webp)
+![Town of Reine in Lofoten](/images/articles/norway-reine.jpg)
 
-![Reindeer at the Arctic Circle Centre](https://res.cloudinary.com/liam/image/upload/w_1600/v1/liamhammett.com/IMG_5185.webp)
+![Reindeer at the Arctic Circle Centre](/images/articles/norway-reindeer.jpg)
 
-![Aurora Borealis just outside Alta](https://res.cloudinary.com/liam/image/upload/w_1600/v1/liamhammett.com/IMG_5821.webp)
+![Aurora Borealis just outside Alta](/images/articles/norway-aurora-1.jpg)
 
-![More Aurora Borealis outside Alta](https://res.cloudinary.com/liam/image/upload/w_1600/v1/liamhammett.com/IMG_5963.webp)
+![More Aurora Borealis outside Alta](/images/articles/norway-aurora-2.jpg)
 
-![Proposal at Nordkapp](https://res.cloudinary.com/liam/image/upload/w_1600/v1/liamhammett.com/Proposal_silhouette.webp)
+![Proposal at Nordkapp](/images/articles/Proposal_silhouette.jpg)
 
 ## What's 2023 got in store?
 

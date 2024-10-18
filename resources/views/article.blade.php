@@ -80,7 +80,7 @@
                     {!! $article->render() !!}
                 </div>
                 <x-divider class="flex flex-col gap-4 items-center justify-center bg-noise before:opacity-25">
-                    <img src="https://res.cloudinary.com/liam/image/upload/v1675208772/liamhammett.com/avatar.jpg" alt="Photo of Liam Hammett" class="rounded-full size-32 {{ random_rotation() }}" />
+                    <img src="{{ url('images/avatar.jpg') }}" alt="Photo of Liam Hammett" class="rounded-full size-32 {{ random_rotation() }}" />
                     <div class="text-center">
                         <div class="text-sm font-light">written by</div>
                         <div class="font-bold text-lg -mt-2">Liam Hammett</div>
