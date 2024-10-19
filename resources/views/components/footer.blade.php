@@ -1,4 +1,4 @@
-<x-container class="my-16 text-sm text-center space-y-8 px-8">
+<x-container class="my-16 text-sm text-center space-y-8 px-8 print:hidden">
     <div>
         Hit me up on
         <a href="https://twitter.com/LiamHammett" class="relative group font-semibold text-orange-700 hover:text-orange-500">

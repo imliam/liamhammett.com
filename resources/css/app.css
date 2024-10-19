@@ -55,6 +55,12 @@ img {
     }
 }
 
+@media print {
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+}
+
 .prose {
     max-width: auto !important;
 

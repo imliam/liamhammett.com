@@ -1,6 +1,6 @@
 @props(['homepage' => false])
 
-<div class="overflow-x-clip">
+<div class="overflow-x-clip print:hidden">
     <div class="-rotate-12 sm:-rotate-3 -mx-64 -mt-36 left-0 right-0 bg-noise">
         <div class="{{ $homepage ? 'h-96' : 'h-64' }} w-full bg-orange-500 z-20 relative flex items-end justify-center -ml-4">
             <div class="flex flex-col gap-2 font-title text-center px-4">

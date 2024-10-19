@@ -11,6 +11,10 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+              print: {raw: 'print'},
+              screen: {raw: 'screen'},
+            },
             fontFamily: {
                 title: [
                     '"Ostrich Sans Rounded"',
