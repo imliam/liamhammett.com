@@ -57,6 +57,8 @@ This page contains a collection of quotes that I've found interesting and insigh
 
 <x-quote name="Seth Goden">Whoever fails the most wins.</x-quote>
 
+<x-quote name="Taylor Otwell">If they can't understand it, then we're doing something wrong.</x-quote>
+
 ## Quotes About Communication
 
 <x-quote name="Vinh Giang">You are only as good as you communicate.</x-quote>
