@@ -4,7 +4,7 @@
         @isset ($article->synopsis)
             <meta name="description" content="{{ $article->synopsis }}">
         @endisset
-        <link rel="canonical" href="{{ $article->getUrl() }}">
+        <link rel="canonical" href="{{ $article->canonical ?? $article->getUrl() }}">
         <meta name="keywords" content="{{ implode(',', $article->tags) }}">
 
         @if ($article->hasNextArticle())
