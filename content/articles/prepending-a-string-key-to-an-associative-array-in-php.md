@@ -1,7 +1,7 @@
 ---
 title: Prepending a String Key to an Associative Array in PHP
 slug: prepending-a-string-key-to-an-associative-array-in-php
-published_at: 
+published_at: 2025-02-04
 updated_at: 
 strapline: 
 synopsis: Learn how to prepend a string key to an associative array in PHP.
