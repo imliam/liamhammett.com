@@ -1,7 +1,7 @@
 ---
 title: PHP Associative Arrays Are Predictably Ordered
 slug: php-associative-arrays-are-predictably-ordered
-published_at: 
+published_at: 2025-02-10
 updated_at: 
 strapline: 
 synopsis: 
