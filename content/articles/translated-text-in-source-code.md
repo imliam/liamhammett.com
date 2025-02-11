@@ -55,11 +55,11 @@ However, this pattern starts to break down in a few unfortunate ways that make i
 
 For example, in English, we may use the same word, "name", to refer to both the name of a person and the name of a team.
 
-![](/images/articles/l10n-1.webp)
+![](/images/articles/l10n-1.png)
 
 However, in Chinese, the direct translation of "name" to "名字" ("Míngzì") does not make sense in both contexts, and will read improperly and be confusing to Chinese users.
 
-![](/images/articles/l10n-2.webp)
+![](/images/articles/l10n-2.png)
 
 As you can see, this approach does not allow the translator to use a different translation in the two different contexts if they need to, as the source code only accounts for what the text should be in English.
 
@@ -94,7 +94,7 @@ return [
 ];
 ```
 
-![](/images/articles/l10n-3.webp)
+![](/images/articles/l10n-3.png)
 
 This approach has some positives and negatives.
 

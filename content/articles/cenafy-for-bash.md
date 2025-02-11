@@ -8,7 +8,7 @@ tags:
     - Terminal
 ---
 
-![Photo of someone being Cenafied in a terminal](/images/articles/cenafy-photo.webp)
+![Photo of someone being Cenafied in a terminal](/images/articles/cenafy-photo.png)
 
 Based on the wonderful [Chrome extension of the same name](https://chrome.google.com/webstore/detail/cenafy/ndchmakhfaakbkhnkdgambadneloplnn) that lets you know who the champ is, this is a version for Bash that lets an unsuspecting victim who left their terminal open know about the champ via the magic of ASCII art (and even some killer singing, if they have the `say` command like on Mac OS).
 
