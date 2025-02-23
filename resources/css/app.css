@@ -154,6 +154,22 @@ img {
         @apply underline underline-offset-4 decoration-2 decoration-orange-500 decoration-wavy;
         text-decoration-skip-ink: none;
     }
+
+    kbd:not(:has(kbd, samp)) {
+        @apply p-1 text-orange-500 rounded bg-orange-50 shadow-orange-300 me-1;
+        box-shadow: 2px 2px 0 3px #fdba74;
+        margin-inline-end: 0.25ch;
+    }
+
+    samp {
+        @apply p-4;
+        border: 1px solid currentColor;
+        background: hsl(from currentColor h s l / 0.1);
+    }
+
+    kbd > samp {
+        @apply p-1 rounded-lg;
+    }
 }
 
 /* .mx-break-out {

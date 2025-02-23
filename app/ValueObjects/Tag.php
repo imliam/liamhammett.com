@@ -3,6 +3,7 @@
 namespace App\ValueObjects;
 
 use App\Models\Article;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Tag
@@ -19,19 +20,21 @@ class Tag
         return url('/tags/' . $this->getSlug());
     }
 
-    /** @return Tag[] */
-    public static function all(): array
+    public static function all(): Collection
     {
         $tags = [];
 
-        Article::all()->each(function (Article $article) use ($tags) {
+        foreach (Article::query()->published()->get() as $article) {
             foreach ($article->tags as $tag) {
                 if (!in_array($tag, $tags)) {
                     $tags[] = $tag;
                 }
             }
-        });
+        }
 
-        return array_map(fn (string $tagName) => new Tag($tagName), $tags);
+        return collect($tags)
+            ->filter()
+            ->sort()
+            ->map(fn (string $tagName) => new Tag($tagName));
     }
 }
