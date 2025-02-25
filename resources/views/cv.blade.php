@@ -1,5 +1,5 @@
 <x-page title="CV">
-    <x-container class="mt-16">
+    <x-container class="mt-16" style="view-transition-name:main">
         <div class="px-6 lg:px-8">
             <div class="relative max-w-3xl mx-auto space-y-8 text-base leading-7 text-gray-700">
                 <div class="prose print:text-sm">

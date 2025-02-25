@@ -1,5 +1,5 @@
 <x-page title="Tags">
-    <x-container>
+    <x-container style="view-transition-name:main">
         <div class="max-w-3xl mx-auto space-y-8 text-base leading-7 text-center text-gray-700">
             <h1 class="text-3xl font-bold tracking-wide text-gray-900 font-title sm:text-6xl text-shadow-sq shadow-orange-500">Tag List</h1>
         </div>

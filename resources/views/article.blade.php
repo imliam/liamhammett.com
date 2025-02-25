@@ -1,4 +1,4 @@
-<x-page title="{{ $article->title }}">
+<x-page :title="$article->title">
     <x-slot name="metaTags">
         <!-- SEO -->
         @isset ($article->synopsis)
@@ -50,18 +50,18 @@
         </script>
     </x-slot>
 
-    <x-container>
+    <x-container style="view-transition-name:main">
         <div class="px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-base leading-7 text-gray-700 space-y-8 relative">
+            <div class="relative max-w-3xl mx-auto space-y-8 text-base leading-7 text-gray-700">
                 <span class="size-80 text-gray-50 absolute right-0 rotate-[35deg] -z-10 -mt-16">
                     {!! svg('article-types.' . $article->type ?? 'article') !!}
                 </span>
 
                 <div>
                     @if ($article->strapline)
-                        <p class="uppercase text-sm font-semibold tracking-wide leading-7 text-orange-500">{{ $article->strapline }}</p>
+                        <p class="text-sm font-semibold leading-7 tracking-wide text-orange-500 uppercase">{{ $article->strapline }}</p>
                     @endif
-                    <h1 class="text-3xl font-title font-bold text-balance tracking-wide text-gray-900 sm:text-6xl text-shadow-sq shadow-orange-500">{{ $article->getAlternateTitle() }}</h1>
+                    <h1 class="text-3xl font-bold tracking-wide text-gray-900 font-title text-balance sm:text-6xl text-shadow-sq shadow-orange-500">{{ $article->getAlternateTitle() }}</h1>
                     <p class="mt-4">
                         @isset ($article->published_at)
                             Published on <time datetime="{{ $article->published_at->toDateString() }}">{{ $article->published_at->toFormattedDateString() }}</time>
@@ -79,22 +79,22 @@
                 <div class="prose max-w-[65ch] mx-auto">
                     {!! $article->render() !!}
                 </div>
-                <x-divider class="flex flex-col gap-4 items-center justify-center bg-noise before:opacity-25">
+                <x-divider class="flex flex-col items-center justify-center gap-4 bg-noise before:opacity-25">
                     <img src="{{ url('images/avatar.jpg') }}" alt="Photo of Liam Hammett" class="rounded-full size-32 {{ random_rotation() }}" />
                     <div class="text-center">
                         <div class="text-sm font-light">written by</div>
-                        <div class="font-bold text-lg -mt-2">Liam Hammett</div>
+                        <div class="-mt-2 text-lg font-bold">Liam Hammett</div>
                     </div>
                 </x-divider>
                 <div class="grid grid-cols-2 gap-2">
                     <div class="text-left">
                         @if ($article->hasPreviousArticle())
-                            <a href="{{ $article->getPreviousArticle()->getUrl() }}" class="h-full border border-1 rounded-2xl px-6 py-4 flex gap-8 items-center justify-center group hover:bg-orange-500 hover:text-orange-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-right text-gray-600 group-hover:text-orange-200">
+                            <a href="{{ $article->getPreviousArticle()->getUrl() }}" class="flex items-center justify-center h-full gap-8 px-6 py-4 border border-1 rounded-2xl group hover:bg-orange-500 hover:text-orange-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-right text-gray-600 size-8 group-hover:text-orange-200">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
-                                <div class="flex flex-col grow gap-2">
-                                    <span class="font-semibold text-sm text-gray-700 uppercase tracking-wide group-hover:text-orange-100">
+                                <div class="flex flex-col gap-2 grow">
+                                    <span class="text-sm font-semibold tracking-wide text-gray-700 uppercase group-hover:text-orange-100">
                                         Previous
                                         {{ match($article->type) {
                                             'podcast' => 'episode',
@@ -109,9 +109,9 @@
                     </div>
                     <div class="text-right">
                         @if ($article->hasNextArticle())
-                            <a href="{{ $article->getNextArticle()->getUrl() }}" class="h-full border border-1 rounded-2xl px-6 py-4 flex gap-8 items-center justify-center group hover:bg-orange-500 hover:text-orange-50">
-                                <div class="flex flex-col grow gap-2">
-                                    <span class="font-semibold text-sm text-gray-700 uppercase tracking-wide group-hover:text-orange-100">
+                            <a href="{{ $article->getNextArticle()->getUrl() }}" class="flex items-center justify-center h-full gap-8 px-6 py-4 border border-1 rounded-2xl group hover:bg-orange-500 hover:text-orange-50">
+                                <div class="flex flex-col gap-2 grow">
+                                    <span class="text-sm font-semibold tracking-wide text-gray-700 uppercase group-hover:text-orange-100">
                                         Next
                                         {{ match($article->type) {
                                             'podcast' => 'episode',
@@ -121,7 +121,7 @@
                                     </span>
                                     <span class="grow">{{ $article->getNextArticle()->getAlternateTitle() }}</span>
                                 </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-left text-gray-600 group-hover:text-orange-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-left text-gray-600 size-8 group-hover:text-orange-200">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                             </a>
