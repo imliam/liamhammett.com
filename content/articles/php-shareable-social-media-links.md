@@ -8,7 +8,7 @@ tags:
     - PHP
 ---
 
-![Example of how to use the package](/images/articles/php-shareable-social-media-links.webp)
+![Example of how to use the package](/images/articles/php-shareable-social-media-links.png)
 
 I recently had the need to generate various "shareable" links to help share a particular URL to different social media platforms. The problem is that every platform requires information in a slightly different way.
 
