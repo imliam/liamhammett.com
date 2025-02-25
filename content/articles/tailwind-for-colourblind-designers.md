@@ -10,7 +10,7 @@ previous_article:
 next_article:
 tags:
     - TailwindCSS
-    - Opinion
+    - Accessibility
 ---
 
 As someone with colourblindness, it's always been a bit of a struggle to design things and know I'm using the right colours.
