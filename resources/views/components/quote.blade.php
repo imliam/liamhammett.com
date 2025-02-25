@@ -4,7 +4,7 @@
     <blockquote class="font-semibold text-gray-900">
         {!! $slot !!}
     </blockquote>
-    <figcaption class="flex mt-6 gap-x-4 items-center justify-center">
+    <figcaption class="flex items-center justify-center mt-6 gap-x-4">
         @isset ($avatarUrl)
             <img class="flex-none w-6 h-6 rounded-full bg-gray-50 no-shadow"
                 src="{{ $avatarUrl }}"
@@ -14,9 +14,11 @@
         @endisset
 
         <cite class="text-sm leading-6">
-            <strong class="font-semibold text-gray-900 font-handwritten">
-                {{ $name }}
-            </strong>
+            @isset ($name)
+                <strong class="font-semibold text-gray-900 font-handwritten">
+                    {{ $name }}
+                </strong>
+            @endisset
             @isset ($title)
                 &mdash;
                 {{ $title }}
