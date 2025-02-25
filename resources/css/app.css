@@ -332,6 +332,11 @@ pre .line::before {
             text-align: center;
         }
     }
+
+    :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)):before,
+    :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+        content: "" !important;
+    }
 }
 
 @tailwind components;
