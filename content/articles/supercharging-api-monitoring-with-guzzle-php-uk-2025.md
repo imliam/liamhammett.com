@@ -16,7 +16,9 @@ tags:
 
 Handling millions of API calls in production can be overwhelming.
 
-Almost everyone in the PHP ecosystem uses Guzzle, so in this talk we'll deep dive into using its underutilised middleware for efficient API monitoring. We'll dive into recording telemetry data using OpenTelemetry, observing it through Grafana with the help of Loki, Tempo and Prometheus. Drawing from my experience building an application that makes millions of API calls each week, you'll leave with actionable insights to keep your microservices and third-party APIs stable under pressure.
+Almost everyone in the PHP ecosystem uses Guzzle, so in this talk we'll deep dive into using its underutilised middleware for efficient API monitoring.
+
+We'll dive into recording telemetry data using OpenTelemetry, observing it through Grafana with the help of Loki, Tempo and Prometheus. Drawing from my experience building an application that makes millions of API calls each week, you'll leave with actionable insights to keep your microservices and third-party APIs stable under pressure.
 
 <https://www.youtube.com/watch?v=o6dIlejWNsI>
 
