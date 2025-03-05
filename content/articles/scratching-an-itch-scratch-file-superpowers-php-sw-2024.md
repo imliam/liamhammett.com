@@ -1,4 +1,5 @@
 ---
+type: talk
 title: "Scratching an Itch: Scratch File Superpowers - PHP SW 2024"
 alternate_title:
 slug: scratching-an-itch-scratch-file-superpowers
