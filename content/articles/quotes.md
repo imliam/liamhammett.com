@@ -1,15 +1,17 @@
 ---
 title: Quotes
 slug: quotes
-published_at: 
-updated_at: 
-strapline: 
+published_at: 2025-03-12
+updated_at:
+strapline:
 synopsis: A collection of quotes that I've found interesting and insightful.
 tags:
     - Productivity
 ---
 
-This page contains a collection of quotes that I've found interesting and insightful. I'll keep adding to it as I come across more.
+This page contains a collection of quotes that I've found interesting and insightful, particularly in tech.
+
+I'll keep adding to it as I come across more.
 
 ## Quotes About Coding
 
@@ -40,6 +42,8 @@ This page contains a collection of quotes that I've found interesting and insigh
 <x-quote name="Brian Kernighan" title="Kernighan's Law">Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.</x-quote>
 
 <x-quote name="Anita Pari">Good documentation is like a love letter to your future self.</x-quote>
+
+<x-quote name="David Heinemeier Hansson">"Magic" is just a word programmers use for poetry in code that they don't appreciate at first glance. I love magic and learning how it works! We're supposed to be the wizards of the computer.</x-quote>
 
 ## Quotes About Building Stuff
 
