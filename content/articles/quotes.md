@@ -17,7 +17,7 @@ I'll keep adding to it as I come across more.
 
 <x-quote name="Sam Selikoff" title="Mostly Technical Podcast">Frameworks have a high floor, but if you only stick to the framework it has a low ceiling.</x-quote>
 
-<x-quote name="Simon Swiss">The complexity has to live somewhere</x-quote>
+<x-quote name="Simon Vrachliotis">The complexity has to live somewhere</x-quote>
 
 <x-quote name="Caleb Porzio">Make the change easy, then make the easy change.</x-quote>
 
