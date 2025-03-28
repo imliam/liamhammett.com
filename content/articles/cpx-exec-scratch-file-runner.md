@@ -14,11 +14,13 @@ tags:
     - VSCode
 ---
 
-`cpx exec` is a command that ships with the `cpx` package which just... runs PHP files.
+`cpx exec` is a command that ships with the [`cpx`](https://cpx.dev/) package which just... runs PHP files.
 
 It does a few things ontop of the regular PHP file execution that make it ==awesome== for working with scratch files. You can install it using Composer like any other global package by running `composer global require imliam/cpx` and then benefit from the exec command it provides.
 
 But why use `cpx exec ./file.php` over plain old `php ./file.php`?
+
+<https://cpx.dev/>
 
 ## Automatic Autoloaders
 
@@ -60,3 +62,5 @@ If you use either the [TemPHPest REPL](https://marketplace.visualstudio.com/item
 ```
 
 I use scratch files all the time, and this has helped me save a bunch of time every day when I'm trying out code, so hopefully it helps you too!
+
+<https://cpx.dev/>
