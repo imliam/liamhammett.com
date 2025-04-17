@@ -1,13 +1,13 @@
 ---
 title: PHP Scratch Files in VSCode
-alternate_title: 
+alternate_title:
 slug: php-scratch-files-in-vscode
-published_at: 
-updated_at: 
-strapline: 
-synopsis: 
-previous_article: php-scratch-file-runner
-next_article: 
+published_at: 2025-04-17
+updated_at:
+strapline:
+synopsis:
+previous_article:
+next_article:
 tags:
     - PHP
     - VSCode
@@ -72,12 +72,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 This is easy to do with a snippet if you find yourself doing it all the time - but it's still an extra step for such a common use case.
 
-The [PHP Run File](/php-scratch-file-runner) Composer package helps solve this. It will automatically detect and use Composer's autoloader if it exists in the current directory or a parent directory. The Code Runner extension lets us configure which command to run for each language, so we can use this package to run our PHP scratch files instead once it's installed.
+The [exec command from cpx](/cpx-exec-scratch-file-runner) helps solve this. It will automatically detect and use Composer's autoloader if it exists in the current directory or a parent directory. The Code Runner extension lets us configure which command to run for each language, so we can use this package to run our PHP scratch files instead once it's installed.
 
 ```json
 {
     "code-runner.executorMap": {
-        "php": "php /path/to/.composer/vendor/bin/run-php"
+        "php": "cpx exec"
     }
 }
 ```
@@ -88,7 +88,7 @@ Now we can reference our project's autoloaded files for free!
 
 We still need to make sure to import the right namespaces for the classes we reference. If we forget, we'll get an error when we run the file. Laravel's [Tinker](https://github.com/laravel/tinker) command has a neat feature where, if a class namespace isn't found, it will attempt to find a class in the autoloader that matches the class name, and set it up as an alias it for you.
 
-The [PHP Run File](/php-scratch-file-runner) Composer package can also do this out-of-the-box if it can find an unambiguous match in your application code - so with no additional configuration we can reference some of our project's classes without worrying about the namespace.
+The [cpx exec command](/cpx-exec-scratch-file-runner) can also do this out-of-the-box if it can find an unambiguous match in your application code - so with no additional configuration we can reference some of our project's classes without worrying about the namespace.
 
 ```php
 
@@ -108,4 +108,4 @@ dd($user->getAttributes());
 
 ## Conclusion
 
-With a couple of minutes of setup, [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner), [TemPHPest](https://marketplace.visualstudio.com/items?itemName=liamhammett.temphpest), and [PHP Run File](/php-scratch-file-runner) are installed and lets us make and run PHP scratch files in _seconds_. This might not feel like much, but when you do it a dozen times per day ==it feels like a superpower.==
+With a couple of minutes of setup, [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner), [TemPHPest](https://marketplace.visualstudio.com/items?itemName=liamhammett.temphpest), and [cpx](/cpx-exec-scratch-file-runner) are installed and lets us make and run PHP scratch files in _seconds_. This might not feel like much, but when you do it a dozen times per day ==it feels like a superpower.==
