@@ -91,7 +91,6 @@ We still need to make sure to import the right namespaces for the classes we ref
 The [cpx exec command](/cpx-exec-scratch-file-runner) can also do this out-of-the-box if it can find an unambiguous match in your application code - so with no additional configuration we can reference some of our project's classes without worrying about the namespace.
 
 ```php
-
 <?php
 
 $user = new User();
