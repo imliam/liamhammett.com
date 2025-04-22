@@ -73,6 +73,6 @@ Here we can have some kind of long lorem-ipsum text to make this span a few line
 - 🇬🇧 The **United Kingdom** is another country on the list of countries.
 - 🇫🇷 **France** is a country that is coming third on the list of countries here, just to see how the list of countries may look when there is a lot of text here. Hopefully, it looks pretty dandy.
 
-![Placeholder image](https://placehold.it/400x400)
+![Placeholder image](https://placehold.co/400x400)
 
-<x-quote name="Liam Hammett" title="Tech Lead" avatar-url="https://placehold.it/100x100">Don't die, it's bad for your health!</x-quote>
+<x-quote name="Liam Hammett" title="Tech Lead" :avatar-url="url('images/avatar.jpg')">Don't die, it's bad for your health!</x-quote>
