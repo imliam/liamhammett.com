@@ -2,7 +2,7 @@
 title: Think of an Elephpant
 alternate_title:
 slug: think-of-an-elephpant
-published_at:
+published_at: 2025-04-22
 updated_at:
 strapline:
 synopsis:
