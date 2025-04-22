@@ -8,6 +8,7 @@ use App\ValueObjects\Tag;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Orbit\Concerns\Orbital;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +38,7 @@ class Article extends Model implements Feedable
         $table->string('canonical')->nullable();
         $table->string('next_article')->nullable();
         $table->string('previous_article')->nullable();
+        $table->string('opengraph_image')->nullable();
     }
 
     protected function casts(): array
@@ -331,6 +333,14 @@ class Article extends Model implements Feedable
 
     public function getOpengraphImageUrl(): string
     {
+        if (!empty( $this->opengraph_image)) {
+            if (Str::isUrl($this->opengraph_image)) {
+                return $this->opengraph_image;
+            }
+
+            return url($this->opengraph_image);
+        }
+
         return $this->getUrl() . '.png';
     }
 
