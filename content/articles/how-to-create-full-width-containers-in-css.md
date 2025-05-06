@@ -121,7 +121,7 @@ To pull the left side out of the container, we can apply a negative margin of 50
 That's a little off-screen...
 </div>
 
-But we can now fix this by making the element's position relative, alalowing us to set its `left` value to 50%, bringing it right back to the start of the viewport.
+But we can now fix this by making the element's position relative, allowing us to set its `left` value to 50%, bringing it right back to the start of the viewport.
 
 ```html
 <div class="
@@ -217,7 +217,7 @@ If using TailwindCSS, the markup might be getting a little verbose, but you can 
 
 If you want a recap of the final styles, ready to copy + paste into your own project, you can find them below:
 
-For TailwindCSS, find the styles below. You might even consider using Matt Anderson's [tailwind-container-break-out](https://github.com/LucidNinja/tailwind-container-break-out) plugin to get some prebuilt utility classes for this.
+For TailwindCSS, try using the styles below in your project. You might even consider using Matt Anderson's [tailwind-container-break-out](https://github.com/LucidNinja/tailwind-container-break-out) plugin to get some prebuilt utility classes for this.
 
 ```html
 <div class="
@@ -249,4 +249,4 @@ This negative margin, viewport-width approach might have a little bit of a learn
 
 It allows you to keep the surrounding markup intact, while still giving you the flexibility to create full-width elements that span the entire width of the screen.
 
-CSS truly can do anything.
+CSS truly can do anything!
