@@ -22,7 +22,7 @@ We say "PHP is not dead"... and all they hear is "PHP" and "dead".
 ![A dead elephpant](/images/articles/dead-elephpant.svg){.no-shadow}
 
 <div class="px-8 py-16 my-16 text-pink-900 bg-pink-100 mx-full full-width-quote">
-<div class="container max-w-3xl mx-auto">
+<div class="container max-w-[65ch] mx-auto">
 <h2>The Pink Elephant Paradox</h2>
 
 This happens all the time in language - we think we're correcting a myth, but end up reinforcing it instead.
