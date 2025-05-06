@@ -217,7 +217,7 @@ If using TailwindCSS, the markup might be getting a little verbose, but you can 
 
 If you want a recap of the final styles, ready to copy + paste into your own project, you can find them below:
 
-For TailwindCSS, find the styles below. You might even consider using Matt Anderson's [tailwind-container-break-out](https://github.com/LucidNinja/tailwind-container-break-out) plugin to get some classes for this.
+For TailwindCSS, find the styles below. You might even consider using Matt Anderson's [tailwind-container-break-out](https://github.com/LucidNinja/tailwind-container-break-out) plugin to get some prebuilt utility classes for this.
 
 ```html
 <div class="
@@ -230,7 +230,7 @@ For TailwindCSS, find the styles below. You might even consider using Matt Ander
 ">...</div>
 ```
 
-For plain old vanilla CSS:
+For plain old vanilla CSS, consider using this utility class in your project:
 
 ```css
 .full-width {
@@ -248,3 +248,5 @@ For plain old vanilla CSS:
 This negative margin, viewport-width approach might have a little bit of a learning curve, but it can be a really powerful way to create full-width elements in your designs.
 
 It allows you to keep the surrounding markup intact, while still giving you the flexibility to create full-width elements that span the entire width of the screen.
+
+CSS truly can do anything.
