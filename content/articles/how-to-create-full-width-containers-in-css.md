@@ -173,7 +173,7 @@ Where we're setting the margins, we can also use the `calc()` function to set th
 </div>
 ```
 
-This now solves the scrollbar problem, but we can't just hardcode the valus of `12px` and `6px` because the scrollbar width can vary between browsers and operating systems. Even on our one device, some pages may have a scrollbar and others may not, changing the behaviour of the viewport width - so we need to calculate the scrollbar width dynamically.
+This now solves the scrollbar problem, but we can't just hardcode the values of `12px` and `6px` because the scrollbar width can vary between browsers and operating systems. Even on our one device, some pages may have a scrollbar and others may not, changing the behaviour of the viewport width - so we need to calculate the scrollbar width dynamically.
 
 This is tricky to do in CSS alone, but we can use a little bit of JavaScript to calculate the scrollbar width and set it as a CSS variable.
 
