@@ -20,8 +20,6 @@ At the end of [PHPverse 2025](https://lp.jetbrains.com/phpverse-2025/), some fol
 
 I've collected all the links from that discussion as well as any others I could find for sale online, and I've put all of them here so that anyone who wants to buy one can easily find them - elePHPants are not always easy to find in the wild!
 
-[![PHPStan](https://phpstan.org/elephpant_right.ff8f09b8.jpg)](https://phpstan.org/merch)
-
 [![PHP Architect](https://www.phparch.com/wp-content/uploads/2022/06/2022-06-11-07.56.55-300x225.jpg)](https://www.phparch.com/swag/plush-elephpant/)
 
 [![Laravel (by PHP Architect)](https://www.phparch.com/wp-content/uploads/2016/03/elephpant_laravel_2-300x300.jpg)](https://www.phparch.com/swag/laravel-plush-elephpant/)
