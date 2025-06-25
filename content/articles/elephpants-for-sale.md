@@ -3,7 +3,7 @@ title: ElePHPants for Sale
 alternate_title: 
 slug: elephpants-for-sale
 published_at: 2025-06-19
-updated_at: 
+updated_at: 2025-06-25
 strapline: 
 synopsis: A comprehensive list of places to buy ElePHPants online
 previous_article: 
@@ -39,6 +39,8 @@ I've collected all the links from that discussion as well as any others I could 
 [![Pink elePHPant (by PHPClasses)](https://files.phpclasses.org/picture/product/1-ElePHPant-2022-Pink-352x352-2024-01-26-21-53-46.jpg)](https://www.phpclasses.org/shop/product/eles1pink/)
 
 [![Original Blue elePHPant](https://www.vincentpontier.com/elephpant/wp-content/uploads/2014/08/blue_elephpant_ab-510x510.jpg)](https://www.vincentpontier.com/elephpant/produit/elephpant-blue-original/)
+
+[![PHPStan Elephpant](https://phpstan.org/elephpant_right.ff8f09b8.jpg)](https://phpstan.org/merch)
 
 And one honorable mention to end it out...
 
