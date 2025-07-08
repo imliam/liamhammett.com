@@ -21,7 +21,13 @@
             @endisset
             @isset ($title)
                 &mdash;
-                {{ $title }}
+                @isset($sourceUrl)
+                    <a class="text-gray-500 hover:text-gray-700" href="{{ $sourceUrl }}" rel="nofollow noopener noreferrer" target="_blank">
+                        {{ $title }}
+                    </a>
+                @else
+                    {{ $title }}
+                @endisset
             @endisset
         </cite>
     </figcaption>
