@@ -40,10 +40,6 @@ I've collected all the links from that discussion as well as any others I could 
 
 [![Original Blue elePHPant](https://www.vincentpontier.com/elephpant/wp-content/uploads/2014/08/blue_elephpant_ab-510x510.jpg)](https://www.vincentpontier.com/elephpant/produit/elephpant-blue-original/)
 
-And one honorable mention to end it out...
-
-[![Pachiderm enthusiast](https://shop.bricked-it.com/cdn/shop/files/ElephantLaravelred-white-front-bricked-n.png?v=1732720023&width=300)](https://shop.bricked-it.com/products/pachiderm-enthusiast)
-
 If you'd like to see what other elePHPants are out there, check out <https://elephpant.me/> which is a community-driven site that lists elePHPants from around the world.
 
 If you've got any other links to elePHPants for sale, please let me know and I'll add them to this list!
