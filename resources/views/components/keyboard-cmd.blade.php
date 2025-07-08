@@ -1,0 +1,1 @@
+<span x-data x-text="window.navigator.platform.includes('Mac') ? '⌘' : 'CTRL'">⌘</span>
