@@ -1,4 +1,5 @@
 ---
+type: podcast
 title: OmARCase
 alternate_title:
 slug: omarcase
@@ -16,7 +17,7 @@ Recently, the company behind the [Arc browser](https://arc.net/) announced they'
 
 But forget the drama - let's talk about what Arc got _absolutely right_: ==Omakase==
 
-<https://www.youtube.com/watch?v=D-QjPYBRnno>
+<https://braindump.transistor.fm/episodes/omarcase>
 
 ## What Is Omakase?
 
