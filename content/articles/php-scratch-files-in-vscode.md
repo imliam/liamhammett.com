@@ -15,7 +15,7 @@ tags:
 
 Throughout any given day, I find myself writing PHP code in "scratch files" - quick, throwaway scripts that I use to test out a concept or debug a problem.
 
-Usually I just make a new file with <kbd><span x-data x-text="window.navigator.platform.includes('Mac') ? 'CMD' : 'CTRL'">CMD</span>+N</kbd> and don't even save it.
+Usually I just make a new file with <kbd><x-keyboard-cmd />+N</kbd> and don't even save it.
 
 It's quick to set up, but to get rid of a couple of the little "papercuts" that might cost you precious seconds, you can go a step further.
 
