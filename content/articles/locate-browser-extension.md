@@ -1,5 +1,5 @@
 ---
-title: Locate: The Search Your Browser Should Have Had
+title: Locate - The Search Your Browser Should Have Had
 alternate_title:
 slug: locate-browser-extension
 published_at: 2025-12-22
