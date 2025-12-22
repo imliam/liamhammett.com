@@ -9,10 +9,7 @@ synopsis: A new Chrome extension that brings powerful features like regex, CSS s
 previous_article:
 next_article:
 tags:
-    - chrome
-    - browser-extension
-    - javascript
-    - tools
+    - Browser Extensions
 ---
 
 I've just released [Locate](https://chromewebstore.google.com/detail/locate/mhiddaoekickdjndlpnmkikgohhhpjkn), a Chrome extension that supercharges your browser's search functionality. If you've ever felt limited by the basic <kbd><x-keyboard-cmd />+F</kbd> search, this one's for you.
