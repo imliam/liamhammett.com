@@ -22,7 +22,7 @@
                     <h2 class="print:mt-8">Work</h2>
 
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8 print:grid-cols-1 print:gap-4">
-                        <div class=""><img class="print:max-w-32" src="{{ asset('/images/cv/future-plc.png') }}" /></div>
+                        <div class=""><img class="no-shadow print:max-w-32" src="{{ asset('/images/cv/future-plc.webp') }}" /></div>
                         <div class="col-span-2">
                             <h3 class="print:hidden">Future Publishing</h3>
                             <p class="text-gray-400"><strong>Tech Lead</strong> (<em>2019 &mdash; Present</em>)</p>
