@@ -46,8 +46,20 @@ class Article extends Model implements Feedable
         return [
             'published_at' => 'datetime:Y-m-d',
             'updated_at' => 'datetime:Y-m-d',
-            'tags' => 'array',
+            'tags' => 'json',
         ];
+    }
+
+    /**
+     * Override setAttribute to ensure arrays are JSON-encoded for Orbit's bulk insert.
+     */
+    public function setAttribute($key, $value)
+    {
+        if ($key === 'tags' && is_array($value)) {
+            $value = json_encode($value);
+        }
+
+        return parent::setAttribute($key, $value);
     }
 
     public function getKeyName()
@@ -71,6 +83,17 @@ class Article extends Model implements Feedable
         // $markdown = str_replace('<?php', '\<?php', $markdown);
         $markdown = $this->wrapCodeBlocksWithVerbatim($markdown);
         $markdown = app(MarkdownRenderer::class)->toHtml($markdown);
+
+        // Escape @ symbols inside <code> tags to prevent Blade from processing them
+        // This handles inline code like `@push` or `@@push` that shouldn't be interpreted as Blade
+        $markdown = preg_replace_callback('/<code([^>]*)>(.*?)<\/code>/s', function ($matches) {
+            $attrs = $matches[1];
+            $content = $matches[2];
+            // Replace @ with HTML entity to prevent Blade interpretation
+            $content = str_replace('@', '&#64;', $content);
+            return '<code' . $attrs . '>' . $content . '</code>';
+        }, $markdown);
+
         $markdown = Blade::render($markdown, [
             'article' => $this,
         ]);
@@ -113,7 +136,9 @@ class Article extends Model implements Feedable
     protected function wrapCodeBlocksWithVerbatim(string $markdown): string
     {
         // Use regex to find fenced code blocks
-        $pattern = '/(```\s*[^`]*```)/s';
+        // The pattern [\s\S]*? matches any character including newlines (non-greedy)
+        // This handles code blocks that contain backticks (like inline code examples)
+        $pattern = '/(```[\s\S]*?```)/s';
 
         // Callback function to wrap matched code blocks
         $callback = function ($matches) {

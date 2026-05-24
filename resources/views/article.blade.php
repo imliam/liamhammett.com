@@ -35,8 +35,8 @@
         <!-- JSON-LD -->
         <script type="application/ld+json">
             {
-                "@context": "https://schema.org",
-                "@type": "WebPage",
+                "@@context": "https://schema.org",
+                "@@type": "WebPage",
                 "name": "{{ $article->title }}",
                 @isset($article->synopsis)
                     "description": "{{ $article->synopsis }}",

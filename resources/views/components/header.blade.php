@@ -1,16 +1,22 @@
 @props(['homepage' => false])
 
-<div class="overflow-x-clip print:hidden" style="view-transition-name:header">
+<div class="overflow-x-clip" style="view-transition-name:header">
     <div class="-rotate-12 sm:-rotate-3 -mx-64 -mt-36 left-0 right-0 bg-noise">
         <div class="{{ $homepage ? 'h-96' : 'h-64' }} w-full bg-orange-500 z-20 relative flex items-end justify-center -ml-4">
             <div class="flex flex-col gap-2 font-title text-center px-4" style="view-transition-name:header-text">
                 <{{ $homepage ? 'h1' : 'h2' }} class="{{ $homepage ? 'text-8xl' : 'text-6xl' }} font-semibold uppercase tracking-wide leading-1 text-pretty mt-8">
                     <a href="{{ url('/') }}" class="text-shadow-sq shadow-orange-700 hover:text-orange-700 hover:shadow-gray-900 transition-all">
-                        Hi, I'm
-                        <span class="font-black">Liam</span>
+                        <span class="print:hidden">
+                            Hi, I'm
+                            <span class="font-black">Liam</span>
+                        </span>
+                        <span class="hidden print:block" aria-hidden>Liam Hammett</span>
                     </a>
                 </{{ $homepage ? 'h1' : 'h2' }}>
-                <p class="{{ $homepage ? 'text-3xl mb-10' : 'text-xl mb-2' }} uppercase font-semibold tracking-wide leading-none text-orange-900 bg-orange-500 mx-auto py-1 rounded-2xl -mt-4">I talk about code and stuff</p>
+                <p class="{{ $homepage ? 'text-3xl mb-10' : 'text-xl mb-2' }} uppercase font-semibold tracking-wide leading-none text-orange-900 bg-orange-500 mx-auto py-1 rounded-2xl -mt-4">
+                    <span class="print:hidden">I talk about code and stuff</span>
+                    <span class="hidden print:block" aria-hidden>Software Developer &amp; Senior Tech Lead</span>
+                </p>
             </div>
         </div>
 

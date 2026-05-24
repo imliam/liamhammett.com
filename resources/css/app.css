@@ -1,5 +1,10 @@
 @tailwind base;
 
+/* Ensure [hidden] always wins over display utilities like `contents` */
+[hidden] {
+    display: none !important;
+}
+
 @font-face {
     font-family: "Ostrich Sans Rounded";
     src: url(../../public/fonts/ostrich-sans-rounded.ttf);
