@@ -48,7 +48,7 @@ return [
     'commands' => [
         'About' => 'php artisan solo:about',
         'Logs' => EnhancedTailCommand::file(storage_path('logs/laravel.log')),
-        'Vite' => 'npm run dev',
+        'Vite' => 'bun run dev',
         'Make' => new MakeCommand,
         'HTTP' => 'php artisan serve',
 
