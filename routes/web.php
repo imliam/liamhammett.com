@@ -41,6 +41,10 @@ Route::get('/tags/{tag}', function (string $tag) {
             )
         );
 
+    if ($articles->isEmpty()) {
+        abort(404);
+    }
+
     $tag = collect($articles->first()->getTags())->first(fn (Tag $articleTag) => $articleTag->getSlug() === $tag);
 
     return view('tags', [

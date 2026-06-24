@@ -22,19 +22,14 @@ class Tag
 
     public static function all(): Collection
     {
-        $tags = [];
-
-        foreach (Article::query()->published()->get() as $article) {
-            foreach ($article->tags as $tag) {
-                if (!in_array($tag, $tags)) {
-                    $tags[] = $tag;
-                }
-            }
-        }
-
-        return collect($tags)
+        return Article::query()
+            ->published()
+            ->pluck('tags')
+            ->flatten()
             ->filter()
+            ->unique()
             ->sort()
+            ->values()
             ->map(fn (string $tagName) => new Tag($tagName));
     }
 }

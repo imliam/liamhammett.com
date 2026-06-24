@@ -9,7 +9,7 @@ Route::redirect('/2022-in-review-v1zppRzZ', '/2022-in-review', 301);
 Route::redirect('/a-look-at-phps-isset-N3zx8z7q', '/a-look-at-phps-isset', 301);
 Route::redirect('/announcing-the-livewirerun-newsletter-LkoZ1azl', '/announcing-the-livewire-run-newsletter', 301);
 Route::redirect('/avoiding-the-pain-of-localisation-talk-edr7eLoW', '/avoiding-the-pain-of-localisation', 301);
-Route::redirect('/bitmask-constant-arguments-in-php-D9o0AQJO', 'bitmask-constant-arguments-in-php', 301);
+Route::redirect('/bitmask-constant-arguments-in-php-D9o0AQJO', '/bitmask-constant-arguments-in-php', 301);
 Route::redirect('/black-friday-2018-deals-for-laravel-developers-pbolYQwW', '/black-friday-2018-deals-for-laravel-developers', 301);
 Route::redirect('/black-friday-cyber-monday-2019-deals-for-php-laravel-developers-KvrGA8oM', '/black-friday-cyber-monday-2019-deals-for-php-laravel-developers', 301);
 Route::redirect('/catching-an-exit-in-php-KEzjLQxG', '/catching-an-exit-in-php', 301);
@@ -34,7 +34,7 @@ Route::redirect('/php-shareable-social-media-links-dbr20o7L', '/php-shareable-so
 Route::redirect('/php-wishlist-operator-overloading-wEQXAr4p', '/php-wishlist-operator-overloading', 301);
 Route::redirect('/php-wishlist-typing-LkoZazl3', '/php-wishlist-typing', 301);
 Route::redirect('/private-constructors-dbr2K0z7', '/private-constructors', 301);
-Route::redirect('/protecting-against-infinite-gmail-addresses-using-regex-wEQXmAr4', 'protecting-against-infinite-gmail-addresses-using-regex', 301);
+Route::redirect('/protecting-against-infinite-gmail-addresses-using-regex-wEQXmAr4', '/protecting-against-infinite-gmail-addresses-using-regex', 301);
 Route::redirect('/run-and-stop-multiple-long-running-commands-from-bash-with-a-trap-2Mok4GQD', '/run-and-stop-multiple-long-running-commands-from-bash-with-a-trap', 301);
 Route::redirect('/slicing-into-blade-laracon-eu-online-2021-xbzyWdQv', '/slicing-into-blade', 301);
 Route::redirect('/static-constructors-in-php-y0zPVbQl', '/static-constructors-in-php', 301);

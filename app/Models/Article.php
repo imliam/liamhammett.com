@@ -209,10 +209,6 @@ class Article extends Model implements Feedable
         $callback = function ($matches) {
             $imgTag = $matches[0];
 
-            if (preg_match('/<(picture|figure)[^>]*>.*' . preg_quote($imgTag, '/') . '.*<\/\1>/is', $matches[0])) {
-                return $imgTag;
-            }
-
             if (preg_match('/data-nofigure/i', $imgTag)) {
                 return $imgTag;
             }
@@ -345,6 +341,7 @@ class Article extends Model implements Feedable
             ->id($this->slug)
             ->title($this->title)
             ->summary($this->synopsis ?? '')
+            ->content($this->render())
             ->updated($this->updated_at ?? $this->published_at)
             ->link($this->getUrl())
             ->authorName('Liam Hammett')

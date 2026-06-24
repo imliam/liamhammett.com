@@ -27,7 +27,7 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="{{ $article->title }}">
         @isset($article->synopsis)
-            <meta property="og:description" content="Theres really a lot of great stuff in here...">
+            <meta property="og:description" content="{{ $article->synopsis }}">
         @endisset
         <meta property="og:image" content="{{ $article->getOpengraphImageUrl() }}">
         <meta property="og:url" content="{{ $article->getUrl() }}">

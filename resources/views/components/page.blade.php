@@ -27,14 +27,16 @@
 
     {{ $metaTags ?? '' }}
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SG43WE6EN7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    @if (env('GOOGLE_ANALYTICS_ID'))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GOOGLE_ANALYTICS_ID') }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-        gtag('config', 'G-SG43WE6EN7');
-    </script>
+            gtag('config', '{{ env("GOOGLE_ANALYTICS_ID") }}');
+        </script>
+    @endif
 </head>
 
 <body class="font-sans antialiased bg-white text-slate-950 min-h-full bg-noise before:opacity-5 before:fixed">

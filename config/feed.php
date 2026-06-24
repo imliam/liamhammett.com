@@ -27,7 +27,7 @@ return [
              * a banner/logo; for RSS and JSON feeds, it's displayed as an icon.
              * An empty value omits the image attribute from the feed.
              */
-            'image' => '',
+            'image' => env('APP_URL', 'https://liamhammett.com') . '/images/avatar.jpg',
 
             /*
              * The format of the feed. Acceptable values are 'rss', 'atom', or 'json'.

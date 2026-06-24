@@ -18,7 +18,7 @@ class MakeArticle extends GeneratorCommand
         $response = parent::handle();
 
         if ($response !== false) {
-            shell_exec("open {$this->getPath()}");
+            shell_exec('open ' . escapeshellarg($this->getPath()));
         }
 
         return $response;
