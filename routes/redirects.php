@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Redirects for the old URL structure of the previous site, to maintain links.
  */
+Route::redirect('/think-of-an-elephant', '/think-of-an-elephpant', 301);
 Route::redirect('/2022-in-review-v1zppRzZ', '/2022-in-review', 301);
 Route::redirect('/a-look-at-phps-isset-N3zx8z7q', '/a-look-at-phps-isset', 301);
 Route::redirect('/announcing-the-livewirerun-newsletter-LkoZ1azl', '/announcing-the-livewire-run-newsletter', 301);
