@@ -1,23 +1,20 @@
 <x-page :title="$tag->name">
-    <x-container style="view-transition-name:main">
-        <div class="text-center max-w-3xl mx-auto text-base leading-7 text-gray-700 space-y-8">
-            <h1 class="text-3xl font-title font-bold tracking-wide text-gray-900 sm:text-6xl text-shadow-sq shadow-orange-500">{{ $tag->name }}</h1>
-        </div>
+    <div class="contents dir-jelly">
+        <div class="jelly-page">
+            @include('jelly.nav')
 
-        <div class="px-6 mx-auto max-w-7xl lg:px-8">
-            <div class="max-w-2xl mx-auto">
-                <div class="pt-10 mt-10 space-y-16 sm:mt-16 sm:pt-16">
-                    @foreach ($articlesByYear as $year => $articles)
-                        <x-divider>{{ $year }}</x-divider>
-                        <div class="grid gap-8">
-                            @foreach ($articles as $article)
-                                <x-short-listing :article="$article" />
-                                {{-- <x-divider /> --}}
-                            @endforeach
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            <header class="jelly-page-head jelly-wrap">
+                <a href="{{ url('/tags') }}" class="jelly-back"><span aria-hidden="true">←</span> All tags</a>
+                <p class="jelly-kicker"><span class="jelly-dot"></span> Tagged</p>
+                <h1 class="jelly-article-title">{{ $tag->name }}</h1>
+                <p class="jelly-page-lede">{{ $count = $articlesByYear->flatten()->count() }} {{ str('post')->plural($count) }} and counting.</p>
+            </header>
+
+            <section class="jelly-section jelly-wrap">
+                @include('jelly.archive', ['articlesByYear' => $articlesByYear])
+            </section>
+
+            @include('jelly.footer')
         </div>
-    </x-container>
+    </div>
 </x-page>

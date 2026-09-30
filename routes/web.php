@@ -21,6 +21,8 @@ Route::get('/', function () {
 
     return view('home', [
         'articlesByYear' => $articlesByYear,
+        'talks' => config('talks'),
+        'videos' => config('videos'),
     ]);
 });
 

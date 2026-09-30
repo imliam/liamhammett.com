@@ -1,3 +1,5 @@
+@import "./jelly.css";
+
 @tailwind base;
 
 /* Ensure [hidden] always wins over display utilities like `contents` */

@@ -1,18 +1,30 @@
 <x-page title="CV">
-    <x-container class="mt-16" style="view-transition-name:main">
-        <div class="px-6 lg:px-8">
-            <div class="relative max-w-3xl print:max-w-full mx-auto space-y-8 text-base leading-7 text-gray-700">
+    <div class="contents dir-jelly">
+        <div class="jelly-page jelly-cv-page">
+            <div class="print:hidden">
+                @include('jelly.nav')
+            </div>
+
+            <header class="jelly-article-head jelly-wrap print:hidden">
+                <p class="jelly-kicker"><span class="jelly-dot"></span> Curriculum vitae</p>
+                <h1 class="jelly-article-title">Liam <span class="jelly-hl">Hammett</span></h1>
+            </header>
+
+            <div class="jelly-article-body jelly-cv">
                 <div class="prose print:text-sm">
 
                     <div class="not-prose mb-8">
-                        <h1 class="font-title text-7xl sm:text-8xl print:text-4xl tracking-tight text-slate-950 mb-2 print:mb-1 print:hidden">Liam Hammett</h1>
-                        <p class="text-sm text-gray-400 flex flex-wrap gap-x-1">
-                            <a href="mailto:liam@liamhammett.com" class="hover:text-gray-600 transition-colors">liam@liamhammett.com</a> &middot;
-                            <a href="https://www.linkedin.com/in/liam-hammett/" class="hover:text-gray-600 transition-colors">LinkedIn</a> &middot;
-                            <a href="https://www.github.com/imliam" class="hover:text-gray-600 transition-colors">GitHub</a> &middot;
-                            <a href="https://liamhammett.com/" class="hover:text-gray-600 transition-colors">Blog</a> &middot;
-                            <a href="https://twitter.com/LiamHammett" class="hover:text-gray-600 transition-colors">Twitter</a> &middot;
-                            <a href="https://www.youtube.com/@imliamhammett" class="hover:text-gray-600 transition-colors">YouTube</a>
+                        <div class="hidden print:block">
+                            <p class="jelly-cv-name">Liam Hammett</p>
+                            <p class="jelly-cv-role">Software Developer &amp; Senior Tech Lead</p>
+                        </div>
+                        <p class="jelly-cv-links flex flex-wrap gap-x-1">
+                            <a href="mailto:liam@liamhammett.com">liam@liamhammett.com</a> &middot;
+                            <a href="https://www.linkedin.com/in/liam-hammett/">LinkedIn</a> &middot;
+                            <a href="https://www.github.com/imliam">GitHub</a> &middot;
+                            <a href="https://liamhammett.com/">Blog</a> &middot;
+                            <a href="https://twitter.com/LiamHammett">Twitter</a> &middot;
+                            <a href="https://www.youtube.com/@imliamhammett">YouTube</a>
                         </p>
                     </div>
 
@@ -43,9 +55,9 @@
                         @endphp
                         @foreach ($skillGroups as $label => $skills)
                             <div class="flex flex-wrap items-baseline gap-2 print:gap-1">
-                                <span class="text-xs font-semibold w-28 text-gray-500 uppercase tracking-wider shrink-0">{{ $label }}</span>
+                                <span class="jelly-cv-skill-label w-28 shrink-0">{{ $label }}</span>
                                 @foreach ($skills as $skill)
-                                    <span class="inline-block px-2.5 py-0.5 text-xs font-medium text-gray-700 bg-gray-100 rounded-full">{{ $skill }}</span>
+                                    <span class="jelly-cv-skill">{{ $skill }}</span>
                                 @endforeach
                             </div>
                         @endforeach
@@ -152,6 +164,10 @@
                     <p class="text-gray-400 text-xs">References and further information is available upon request.</p>
                 </div>
             </div>
+
+            <div class="print:hidden">
+                @include('jelly.footer')
+            </div>
         </div>
-    </x-container>
+    </div>
 </x-page>

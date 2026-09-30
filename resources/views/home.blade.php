@@ -1,4 +1,4 @@
-<x-page :homepage="true">
+<x-page>
     <x-slot name="metaTags">
         <!-- SEO -->
         <meta name="description" content="I talk about code and stuff">
@@ -35,20 +35,7 @@
         </script>
     </x-slot>
 
-    <x-container style="view-transition-name:main">
-        <div class="px-6 mx-auto max-w-7xl lg:px-8">
-            <div class="max-w-2xl mx-auto">
-                <div class="pt-10 mt-10 space-y-16 sm:mt-16 sm:pt-16">
-                    @foreach ($articlesByYear as $year => $articles)
-                        <x-divider>{{ $year }}</x-divider>
-                        <div class="flex flex-col gap-8">
-                            @foreach ($articles as $article)
-                                <x-short-listing :article="$article" />
-                            @endforeach
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </x-container>
+    <div class="contents dir-jelly">
+        @include('jelly.home')
+    </div>
 </x-page>

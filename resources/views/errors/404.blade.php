@@ -1,14 +1,15 @@
 <x-page title="404">
+    <div class="contents dir-jelly">
+        <div class="jelly-page">
+            @include('jelly.nav')
 
-    <div class="min-h-[50vh] text-center flex flex-col items-center justify-center gap-16 font-mono">
-        <h1 class="font-extrabold uppercase leading-1 text-8xl text-pretty max-w-96 mx-auto text-shadow-sq shadow-orange-500">
-            404
-        </h1>
+            <main class="jelly-404 jelly-wrap">
+                <h1 class="jelly-404-title">4<span class="jelly-hl">0</span>4</h1>
+                <p class="jelly-page-lede">Looks like you've found&hellip; nothing. It must have slid off somewhere.</p>
+                <a href="{{ url('/') }}" class="jelly-btn jelly-btn--primary">Take me home</a>
+            </main>
 
-        <p class="uppercase font-semibold text-2xl tracking-wide leading-none text-gray-700">
-            Looks like you've found... nothing
-        </p>
-
-        <a href="{{ url('/') }}" class="text-orange-50 bg-orange-700 hover:bg-orange-500 hover:text-orange-100 rounded-2xl text-2xl px-6 py-4">Go home</a>
+            @include('jelly.footer')
+        </div>
     </div>
 </x-page>

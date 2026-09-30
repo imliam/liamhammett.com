@@ -19,6 +19,9 @@
     @endforeach
 
     <!-- Assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@500;700&display=swap">
     <link rel="preload" href="/fonts/ostrich-sans-rounded.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="/fonts/Handlee-Regular.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="/fonts/Spirax-Regular.ttf" as="font" type="font/ttf" crossorigin />
@@ -40,11 +43,7 @@
 </head>
 
 <body class="font-sans antialiased bg-white text-slate-950 min-h-full bg-noise before:opacity-5 before:fixed">
-    <x-header class="text-center z-10 relative pb-32" :homepage="$homepage ?? false" />
-
     {{ $slot }}
-
-    <x-footer class="mb-8" />
 </body>
 
 </html>

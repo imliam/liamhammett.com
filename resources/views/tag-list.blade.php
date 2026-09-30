@@ -1,17 +1,34 @@
 <x-page title="Tags">
-    <x-container style="view-transition-name:main">
-        <div class="max-w-3xl mx-auto space-y-8 text-base leading-7 text-center text-gray-700">
-            <h1 class="text-3xl font-bold tracking-wide text-gray-900 font-title sm:text-6xl text-shadow-sq shadow-orange-500">Tag List</h1>
-        </div>
+    @php
+        $counts = \App\Models\Article::query()->published()->get()
+            ->flatMap(fn ($article) => $article->getTags())
+            ->countBy(fn ($tag) => $tag->name);
+    @endphp
 
-        <div class="px-6 mx-auto max-w-7xl lg:px-8">
-            <div class="max-w-2xl mx-auto prose">
-                <ul class="pt-10 mt-10 space-y-4 sm:mt-16 sm:pt-16">
+    <div class="contents dir-jelly">
+        <div class="jelly-page">
+            @include('jelly.nav')
+
+            <header class="jelly-page-head jelly-wrap">
+                <a href="{{ url('/') }}#writing" class="jelly-back"><span aria-hidden="true">←</span> All writing</a>
+                <h1 class="jelly-article-title">Browse by <span class="jelly-hl">tag</span></h1>
+                <p class="jelly-page-lede">Everything I've written, sorted into little piles.</p>
+            </header>
+
+            <section class="jelly-section jelly-wrap">
+                <ul class="jelly-tag-cloud">
                     @foreach ($tags as $tag)
-                        <li><a href="{{ $tag->getUrl() }}">{{ $tag->name }}</a></li>
+                        <li>
+                            <a href="{{ $tag->getUrl() }}" class="jelly-tag jelly-tint-{{ $loop->index % 4 }}">
+                                {{ $tag->name }}
+                                <span class="jelly-tag-count">{{ $counts[$tag->name] ?? 0 }}</span>
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
-            </div>
+            </section>
+
+            @include('jelly.footer')
         </div>
-    </x-container>
+    </div>
 </x-page>

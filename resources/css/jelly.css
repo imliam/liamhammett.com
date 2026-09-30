@@ -1,0 +1,1831 @@
+/* Jelly — squishy, bouncy, tactile. */
+
+body:has(.dir-jelly) {
+    background: #ffeede;
+    background-image: radial-gradient(#f6d2b4 1.2px, transparent 1.4px);
+    background-size: 1.4rem 1.4rem;
+}
+
+body:has(.dir-jelly)::before {
+    opacity: 0.035 !important;
+}
+
+.dir-jelly {
+    --j-bg: #ffeede;
+    --j-cream: #fffaf4;
+    --j-ink: #2a1810;
+    --j-ink-soft: #5b4336;
+    --j-orange: #ff6a1f;
+    --j-orange-deep: #e24e06;
+    --j-yellow: #ffd644;
+    --j-pink: #ffa3c8;
+    --j-mint: #93e6c3;
+    --j-lilac: #c9b8ff;
+    --j-line: 2.5px;
+    --j-radius: 1.75rem;
+    --j-display: "Ostrich Sans Rounded", "Figtree", system-ui, sans-serif;
+    --j-body: "Figtree", system-ui, sans-serif;
+    --j-mono: "JetBrains Mono", ui-monospace, monospace;
+    --j-spring: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1);
+    --j-shadow: 0.3rem 0.3rem 0 var(--j-ink);
+    --j-shadow-orange: 0.3rem 0.3rem 0 var(--j-orange);
+}
+
+.dir-jelly .jelly-page {
+    font-family: var(--j-body);
+    color: var(--j-ink);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-feature-settings: "ss01";
+    overflow-x: clip;
+}
+
+.dir-jelly .jelly-page ::selection {
+    background: var(--j-yellow);
+    color: var(--j-ink);
+}
+
+.dir-jelly .jelly-wrap {
+    width: min(100% - 2.5rem, 64rem);
+    margin-inline: auto;
+}
+
+/* ---------- Shared bits ---------- */
+
+.dir-jelly .jelly-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--j-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--j-ink);
+    background: var(--j-cream);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+}
+
+.dir-jelly .jelly-dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: var(--j-orange);
+    box-shadow: 0 0 0 2px var(--j-ink);
+}
+
+.dir-jelly .jelly-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--j-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 999px;
+    border: var(--j-line) solid var(--j-ink);
+    background: var(--j-cream);
+    color: var(--j-ink);
+    box-shadow: var(--j-shadow);
+    transition: transform 600ms var(--j-spring), box-shadow 200ms ease;
+}
+
+.dir-jelly .jelly-btn svg {
+    width: 1.1em;
+    height: 1.1em;
+    color: var(--j-orange);
+}
+
+.dir-jelly .jelly-btn--primary {
+    background: var(--j-orange);
+    color: #fff;
+}
+
+.dir-jelly .jelly-btn:hover {
+    transform: translate(-2px, -2px) scale(1.05, 0.96);
+    box-shadow: 0.45rem 0.45rem 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-btn:active {
+    transform: translate(3px, 3px) scale(0.96, 1.03);
+    box-shadow: 0 0 0 var(--j-ink);
+    transition-duration: 120ms;
+}
+
+.dir-jelly .jelly-chip {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    border: 2px solid var(--j-ink);
+    background: var(--j-cream);
+    white-space: nowrap;
+}
+
+.dir-jelly .jelly-chip--link {
+    transition: transform 500ms var(--j-spring), background 150ms;
+}
+
+.dir-jelly .jelly-chip--link:hover {
+    background: var(--j-yellow);
+    transform: rotate(-4deg) scale(1.08);
+}
+
+.dir-jelly .jelly-hl {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+    padding-inline: 0.12em;
+}
+
+.dir-jelly .jelly-hl::before {
+    content: "";
+    position: absolute;
+    inset: 0.18em -0.08em 0.02em;
+    background: var(--j-orange);
+    border-radius: 0.4em 0.6em 0.35em 0.7em;
+    transform: rotate(-2deg);
+    z-index: -1;
+}
+
+.dir-jelly .jelly-hl--pink::before { background: var(--j-pink); }
+.dir-jelly .jelly-hl--yellow::before { background: var(--j-yellow); }
+
+/* ---------- Nav ---------- */
+
+.dir-jelly .jelly-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.25rem;
+}
+
+.dir-jelly .jelly-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: 1.56rem;
+    letter-spacing: 0.02em;
+}
+
+.dir-jelly .jelly-logo-blob {
+    display: grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    background: var(--j-orange);
+    color: #fff;
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 58% 42% 55% 45% / 48% 58% 42% 52%;
+    box-shadow: 0.18rem 0.18rem 0 var(--j-ink);
+    transition: transform 700ms var(--j-spring), border-radius 700ms var(--j-spring);
+}
+
+.dir-jelly .jelly-logo:hover .jelly-logo-blob {
+    transform: rotate(-12deg) scale(1.12, 0.92);
+    border-radius: 42% 58% 45% 55% / 58% 42% 58% 42%;
+}
+
+.dir-jelly .jelly-logo-word {
+    font-size: 1.9rem;
+    line-height: 1;
+    text-shadow: 0.05em 0.05em 0 var(--j-orange);
+}
+
+.dir-jelly .jelly-logo-word span {
+    color: var(--j-orange);
+}
+
+.dir-jelly .jelly-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.3rem;
+    background: var(--j-cream);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 999px;
+    box-shadow: 0.2rem 0.2rem 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-nav-links a {
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    transition: background 150ms, transform 500ms var(--j-spring);
+}
+
+.dir-jelly .jelly-nav-links a:hover {
+    background: #ffe0c4;
+    transform: scale(1.08);
+}
+
+/* ---------- Hero ---------- */
+
+.dir-jelly .jelly-hero {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 3rem 4rem;
+}
+
+.dir-jelly .jelly-hero-title {
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: clamp(3.92rem, 9.8vw, 6.44rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    word-spacing: 0.08em;
+    margin-top: 1.25rem;
+    text-wrap: balance;
+}
+
+.dir-jelly .jelly-hero-name {
+    position: relative;
+    display: inline-block;
+    color: var(--j-orange);
+    -webkit-text-stroke: var(--j-line) var(--j-ink);
+    paint-order: stroke fill;
+    text-shadow: 0.06em 0.06em 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-squiggle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.2em;
+    width: 100%;
+    height: 0.28em;
+    overflow: visible;
+}
+
+.dir-jelly .jelly-squiggle path {
+    fill: none;
+    stroke: var(--j-ink);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: jelly-draw 1.2s 0.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes jelly-draw {
+    to { stroke-dashoffset: 0; }
+}
+
+.dir-jelly .jelly-hero-sub {
+    display: block;
+    margin-top: 0.3em;
+    font-size: 0.52em;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    color: var(--j-ink-soft);
+}
+
+.dir-jelly .jelly-hero-lede {
+    margin-top: 1.5rem;
+    max-width: 34ch;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--j-ink-soft);
+    text-wrap: pretty;
+}
+
+.dir-jelly .jelly-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2rem;
+}
+
+.dir-jelly .jelly-hero-art {
+    position: relative;
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 26rem;
+    justify-self: center;
+}
+
+.dir-jelly .jelly-goo-defs {
+    position: absolute;
+}
+
+.dir-jelly .jelly-goo {
+    position: absolute;
+    inset: 0;
+    filter: url(#jelly-goo);
+}
+
+.dir-jelly .jelly-goo-b {
+    position: absolute;
+    background: var(--j-orange);
+    border-radius: 999px;
+}
+
+.dir-jelly .jelly-goo-b1 { inset: 12%; animation: jelly-wobble 9s ease-in-out infinite; }
+.dir-jelly .jelly-goo-b2 { width: 30%; height: 30%; right: 2%; top: 8%; animation: jelly-drift 7s ease-in-out infinite; }
+.dir-jelly .jelly-goo-b3 { width: 24%; height: 24%; left: 7%; bottom: 9%; animation: jelly-drift 8s ease-in-out -3s infinite reverse; }
+.dir-jelly .jelly-goo-b4 { width: 14%; height: 14%; left: 44%; bottom: -2%; animation: jelly-drop 5s ease-in-out infinite; }
+
+@keyframes jelly-wobble {
+    0%, 100% { border-radius: 52% 48% 55% 45% / 45% 55% 45% 55%; transform: rotate(0deg); }
+    50% { border-radius: 45% 55% 42% 58% / 58% 42% 58% 42%; transform: rotate(8deg) scale(1.03); }
+}
+
+@keyframes jelly-drift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-18%, 22%); }
+}
+
+@keyframes jelly-drop {
+    0%, 100% { transform: translateY(-40%); }
+    50% { transform: translateY(35%); }
+}
+
+.dir-jelly .jelly-hero-avatar {
+    position: absolute;
+    inset: 22%;
+    width: 56%;
+    height: 56%;
+    object-fit: cover;
+    border-radius: 999px;
+    border: 0.3rem solid var(--j-ink);
+    box-shadow: 0.4rem 0.4rem 0 var(--j-ink);
+    transition: transform 800ms var(--j-spring);
+}
+
+.dir-jelly .jelly-hero-art:hover .jelly-hero-avatar {
+    transform: scale(1.06, 0.95) rotate(-3deg);
+}
+
+.dir-jelly .jelly-sticker {
+    position: absolute;
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: 1.06rem;
+    letter-spacing: 0.02em;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: var(--j-line) solid var(--j-ink);
+    box-shadow: 0.2rem 0.2rem 0 var(--j-ink);
+    white-space: nowrap;
+    transition: transform 700ms var(--j-spring);
+}
+
+.dir-jelly .jelly-sticker--yellow { background: var(--j-yellow); }
+.dir-jelly .jelly-sticker--pink { background: var(--j-pink); }
+.dir-jelly .jelly-sticker--mint { background: var(--j-mint); }
+
+.dir-jelly .jelly-sticker--a { top: 4%; left: 2%; transform: rotate(-10deg); font-family: var(--j-mono); }
+.dir-jelly .jelly-sticker--b { top: 48%; right: -6%; transform: rotate(7deg); }
+.dir-jelly .jelly-sticker--c { bottom: 6%; left: 10%; transform: rotate(-4deg); }
+
+.dir-jelly .jelly-hero-art:hover .jelly-sticker--a { transform: rotate(-18deg) translate(-6px, -6px) scale(1.08); }
+.dir-jelly .jelly-hero-art:hover .jelly-sticker--b { transform: rotate(14deg) translate(8px, 0) scale(1.08); }
+.dir-jelly .jelly-hero-art:hover .jelly-sticker--c { transform: rotate(-10deg) translate(-4px, 6px) scale(1.08); }
+
+/* ---------- Sections ---------- */
+
+.dir-jelly .jelly-section {
+    padding-block: 2.5rem;
+}
+
+.dir-jelly .jelly-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dir-jelly .jelly-h2 {
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: clamp(2.66rem, 6.3vw, 3.64rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+}
+
+.dir-jelly .jelly-link-arrow,
+.dir-jelly .jelly-section-note {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--j-ink-soft);
+}
+
+.dir-jelly .jelly-link-arrow span {
+    display: inline-block;
+    transition: transform 500ms var(--j-spring);
+}
+
+.dir-jelly .jelly-link-arrow:hover {
+    color: var(--j-orange-deep);
+}
+
+.dir-jelly .jelly-link-arrow:hover span {
+    transform: translateX(6px);
+}
+
+/* Videos */
+
+.dir-jelly .jelly-videos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.dir-jelly .jelly-video {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.6rem 0.6rem 1rem;
+    background: var(--j-cream);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: var(--j-radius);
+    box-shadow: var(--j-shadow);
+    transition: transform 700ms var(--j-spring), box-shadow 200ms ease;
+}
+
+.dir-jelly .jelly-video--feature {
+    grid-column: span 2;
+    grid-row: span 2;
+    background: var(--j-yellow);
+}
+
+.dir-jelly .jelly-video-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-inline: 0.4rem;
+}
+
+.dir-jelly .jelly-video--feature .jelly-video-body {
+    flex: 1;
+    justify-content: flex-end;
+    padding: 0.4rem 0.6rem 0.2rem;
+}
+
+.dir-jelly .jelly-video-kicker {
+    font-family: var(--j-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.dir-jelly .jelly-video-watch {
+    align-self: flex-start;
+    margin-top: 0.4rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: var(--j-ink);
+    color: var(--j-cream);
+    transition: transform 600ms var(--j-spring);
+}
+
+.dir-jelly .jelly-video:hover .jelly-video-watch {
+    transform: scale(1.08) rotate(-2deg);
+}
+
+.dir-jelly .jelly-video-new {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1;
+    font-family: var(--j-body);
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.8rem;
+    background: var(--j-pink);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 999px;
+    box-shadow: 0.15rem 0.15rem 0 var(--j-ink);
+    transform: rotate(-6deg);
+}
+
+.dir-jelly .jelly-video:hover {
+    transform: translate(-3px, -3px) rotate(-1deg) scale(1.02);
+    box-shadow: 0.5rem 0.5rem 0 var(--j-orange);
+}
+
+.dir-jelly .jelly-video:nth-child(even):hover {
+    transform: translate(-3px, -3px) rotate(1deg) scale(1.02);
+}
+
+.dir-jelly .jelly-video-thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    border-radius: calc(var(--j-radius) - 0.6rem);
+    overflow: hidden;
+    border: 2px solid var(--j-ink);
+}
+
+.dir-jelly .jelly-video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms var(--j-spring);
+}
+
+.dir-jelly .jelly-video:hover .jelly-video-thumb img {
+    transform: scale(1.06);
+}
+
+.dir-jelly .jelly-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin: -1.5rem 0 0 -1.5rem;
+    border-radius: 999px;
+    background: var(--j-orange);
+    color: #fff;
+    border: var(--j-line) solid var(--j-ink);
+    box-shadow: 0.15rem 0.15rem 0 var(--j-ink);
+    transition: transform 600ms var(--j-spring);
+}
+
+.dir-jelly .jelly-video--feature .jelly-play {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: -2.25rem 0 0 -2.25rem;
+}
+
+.dir-jelly .jelly-play svg {
+    width: 50%;
+    height: 50%;
+    margin-left: 8%;
+}
+
+.dir-jelly .jelly-video:hover .jelly-play {
+    transform: scale(1.2, 0.9);
+}
+
+.dir-jelly .jelly-video-title {
+    font-family: var(--j-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+}
+
+.dir-jelly .jelly-video--feature .jelly-video-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+}
+
+/* Talks */
+
+/* Full-bleed track: runs to the screen edges, first card lines up with the container */
+.dir-jelly .jelly-talks {
+    /* Matches the side margin .jelly-wrap leaves: max(1.25rem, (viewport - 64rem) / 2) */
+    --bleed: max(1.25rem, (100vw - var(--twcb-scrollbar-width, 0px) - 64rem) / 2);
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--bleed);
+    padding: 1rem var(--bleed) 1.5rem;
+    margin: -0.75rem calc(-1 * var(--bleed)) 0;
+    scrollbar-width: none;
+}
+
+.dir-jelly .jelly-talks::-webkit-scrollbar {
+    display: none;
+}
+
+.dir-jelly .jelly-talks.is-dragging {
+    scroll-snap-type: none;
+    cursor: grabbing;
+    user-select: none;
+}
+
+.dir-jelly .jelly-talks.is-draggable {
+    cursor: grab;
+}
+
+.dir-jelly .jelly-talks {
+    align-items: flex-start;
+}
+
+/* A talk card, plus drips underneath for the other times it's been given */
+.dir-jelly .jelly-talk-stack {
+    position: relative;
+    flex: 1 0 15rem;
+    max-width: 22rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    scroll-snap-align: start;
+    transition: transform 700ms var(--j-spring);
+}
+
+.dir-jelly .jelly-talk-stack:hover {
+    transform: translateY(-6px) rotate(-1.5deg);
+}
+
+.dir-jelly .jelly-talk {
+    position: relative;
+    width: 100%;
+    min-height: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 2rem 2rem 2rem 0.6rem;
+    box-shadow: var(--j-shadow);
+    overflow: hidden;
+    transition: box-shadow 200ms;
+}
+
+.dir-jelly .jelly-tint-0 { --tint: var(--j-orange); background: var(--tint); color: #fff; }
+.dir-jelly .jelly-tint-1 { --tint: var(--j-pink); background: var(--tint); }
+.dir-jelly .jelly-tint-2 { --tint: var(--j-mint); background: var(--tint); }
+.dir-jelly .jelly-tint-3 { --tint: var(--j-yellow); background: var(--tint); }
+
+.dir-jelly .jelly-talk-stack:hover .jelly-talk {
+    box-shadow: 0.45rem 0.6rem 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-talk-meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.dir-jelly .jelly-talk-year {
+    font-family: var(--j-mono);
+    font-weight: 700;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.55rem;
+    background: var(--j-cream);
+    color: var(--j-ink);
+    border: 2px solid var(--j-ink);
+    border-radius: 999px;
+}
+
+/* Conferences get a solid ink badge, meetups a dashed, homelier one */
+.dir-jelly .jelly-talk-kind {
+    font-family: var(--j-mono);
+    font-weight: 700;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 0.3rem 0.55rem;
+    border: 2px solid var(--j-ink);
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.dir-jelly .jelly-talk-kind--conference {
+    background: var(--j-ink);
+    color: var(--j-cream);
+}
+
+.dir-jelly .jelly-talk-kind--meetup {
+    background: var(--j-cream);
+    color: var(--j-ink);
+    border-style: dashed;
+}
+
+.dir-jelly .jelly-talk-play {
+    display: inline-grid;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: none;
+    background: var(--j-cream);
+    color: var(--j-orange-deep);
+    border: 2px solid var(--j-ink);
+    border-radius: 999px;
+}
+
+.dir-jelly .jelly-talk-play svg {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-left: 0.1rem;
+}
+
+.dir-jelly .jelly-talk-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.dir-jelly .jelly-talk-title {
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: 1.76rem;
+    line-height: 1.02;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+}
+
+.dir-jelly .jelly-talk-event {
+    font-family: var(--j-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    line-height: 1.2;
+}
+
+.dir-jelly .jelly-talk-event::before {
+    content: "at ";
+    font-weight: 500;
+    font-style: italic;
+    opacity: 0.75;
+}
+
+.dir-jelly .jelly-talk-mic {
+    position: absolute;
+    right: -1.2rem;
+    top: -0.6rem;
+    width: 6rem;
+    height: 6rem;
+    opacity: 0.2;
+    transform: rotate(18deg);
+    transition: transform 800ms var(--j-spring);
+}
+
+.dir-jelly .jelly-talk-stack:hover .jelly-talk-mic {
+    transform: rotate(-6deg) scale(1.15);
+}
+
+/* Drips: each repeat of the talk hangs off the one above by a gooey neck */
+.dir-jelly .jelly-talk-drip {
+    --neck: 1rem;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    max-width: calc(100% - 1rem);
+    margin-top: var(--neck);
+    margin-left: 0.6rem;
+    padding: 0.4rem 0.8rem 0.4rem 0.45rem;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 1.2rem;
+    box-shadow: 0.2rem 0.2rem 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-talk-drip :is(.jelly-talk-kind, .jelly-talk-play, .jelly-talk-drip-year) {
+    flex: none;
+}
+
+.dir-jelly .jelly-talk-drip + .jelly-talk-drip {
+    margin-left: 1.6rem;
+}
+
+.dir-jelly .jelly-talk-drip + .jelly-talk-drip + .jelly-talk-drip {
+    margin-left: 0.9rem;
+}
+
+.dir-jelly .jelly-talk-neck {
+    position: absolute;
+    z-index: 2;
+    left: 1.1rem;
+    /* Each end sits on the centre line of the border it joins, so its edges run into those borders */
+    top: calc(-1 * var(--neck) - 1.5 * var(--j-line));
+    width: 2.1rem;
+    height: calc(var(--neck) + var(--j-line));
+    overflow: visible;
+    pointer-events: none;
+}
+
+.dir-jelly .jelly-talk-drip + .jelly-talk-drip .jelly-talk-neck {
+    left: 0.6rem;
+}
+
+.dir-jelly .jelly-talk-neck-fill {
+    fill: var(--tint);
+}
+
+.dir-jelly .jelly-talk-neck-edge {
+    fill: none;
+    stroke: var(--j-ink);
+    stroke-width: var(--j-line);
+    vector-effect: non-scaling-stroke;
+}
+
+.dir-jelly .jelly-talk-drip-name {
+    font-weight: 700;
+    min-width: 0;
+}
+
+.dir-jelly .jelly-talk-drip-year {
+    font-family: var(--j-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    opacity: 0.7;
+}
+
+.dir-jelly .jelly-talk-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dir-jelly .jelly-talk-legend-video {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Archive */
+
+.dir-jelly .jelly-archive {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dir-jelly .jelly-year {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.dir-jelly .jelly-year-label {
+    position: sticky;
+    top: 1rem;
+}
+
+.dir-jelly .jelly-year-label span {
+    display: inline-block;
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: 1.89rem;
+    letter-spacing: 0.02em;
+    text-box-trim: trim-both;
+    text-box-edge: ex alphabetic;
+    padding: 1rem;
+    background: var(--j-ink);
+    color: var(--j-cream);
+    border-radius: 999px;
+    transform: rotate(-4deg);
+}
+
+.dir-jelly .jelly-year:nth-child(3n + 2) .jelly-year-label span { background: var(--j-orange); color: #fff; transform: rotate(3deg); }
+.dir-jelly .jelly-year:nth-child(3n + 3) .jelly-year-label span { transform: rotate(-1deg); }
+
+.dir-jelly .jelly-list {
+    display: flex;
+    flex-direction: column;
+    background: var(--j-cream);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: var(--j-radius);
+    box-shadow: var(--j-shadow);
+    padding: 0.4rem;
+}
+
+.dir-jelly .jelly-row {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 1.3rem;
+    transition: background 150ms ease, transform 600ms var(--j-spring);
+}
+
+.dir-jelly .jelly-list li + li .jelly-row {
+    position: relative;
+}
+
+.dir-jelly .jelly-list li + li {
+    border-top: 2px dashed #f2d3bb;
+}
+
+.dir-jelly .jelly-row:hover {
+    background: #ffe3cb;
+    transform: scale(1.015, 0.985);
+}
+
+.dir-jelly .jelly-row-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    color: #e9b896;
+    transition: transform 600ms var(--j-spring), color 150ms;
+}
+
+.dir-jelly .jelly-row:hover .jelly-row-icon {
+    color: var(--j-orange);
+    transform: rotate(-14deg) scale(1.25);
+}
+
+.dir-jelly .jelly-row-title {
+    font-family: var(--j-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+}
+
+.dir-jelly .jelly-row-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    color: var(--j-ink-soft);
+    white-space: nowrap;
+}
+
+.dir-jelly .jelly-row-meta time {
+    font-family: var(--j-mono);
+    font-size: 0.62rem;
+    min-width: 3.4rem;
+    text-align: right;
+}
+
+.dir-jelly .jelly-row:hover .jelly-chip {
+    background: var(--j-yellow);
+}
+
+/* ---------- Footer ---------- */
+
+.dir-jelly .jelly-footer {
+    margin-top: 4rem;
+    background: var(--j-ink);
+    color: var(--j-cream);
+    border-radius: 3rem 3rem 0 0;
+    padding-block: 3.5rem 2rem;
+    position: relative;
+}
+
+.dir-jelly .jelly-footer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1.1rem;
+    height: 2.2rem;
+    background:
+        radial-gradient(circle at 1.1rem 1.1rem, var(--j-orange) 1.1rem, transparent 1.15rem) 0 0 / 2.2rem 2.2rem repeat-x;
+    opacity: 0;
+}
+
+.dir-jelly .jelly-footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.dir-jelly .jelly-footer-big {
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: clamp(2.8rem, 8.4vw, 4.76rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+}
+
+.dir-jelly .jelly-footer-big span {
+    color: var(--j-orange);
+}
+
+.dir-jelly .jelly-socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.dir-jelly .jelly-social {
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    border: var(--j-line) solid var(--j-cream);
+    transition: transform 600ms var(--j-spring), background 150ms, color 150ms;
+}
+
+.dir-jelly .jelly-social:hover {
+    background: var(--j-orange);
+    border-color: var(--j-orange);
+    color: #fff;
+    transform: translateY(-4px) rotate(-4deg) scale(1.08);
+}
+
+.dir-jelly .jelly-copyright {
+    font-family: var(--j-mono);
+    font-size: 0.62rem;
+    color: #bda899;
+}
+
+/* ---------- Article ---------- */
+
+.dir-jelly .jelly-article-head {
+    max-width: 50rem;
+    padding-block: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+}
+
+.dir-jelly .jelly-back {
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--j-ink-soft);
+}
+
+.dir-jelly .jelly-back:hover {
+    color: var(--j-orange-deep);
+}
+
+.dir-jelly .jelly-article-title {
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: clamp(3.5rem, 9.8vw, 6.16rem);
+    line-height: 0.98;
+    letter-spacing: 0.02em;
+    word-spacing: 0.08em;
+    text-wrap: balance;
+}
+
+.dir-jelly .jelly-article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--j-ink-soft);
+}
+
+.dir-jelly .jelly-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.5rem;
+    border-radius: 999px;
+    background: var(--j-orange);
+    color: #fff;
+    border: 2px solid var(--j-ink);
+}
+
+.dir-jelly .jelly-type-badge svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.dir-jelly .jelly-updated {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.dir-jelly .jelly-article-body {
+    width: min(100% - 1.5rem, 50rem);
+    margin-inline: auto;
+    background: var(--j-cream);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 2.5rem;
+    box-shadow: 0.45rem 0.45rem 0 var(--j-ink);
+    padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1.25rem, 5vw, 3.5rem);
+}
+
+/* Prose. Specificity beats the global .prose rules in app.css. */
+
+.dir-jelly .prose.jelly-prose {
+    --tw-prose-body: #3a271d;
+    --tw-prose-headings: var(--j-ink);
+    --tw-prose-lead: var(--j-ink-soft);
+    --tw-prose-links: var(--j-ink);
+    --tw-prose-bold: var(--j-ink);
+    --tw-prose-counters: var(--j-orange-deep);
+    --tw-prose-bullets: var(--j-orange);
+    --tw-prose-hr: #f0cfb4;
+    --tw-prose-quotes: var(--j-ink);
+    --tw-prose-quote-borders: var(--j-orange);
+    --tw-prose-captions: var(--j-ink-soft);
+    --tw-prose-code: var(--j-ink);
+    --tw-prose-pre-bg: #1f140e;
+    max-width: 65ch;
+    margin-inline: auto;
+    font-family: var(--j-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--tw-prose-body);
+}
+
+.dir-jelly .jelly-prose p,
+.dir-jelly .jelly-prose li {
+    text-wrap: pretty;
+}
+
+.dir-jelly .jelly-prose > p:first-of-type {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--j-ink);
+    letter-spacing: -0.01em;
+}
+
+.dir-jelly .jelly-prose h1,
+.dir-jelly .jelly-prose h2,
+.dir-jelly .jelly-prose h3,
+.dir-jelly .jelly-prose h4,
+.dir-jelly .jelly-prose h5,
+.dir-jelly .jelly-prose h6 {
+    font-family: var(--j-display);
+    font-weight: 800;
+    color: var(--j-ink);
+    text-wrap: balance;
+    letter-spacing: 0.02em;
+}
+
+.dir-jelly .jelly-prose h2 {
+    font-size: 2.6rem;
+    line-height: 1.02;
+    letter-spacing: 0.02em;
+    margin-top: 2.6em;
+    margin-bottom: 0.7em;
+}
+
+.dir-jelly .jelly-prose h2::before {
+    content: "";
+    display: block;
+    width: 2.2rem;
+    height: 0.55rem;
+    margin-bottom: 0.7rem;
+    border-radius: 999px;
+    background: var(--j-orange);
+    border: 2px solid var(--j-ink);
+}
+
+.dir-jelly .jelly-prose h3 {
+    font-size: 1.9rem;
+    line-height: 1.15;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
+.dir-jelly .jelly-prose h4,
+.dir-jelly .jelly-prose h5,
+.dir-jelly .jelly-prose h6 {
+    font-size: 1.5rem;
+}
+
+.dir-jelly .jelly-prose a {
+    font-weight: 600;
+    color: var(--j-ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--j-orange), var(--j-orange));
+    background-size: 100% 0.16em;
+    background-position: 0 92%;
+    background-repeat: no-repeat;
+    border-radius: 0.2em;
+    padding-inline: 0.05em;
+    transition: background-size 300ms var(--j-spring), color 150ms;
+}
+
+.dir-jelly .jelly-prose a:hover {
+    color: var(--j-ink);
+    background-image: linear-gradient(var(--j-yellow), var(--j-yellow));
+    background-size: 100% 88%;
+}
+
+.dir-jelly .jelly-prose strong {
+    font-weight: 750;
+}
+
+.dir-jelly .jelly-prose ul > li::marker {
+    color: var(--j-orange);
+    font-size: 1.2em;
+}
+
+.dir-jelly .jelly-prose ol > li::marker {
+    font-family: var(--j-body);
+    font-weight: 800;
+    color: var(--j-orange-deep);
+}
+
+.dir-jelly .jelly-prose hr {
+    border: 0;
+    height: 1.2rem;
+    margin-block: 3rem;
+    background:
+        radial-gradient(circle, var(--j-orange) 0 0.28rem, transparent 0.3rem) center / 1.4rem 1.2rem space no-repeat;
+    width: 4.2rem;
+    margin-inline: auto;
+    background-repeat: space no-repeat;
+}
+
+.dir-jelly .jelly-prose blockquote:not(.thought) {
+    font-family: var(--j-body);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    color: var(--j-ink);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 1.75rem 1.75rem 1.75rem 0.5rem;
+    background: #ffe7d3;
+    padding: 1.25rem 1.5rem;
+    quotes: none;
+}
+
+.dir-jelly .jelly-prose blockquote p::before,
+.dir-jelly .jelly-prose blockquote p::after {
+    content: none;
+}
+
+.dir-jelly .jelly-prose blockquote p {
+    margin: 0;
+}
+
+.dir-jelly .jelly-prose figure:has(blockquote)::before,
+.dir-jelly .jelly-prose figure:has(blockquote)::after {
+    color: var(--j-orange);
+    opacity: 0.35;
+}
+
+.dir-jelly .jelly-prose :not(pre) > code {
+    font-family: var(--j-mono);
+    font-size: 0.82em;
+    font-weight: 600;
+    padding: 0.12em 0.45em;
+    border-radius: 0.5em;
+    background: #ffe3cb;
+    border: 1.5px solid #f3c29c;
+    color: var(--j-ink);
+}
+
+.dir-jelly .jelly-prose pre {
+    font-family: var(--j-mono);
+    font-size: 0.72rem;
+    line-height: 1.7;
+    border-radius: 1.4rem;
+    border: var(--j-line) solid var(--j-ink);
+    box-shadow: 0.35rem 0.35rem 0 var(--j-orange);
+    padding-top: 2.4rem;
+    padding-bottom: 1.1rem;
+    position: relative;
+    margin-block: 2rem;
+    overflow-x: auto;
+    background-image:
+        radial-gradient(circle at 1.1rem 1.1rem, #ff6a1f 0 0.3rem, transparent 0.32rem),
+        radial-gradient(circle at 2rem 1.1rem, #ffd644 0 0.3rem, transparent 0.32rem),
+        radial-gradient(circle at 2.9rem 1.1rem, #93e6c3 0 0.3rem, transparent 0.32rem);
+    background-repeat: no-repeat;
+}
+
+.dir-jelly .jelly-prose pre code {
+    font-size: inherit;
+}
+
+.dir-jelly .jelly-prose img:not(.no-shadow) {
+    border-radius: 1.4rem;
+    border: var(--j-line) solid var(--j-ink);
+    box-shadow: 0.35rem 0.35rem 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-prose iframe[src*="youtube"] {
+    border-radius: 1.4rem;
+    border: var(--j-line) solid var(--j-ink);
+    box-shadow: 0.35rem 0.35rem 0 var(--j-orange);
+}
+
+.dir-jelly .jelly-prose mark {
+    background: var(--j-yellow);
+    background-image: none;
+    color: var(--j-ink);
+    border-radius: 0.35em 0.5em 0.3em 0.55em;
+    padding: 0.05em 0.3em;
+}
+
+.dir-jelly .jelly-prose u {
+    text-decoration-color: var(--j-orange);
+}
+
+.dir-jelly .jelly-prose table {
+    font-size: 0.85rem;
+}
+
+/* End of article */
+
+.dir-jelly .jelly-article-end {
+    max-width: 50rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.dir-jelly .jelly-author {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--j-yellow);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 2rem;
+    box-shadow: var(--j-shadow);
+}
+
+.dir-jelly .jelly-author-img {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 999px;
+    object-fit: cover;
+    border: var(--j-line) solid var(--j-ink);
+    transform: rotate(-6deg);
+    transition: transform 700ms var(--j-spring);
+}
+
+.dir-jelly .jelly-author:hover .jelly-author-img {
+    transform: rotate(8deg) scale(1.1);
+}
+
+.dir-jelly .jelly-author-label {
+    font-family: var(--j-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.dir-jelly .jelly-author-name {
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: 1.76rem;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+}
+
+.dir-jelly .jelly-author-bio {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--j-ink-soft);
+    margin-top: 0.2rem;
+    text-wrap: pretty;
+}
+
+.dir-jelly .jelly-pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.dir-jelly .jelly-pager-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.25rem;
+    background: var(--j-cream);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 1.75rem;
+    box-shadow: var(--j-shadow);
+    transition: transform 700ms var(--j-spring), box-shadow 200ms, background 150ms;
+}
+
+.dir-jelly .jelly-pager-card--next {
+    grid-column: 2;
+    text-align: right;
+}
+
+.dir-jelly .jelly-pager-card:hover {
+    background: var(--j-orange);
+    color: #fff;
+    transform: translate(-3px, -3px) scale(1.02, 0.98);
+    box-shadow: 0.5rem 0.5rem 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-pager-label {
+    font-family: var(--j-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.dir-jelly .jelly-pager-title {
+    font-family: var(--j-body);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px) {
+    .dir-jelly .jelly-hero {
+        grid-template-columns: 1fr;
+        padding-block: 1.5rem 2.5rem;
+    }
+
+    .dir-jelly .jelly-hero-art {
+        grid-row: 1;
+        max-width: 17rem;
+    }
+
+    .dir-jelly .jelly-videos {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.9rem;
+    }
+
+    .dir-jelly .jelly-video--feature {
+        grid-column: span 2;
+        grid-row: auto;
+    }
+
+    .dir-jelly .jelly-video--feature .jelly-video-title {
+        font-size: 1.1rem;
+    }
+
+    .dir-jelly .jelly-video:nth-child(6) {
+        display: none;
+    }
+
+    .dir-jelly .jelly-year {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .dir-jelly .jelly-year-label {
+        position: static;
+    }
+
+    .dir-jelly .jelly-row {
+        grid-template-columns: 1.4rem 1fr;
+        row-gap: 0.4rem;
+    }
+
+    .dir-jelly .jelly-row-meta {
+        grid-column: 2;
+        flex-wrap: wrap;
+    }
+
+    .dir-jelly .jelly-row-meta time {
+        text-align: left;
+        min-width: 0;
+    }
+
+    .dir-jelly .jelly-author {
+        grid-template-columns: auto 1fr;
+    }
+
+    .dir-jelly .jelly-author-btn {
+        grid-column: 1 / -1;
+        justify-content: center;
+    }
+
+    .dir-jelly .jelly-pager {
+        grid-template-columns: 1fr;
+    }
+
+    .dir-jelly .jelly-pager-card--next {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .dir-jelly .jelly-nav-links a {
+        padding: 0.35rem 0.6rem;
+    }
+
+    .dir-jelly .jelly-logo-word {
+        display: none;
+    }
+
+    .dir-jelly .jelly-prose.prose {
+        font-size: 0.95rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dir-jelly *,
+    .dir-jelly *::before,
+    .dir-jelly *::after {
+        animation: none !important;
+        transition-duration: 1ms !important;
+    }
+
+    .dir-jelly .jelly-squiggle path {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* The <x-thought> component, as a squishy speech bubble */
+
+.dir-jelly .jelly-prose .thought {
+    font-family: var(--j-body);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--j-ink);
+    max-width: 30ch;
+    padding: 1.5rem 1.75rem;
+    background: var(--j-yellow);
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 2rem;
+    box-shadow: 0.35rem 0.35rem 0 var(--j-ink);
+    quotes: none;
+}
+
+.dir-jelly .jelly-prose .thought::before,
+.dir-jelly .jelly-prose .thought::after {
+    background: var(--j-yellow);
+    border: var(--j-line) solid var(--j-ink);
+    box-shadow: 0.2rem 0.2rem 0 var(--j-ink);
+    top: auto;
+    right: auto;
+}
+
+.dir-jelly .jelly-prose .thought::before {
+    width: 1.3rem;
+    height: 1.3rem;
+    left: 2.5rem;
+    bottom: -1.9rem;
+}
+
+.dir-jelly .jelly-prose .thought::after {
+    width: 0.7rem;
+    height: 0.7rem;
+    left: 1.6rem;
+    bottom: -3rem;
+}
+
+/* Ostrich Sans Rounded headlines: a hard orange offset like the original site */
+.dir-jelly :is(.jelly-hero-title, .jelly-h2, .jelly-article-title, .jelly-footer-big, .jelly-talk-title, .jelly-prose :is(h1, h2, h3, h4, h5, h6)) {
+    font-synthesis: weight;
+    text-shadow: 0.05em 0.05em 0 var(--j-orange);
+}
+
+.dir-jelly .jelly-hero-title .jelly-hero-name {
+    text-shadow: 0.06em 0.06em 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-hero-title .jelly-hero-sub {
+    margin-top: 0.55em;
+    text-shadow: none;
+}
+
+/* ---------- Standalone pages (tags, CV) ---------- */
+
+.dir-jelly .jelly-page-head {
+    padding-block: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.dir-jelly .jelly-page-lede {
+    font-size: 1.1rem;
+    color: var(--j-ink-soft);
+}
+
+.dir-jelly .jelly-tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem 0.8rem;
+    list-style: none;
+    padding: 0;
+}
+
+.dir-jelly .jelly-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.6rem 0.55rem 1.1rem;
+    font-family: var(--j-display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    border: var(--j-line) solid var(--j-ink);
+    border-radius: 999px;
+    box-shadow: var(--j-shadow);
+    transition: transform 600ms var(--j-spring), box-shadow 200ms;
+}
+
+.dir-jelly .jelly-tag-cloud li:nth-child(odd) .jelly-tag { rotate: -1.5deg; }
+.dir-jelly .jelly-tag-cloud li:nth-child(3n) .jelly-tag { rotate: 2deg; }
+
+.dir-jelly .jelly-tag:hover {
+    transform: translate(-2px, -3px) scale(1.06, 0.96);
+    box-shadow: 0.45rem 0.5rem 0 var(--j-ink);
+}
+
+.dir-jelly .jelly-tag-count {
+    display: grid;
+    place-items: center;
+    min-width: 1.7rem;
+    height: 1.7rem;
+    padding-inline: 0.4rem;
+    font-family: var(--j-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0;
+    background: var(--j-cream);
+    color: var(--j-ink);
+    border: 2px solid var(--j-ink);
+    border-radius: 999px;
+}
+
+/* CV: sits in the same cream card as an article */
+
+.dir-jelly .jelly-cv {
+    margin-bottom: 3rem;
+}
+
+.dir-jelly .jelly-cv .prose {
+    max-width: none;
+    color: #3a271d;
+    --tw-prose-bold: var(--j-ink);
+    --tw-prose-bullets: var(--j-orange);
+    --tw-prose-links: var(--j-ink);
+}
+
+.dir-jelly .jelly-cv .prose h2 {
+    font-family: var(--j-display);
+    font-size: 2.4rem;
+    letter-spacing: 0.02em;
+    color: var(--j-ink);
+    text-shadow: 0.05em 0.05em 0 var(--j-orange);
+}
+
+.dir-jelly .jelly-cv .prose a {
+    color: var(--j-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--j-orange);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.dir-jelly .jelly-cv .prose a:hover {
+    background: var(--j-yellow);
+}
+
+.dir-jelly .jelly-cv .prose mark {
+    background: var(--j-yellow);
+    background-image: none;
+    color: var(--j-ink);
+    border-radius: 0.3em;
+}
+
+.dir-jelly .jelly-cv-links {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--j-ink-soft);
+}
+
+.dir-jelly .jelly-cv-links a {
+    color: var(--j-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--j-orange);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.dir-jelly .jelly-cv-name {
+    font-family: var(--j-display);
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--j-ink);
+}
+
+.dir-jelly .jelly-cv-role {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--j-ink-soft);
+    margin-bottom: 0.25rem;
+}
+
+.dir-jelly .jelly-cv-skill-label {
+    font-family: var(--j-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--j-ink-soft);
+}
+
+.dir-jelly .jelly-cv-skill {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--j-ink);
+    background: #ffe7d2;
+    border: 1.5px solid var(--j-ink);
+    border-radius: 999px;
+}
+
+@media print {
+    .dir-jelly .print\:hidden {
+        display: none !important;
+    }
+
+    .dir-jelly .jelly-cv .prose > p:first-of-type {
+        font-size: 0.85rem;
+        line-height: 1.45;
+    }
+
+    body:has(.dir-jelly) {
+        background: #fff !important;
+    }
+
+    body:has(.dir-jelly)::before {
+        display: none;
+    }
+
+    .dir-jelly .jelly-article-body.jelly-cv {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .dir-jelly .jelly-cv .prose h2 {
+        font-size: 1.3rem;
+        text-shadow: none;
+    }
+
+    .dir-jelly .jelly-cv-name {
+        font-size: 2rem;
+    }
+
+    .dir-jelly .jelly-cv-skill {
+        border-width: 1px;
+        background: #fff3e9;
+    }
+
+    .dir-jelly .jelly-cv .prose a:hover {
+        background: none;
+    }
+}
+
+/* ---------- 404 ---------- */
+
+.dir-jelly .jelly-404 {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-block: 3rem 5rem;
+    text-align: center;
+}
+
+.dir-jelly .jelly-404-title {
+    font-family: var(--j-display);
+    font-weight: 800;
+    font-size: clamp(7rem, 26vw, 13rem);
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    text-shadow: 0.05em 0.05em 0 var(--j-orange);
+}
+
+/* The hero blob's arm reaches behind the intro, not over it */
+.dir-jelly .jelly-hero-copy {
+    position: relative;
+    z-index: 1;
+}
