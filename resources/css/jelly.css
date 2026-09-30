@@ -1829,3 +1829,45 @@ body:has(.dir-jelly)::before {
     position: relative;
     z-index: 1;
 }
+
+/* Gooey page transitions (see jelly/view-transition.blade.php) */
+.goo-vt {
+    display: none;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+html.goo-vt-on .goo-vt {
+    display: block;
+}
+
+.goo-vt--ink {
+    background: #2a1810;
+    view-transition-name: goo-ink;
+}
+
+.goo-vt--orange {
+    background: #ff6a1f;
+    view-transition-name: goo-orange;
+}
+
+/* Everything is driven from JS; start fully hidden so nothing flashes before the first frame */
+html.goo-vt-on::view-transition-old(root),
+html.goo-vt-on::view-transition-new(root),
+html.goo-vt-on::view-transition-new(goo-ink),
+html.goo-vt-on::view-transition-new(goo-orange) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+html.goo-vt-on::view-transition-new(root),
+html.goo-vt-on::view-transition-new(goo-ink),
+html.goo-vt-on::view-transition-new(goo-orange) {
+    clip-path: circle(0);
+}
+
+html.goo-vt-on::view-transition-group(goo-ink),
+html.goo-vt-on::view-transition-group(goo-orange) {
+    animation: none;
+}

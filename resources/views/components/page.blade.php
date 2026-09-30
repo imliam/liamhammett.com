@@ -25,6 +25,9 @@
     <link rel="preload" href="/fonts/ostrich-sans-rounded.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="/fonts/Handlee-Regular.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="/fonts/Spirax-Regular.ttf" as="font" type="font/ttf" crossorigin />
+    {{-- Don't render (or snapshot for the page transition) until the whole body has arrived, or the goo reveals a half-built page --}}
+    <link rel="expect" href="#page-end" blocking="render">
+    @include('jelly.view-transition')
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
@@ -42,8 +45,13 @@
     @endif
 </head>
 
-<body class="font-sans antialiased bg-white text-slate-950 min-h-full bg-noise before:opacity-5 before:fixed">
+<body class="font-sans antialiased text-slate-950 min-h-full bg-noise before:opacity-5 before:fixed">
     {{ $slot }}
+
+    {{-- Only shown while a page transition captures them: the goo's orange rim and its ink outline --}}
+    <div class="goo-vt goo-vt--ink" aria-hidden="true"></div>
+    <div class="goo-vt goo-vt--orange" aria-hidden="true"></div>
+    <div id="page-end" hidden></div>
 </body>
 
 </html>

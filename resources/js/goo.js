@@ -49,6 +49,9 @@ export default function goo() {
 
     createOverlay();
 
+    // Page transitions leave a little goo behind on the top of the screen, sometimes
+    window.jellyGoo = { residue };
+
     const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
@@ -84,6 +87,15 @@ export default function goo() {
         const rect = el.getBoundingClientRect();
         new Splash({ color: colorOf(el), src: el }).pull(e.clientX, rect.top, 'hang', rand(-60, 60), rand(-220, -120));
     });
+}
+
+function residue() {
+    for (let i = Math.random() < 0.35 ? 0 : randInt(1, 2); i > 0; i--) {
+        const splash = new Splash({ color: ORANGE });
+        const edge = new TopGoo({ r: rand(7, 13), vx: rand(-200, 200) }, rand(0.1, 0.9) * viewportWidth());
+        edge.attach(splash);
+        splash.edges.push(edge);
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -318,7 +330,7 @@ class Splash {
 
     addDrop(props) {
         const drop = {
-            vx: 0, vy: 0, s: 0, vs: 0, state: 'free', canSplash: true,
+            vx: 0, vy: 0, s: 0, vs: 0, state: 'free', canSplash: true, magnetAt: 0,
             ...props,
             el: svgEl('ellipse', { fill: this.color }, this.g),
         };
@@ -398,6 +410,8 @@ class Splash {
         }
 
         main.state = 'free';
+        // Just let go of: don't get caught straight back by the magnet
+        main.magnetAt = performance.now() + 900;
         // Yanking it throws the drop, so goo can be flung at the edges of the screen
         main.vx += clamp(pointer.vx * 0.3, -1500, 1500);
         main.vy += clamp(pointer.vy * 0.3, -1500, 1500);
@@ -406,7 +420,7 @@ class Splash {
         for (let i = randInt(0, 3); i > 0; i--) {
             const p = bezier(curve, rand(tb, 1));
             this.addDrop({
-                x: p.x, y: p.y, r: st.r * rand(0.15, 0.32),
+                x: p.x, y: p.y, r: st.r * rand(0.15, 0.32), magnetAt: performance.now() + 900,
                 vx: main.vx * rand(0.4, 1.1) + rand(-160, 160),
                 vy: main.vy * rand(0.4, 1.1) + rand(-200, 60),
             });
@@ -575,6 +589,21 @@ class Splash {
                 d.vs += clamp(Math.abs(scrollDelta) * 0.03, 0, 2);
             }
 
+            // The pointer is a magnet: nearby goo is pulled in and clings to it, until it's shaken off
+            const now = performance.now();
+            if (d.canSplash && now > d.magnetAt && pointer.t && now - pointer.t < 3000 && pointerSpeed() < 1400) {
+                const mx = pointer.x + scrollX - d.x, my = pointer.y + scrollY - d.y;
+                const md = Math.hypot(mx, my);
+                if (md < 150 && md > 0.5) {
+                    const pull = 1 - md / 150;
+                    d.vy -= GRAVITY * pull * dt;
+                    d.vx += (mx / md) * 2600 * pull * dt;
+                    d.vy += (my / md) * 2600 * pull * dt;
+                    d.vx *= 1 - 4 * pull * dt;
+                    d.vy *= 1 - 4 * pull * dt;
+                }
+            }
+
             // The screen is sticky: goo that hits the top or sides splots against it
             if (d.canSplash && d.r > 3.5) {
                 const sx = d.x - scrollX, sy = d.y - scrollY;
@@ -713,6 +742,41 @@ class EdgeGoo {
     fall(x, y, r, vx = 0, vy = 0) {
         this.splash.addDrop({ x: x + scrollX, y: y + scrollY, r, vx, vy, vs: rand(2, 5) });
     }
+
+    // How hard the pointer is pulling on goo at (x, y): nothing when it's far away
+    magnet(x, y, range = 170) {
+        if (this.gone || !pointer.t || performance.now() - pointer.t > 3000) return null;
+        const dx = pointer.x - x, dy = pointer.y - y;
+        const dist = Math.hypot(dx, dy);
+        if (dist > range) return null;
+        return { dx: dx / (dist || 1), dy: dy / (dist || 1), dist, s: (1 - dist / range) ** 1.4 };
+    }
+
+    // A tendril of goo reaching out from (x, y) towards the pointer
+    tendril(x, y, r, pull, dt) {
+        const target = pull ? Math.min(pull.dist * 0.85, 120) * pull.s : 0;
+        this.reachLen = lerp(this.reachLen ?? 0, target, 1 - Math.exp(-dt * 7));
+        if (pull) this.reachDir = [pull.dx, pull.dy];
+
+        const len = this.reachLen;
+        if (len < 1 || !this.reachDir) return [];
+
+        const [dx, dy] = this.reachDir;
+        const blobs = [];
+        const count = clamp(Math.ceil(len / 6), 2, 12);
+        for (let i = 1; i <= count; i++) {
+            const t = i / count;
+            const tr = r * lerp(0.72, 0.34, t) * (1 + 0.12 * Math.sin(this.splash.age * 9 + t * 6));
+            blobs.push([x + dx * len * t, y + dy * len * t, tr, tr]);
+        }
+        return blobs;
+    }
+
+    // Kept right up against the magnet for a moment, it lets go of the screen and leaps across
+    pulled(pull, dt) {
+        this.pullTime = pull && pull.s > 0.65 ? (this.pullTime ?? 0) + dt : 0;
+        return this.pullTime > (this.letGo ??= rand(0.2, 0.7));
+    }
 }
 
 // Splotted against the top: the goo slowly gathers into a bulb that sags and
@@ -760,6 +824,15 @@ class TopGoo extends EdgeGoo {
 
         const blobs = [[this.x, this.ry * 0.2, this.rx, this.ry]];
 
+        const pull = this.magnet(this.x, this.ry);
+        blobs.push(...this.tendril(this.x, this.ry * 0.4, Math.max(this.ry, this.volume * 0.7), pull, dt));
+        if (pull && this.pulled(pull, dt)) {
+            this.fall(this.x + pull.dx * this.volume, this.ry + pull.dy * this.volume, this.volume, pull.dx * 500, pull.dy * 500);
+            this.volume = 0;
+            this.draw([]);
+            return false;
+        }
+
         if (d && (d.wait -= dt) < 0) {
             // Goo slowly gathers, and the heavier the bulb the faster it sags
             d.r = lerp(d.r, d.size, 1 - Math.exp(-dt * 1.4));
@@ -768,7 +841,8 @@ class TopGoo extends EdgeGoo {
 
             const len = d.y;
             const stretch = clamp(len / (d.r * d.pinch), 0, 1);
-            const bx = this.x + Math.sin(this.splash.age * 2.2 + d.sway) * stretch * 3;
+            // Sways a little, and leans towards the pointer if it's close
+            const bx = this.x + Math.sin(this.splash.age * 2.2 + d.sway) * stretch * 3 + (pull ? pull.dx * pull.s * 24 : 0);
             const neck = Math.max(3.6, d.r * 0.6 * Math.sqrt(d.r * 1.4 / Math.max(len, d.r * 1.4)));
             const count = clamp(Math.ceil(len / 4), 1, 16);
 
@@ -806,7 +880,10 @@ class SideGoo extends EdgeGoo {
         this.squash = 1;
         this.trail = [];
         this.walking = Math.random() < 0.5;
-        this.timer = rand(0.3, 0.9);
+        // Some goo is sluggish, some is in a hurry
+        this.pace = rand(0.4, 1.9);
+        this.paceDrift = rand(0.3, 1.2);
+        this.timer = rand(0.3, 0.9) / this.pace;
 
         if (this.walking) {
             this.lr = this.r * 0.8;
@@ -856,7 +933,19 @@ class SideGoo extends EdgeGoo {
             }
         }
 
+        // Held back by the magnet: it stops sliding, reaches out, and may leap off the wall
+        const cx = this.wallX(this.size * (this.walking ? 0.75 : 0.6));
+        const cy = this.walking ? this.pivot : this.y;
+        const pull = this.magnet(cx, cy);
+        this.held = pull ? pull.s : 0;
+
         const blobs = this.walking ? this.walk(dt) : this.dribble(dt);
+        blobs.push(...this.tendril(cx, cy, this.size, pull, dt));
+
+        if (pull && this.pulled(pull, dt)) {
+            this.gone = true;
+            this.fall(cx + pull.dx * this.size, cy + pull.dy * this.size, this.size * 1.1, pull.dx * 550, pull.dy * 550);
+        }
 
         // Trail left behind, drying up
         for (const t of this.trail) t.r *= 1 - 0.7 * dt;
@@ -873,10 +962,12 @@ class SideGoo extends EdgeGoo {
         // Stick-slip: it lurches, sticks for a moment, then gives way again
         if ((this.timer -= dt) < 0) {
             this.moving = !this.moving;
-            this.timer = this.moving ? rand(0.25, 1.1) : rand(0.15, 1);
-            this.target = this.moving ? rand(25, 120) * (this.r / 12) : 0;
+            this.timer = this.moving ? rand(0.25, 1.1) : rand(0.15, 1) / this.pace;
+            this.target = this.moving ? rand(25, 120) * (this.r / 12) * this.pace : 0;
         }
-        this.speed = lerp(this.speed, this.target ?? 0, 1 - Math.exp(-dt * 5));
+        // Its pace wanders a little too, and a nearby magnet holds it in place
+        const drift = 0.75 + 0.5 * Math.sin(this.splash.age * this.paceDrift);
+        this.speed = lerp(this.speed, (this.target ?? 0) * drift * (1 - this.held), 1 - Math.exp(-dt * 5));
 
         const moved = this.speed * dt;
         this.y += moved;
@@ -916,8 +1007,8 @@ class SideGoo extends EdgeGoo {
         const out = this.side < 0 ? 1 : -1;
         let top = { x: this.wallX(inset), y: this.pivot - this.sep };
 
-        if (!this.flip && (this.timer -= dt) < 0) {
-            this.flip = { t: 0, duration: rand(0.45, 0.85) };
+        if (!this.flip && this.held < 0.2 && (this.timer -= dt) < 0) {
+            this.flip = { t: 0, duration: rand(0.45, 0.85) / Math.sqrt(this.pace) };
         }
 
         if (this.flip) {
@@ -937,7 +1028,7 @@ class SideGoo extends EdgeGoo {
                 this.pivot += this.sep;
                 this.flip = null;
                 this.squash = 1;
-                this.timer = rand(0.1, 0.8);
+                this.timer = rand(0.1, 0.8) / this.pace;
                 this.lr *= rand(0.95, 0.985);
                 this.sep = this.lr * rand(1.6, 2.2);
                 top = { x: this.wallX(inset), y: this.pivot - this.sep };
@@ -1113,7 +1204,7 @@ function flick(el) {
         const cos = Math.cos(spread), sin = Math.sin(spread);
         splash.addDrop({
             x: x + rand(-3, 3), y: y + rand(-3, 3),
-            r: base * rand(0.25, 0.6),
+            r: base * rand(0.25, 0.6), magnetAt: performance.now() + 900,
             vx: (dx * cos - dy * sin) * v,
             vy: (dx * sin + dy * cos) * v,
             vs: rand(-4, 4),
@@ -1229,7 +1320,7 @@ function setupReach() {
             const v = rand(350, 1100);
             splash.addDrop({
                 x: cx + dx * rect.width * 0.36, y: cy + dy * rect.height * 0.36,
-                r: rand(7, 18), vx: dx * v, vy: dy * v - 150, vs: rand(-5, 5),
+                r: rand(7, 18), vx: dx * v, vy: dy * v - 150, vs: rand(-5, 5), magnetAt: performance.now() + 900,
             });
         }
 

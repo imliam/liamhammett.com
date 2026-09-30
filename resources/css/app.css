@@ -31,6 +31,9 @@
 }
 
 html {
+    /* The page colour lives on the root so the browser never flashes white while
+       swapping pages (or anywhere the page transition exposes the canvas) */
+    background-color: #ffeede;
     font-size: 18px;
     hanging-punctuation: first last;
     scrollbar-gutter: stable;
@@ -64,6 +67,10 @@ img {
 }
 
 @media print {
+    html {
+        background-color: #fff;
+    }
+
     /* a[href]:after {
         content: " (" attr(href) ")";
     } */
