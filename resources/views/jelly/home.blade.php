@@ -13,10 +13,10 @@
                 I write about PHP, Laravel and the little tools that make developers' days better. I make videos, give talks at conferences, and occasionally ship something silly on purpose.
             </p>
             <div class="jelly-hero-actions">
-                <a href="#writing" class="jelly-btn jelly-btn--primary">Read the blog</a>
+                <a href="#writing" class="jelly-btn jelly-btn--primary">Read my blog</a>
                 <a href="https://www.youtube.com/@imliamhammett" class="jelly-btn">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg>
-                    Watch on YouTube
+                    Watch my videos
                 </a>
             </div>
         </div>
@@ -44,8 +44,8 @@
             </div>
             <img src="{{ url('images/avatar.jpg') }}" alt="" class="jelly-hero-avatar">
             <span class="jelly-sticker jelly-sticker--yellow jelly-sticker--a">&lt;?php</span>
-            <span class="jelly-sticker jelly-sticker--pink jelly-sticker--b">writing since {{ collect(array_keys($articlesByYear))->filter(fn ($y) => is_numeric($y))->min() }}</span>
-            <span class="jelly-sticker jelly-sticker--mint jelly-sticker--c">{{ collect($talks)->sum(fn ($talk) => count($talk['events'])) }} talks</span>
+            <span class="jelly-sticker jelly-sticker--pink jelly-sticker--b">writes real human words</span>
+            <span class="jelly-sticker jelly-sticker--mint jelly-sticker--c">likes orange</span>
         </div>
     </header>
 

@@ -4,17 +4,17 @@
 // one shown on the card; the rest hang underneath it.
 return [
     [
-        'title' => '101 Laravel Tips',
-        'events' => [
-            ['name' => 'Dutch PHP Conference', 'kind' => 'conference', 'year' => 2026, 'url' => 'https://phpconference.nl/'],
-        ],
-    ],
-    [
         'title' => '50 Laravel Tips',
         'events' => [
             ['name' => 'Laravel Live Denmark', 'kind' => 'conference', 'year' => 2026, 'video' => 'https://www.youtube.com/watch?v=Vj0xMtte0po'],
             ['name' => 'Laravel Live UK', 'kind' => 'conference', 'year' => 2026, 'url' => 'https://laravellive.uk/'],
             ['name' => 'PHPSW', 'kind' => 'meetup', 'year' => 2026, 'video' => 'https://www.youtube.com/watch?v=ix_ephTZlyI'],
+        ],
+    ],
+    [
+        'title' => '101 Laravel Tips',
+        'events' => [
+            ['name' => 'Dutch PHP Conference', 'kind' => 'conference', 'year' => 2026, 'url' => 'https://phpconference.nl/'],
         ],
     ],
     [
