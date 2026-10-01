@@ -84,7 +84,6 @@
             <p class="jelly-section-note jelly-talk-legend">
                 <span class="jelly-talk-kind jelly-talk-kind--conference">Conference</span>
                 <span class="jelly-talk-kind jelly-talk-kind--meetup">Meetup</span>
-                <span class="jelly-talk-legend-video"><span class="jelly-talk-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span> Has a video</span>
             </p>
         </div>
         <div class="jelly-talks" data-drag-scroll>
