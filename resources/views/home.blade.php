@@ -9,14 +9,13 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Liam Hammett">
         <meta name="twitter:description" content="I talk about code and stuff">
-        {{-- <meta name="twitter:image" content="https://mywebsite.com/images/blog-1/cover-image.webp"> --}}
+        <meta name="twitter:image" content="{{ url('/opengraph.png?v=jelly') }}">
 
         <!-- Open Graph -->
         <meta property="og:type" content="website">
         <meta property="og:title" content="Liam Hammett">
         <meta property="og:description" content="I talk about code and stuff">
-        {{-- <meta property="og:image" content="https://mywebsite.com/images/blog-1/cover-image.webp"> --}}
-        {{-- <meta property="og:image" content="https://mywebsite.com/images/blog-1/another-image.webp"> --}}
+        <meta property="og:image" content="{{ url('/opengraph.png?v=jelly') }}">
         <meta property="og:url" content="{{ url('/') }}">
 
         <!-- JSON-LD -->

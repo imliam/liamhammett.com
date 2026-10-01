@@ -363,12 +363,13 @@ class Article extends Model implements Feedable
             return url($this->opengraph_image);
         }
 
-        return $this->getUrl() . '.png';
+        // Versioned, so social networks re-fetch it whenever the design changes
+        return $this->getUrl() . '.png?v=jelly';
     }
 
     public function getOpengraphImageLocalPath(): string
     {
-        return "images/opengraph/{$this->slug}.png";
+        return "images/opengraph/jelly/{$this->slug}.png";
     }
 
     public function hasOpengraphImage(): bool

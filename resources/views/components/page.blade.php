@@ -31,7 +31,18 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
-    {{ $metaTags ?? '' }}
+    @isset($metaTags)
+        {{ $metaTags }}
+    @else
+        {{-- Pages without their own share tags get the site-wide card --}}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ isset($title) ? $title . ' - ' . config('app.name') : config('app.name') }}">
+        <meta name="twitter:image" content="{{ url('/opengraph.png?v=jelly') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ isset($title) ? $title . ' - ' . config('app.name') : config('app.name') }}">
+        <meta property="og:image" content="{{ url('/opengraph.png?v=jelly') }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+    @endisset
 
     @if (env('GOOGLE_ANALYTICS_ID'))
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GOOGLE_ANALYTICS_ID') }}"></script>

@@ -1,10 +1,9 @@
 <?php
 
 use App\Models\Article;
-use App\Utilities\OpengraphImageLayout;
+use App\Utilities\JellyOpengraphImage;
 use App\ValueObjects\Tag;
 use Illuminate\Support\Facades\Route;
-use SimonHamp\TheOg\BorderPosition;
 
 Route::get('/', function () {
     $articlesByYear = Article::query()->published()->orderByDesc('published_at')->get()->groupBy(fn (Article $article) => $article->published_at->year)->all();
@@ -59,26 +58,39 @@ Route::feeds();
 
 require_once __DIR__ . '/redirects.php';
 
+Route::get('/opengraph.png', function () {
+    $path = public_path('images/opengraph/jelly/_site.png');
+
+    if (! app()->environment('local') && file_exists($path)) {
+        return response()->file($path, ['Content-Type' => 'image/png']);
+    }
+
+    $png = (new JellyOpengraphImage(
+        title: "Hi, I'm Liam",
+        kicker: 'PHP & Laravel developer',
+        description: 'I talk about code and stuff - writing, videos and conference talks.',
+        sticker: '<?php',
+    ))->save($path);
+
+    return response($png)->header('Content-Type', 'image/png');
+});
+
 Route::get('/{article:slug}.png', function (Article $article) {
-    if (!app()->environment('local') && $article->hasOpengraphImage()) {
-        return response(file_get_contents($article->getOpengraphImageLocalPath()))->header('Content-Type', 'image/png');
+    $path = public_path($article->getOpengraphImageLocalPath());
+
+    if (! app()->environment('local') && file_exists($path)) {
+        return response()->file($path, ['Content-Type' => 'image/png']);
     }
 
-    if (!file_exists(dirname($article->getOpengraphImageLocalPath()))) {
-        mkdir(dirname($article->getOpengraphImageLocalPath()), 0777, true);
-    }
+    $png = (new JellyOpengraphImage(
+        title: $article->getAlternateTitle(),
+        kicker: $article->type ?: 'article',
+        date: $article->published_at?->format('j F Y'),
+        description: $article->synopsis ?: null,
+        sticker: collect($article->getTags())->first()?->name,
+    ))->save($path);
 
-    $image = (new SimonHamp\TheOg\Image())
-        ->accentColor('#f97316')
-        ->url($article->getUrl())
-        ->title($article->getAlternateTitle())
-        ->description($article->synopsis ?? '')
-        ->background(new SimonHamp\TheOg\Theme\Background(storage_path('opengraph-background.png')))
-        ->layout(new OpengraphImageLayout)
-        ->border(BorderPosition::None)
-        ->save($article->getOpengraphImageLocalPath());
-
-    return response($image->toString())->header('Content-Type', 'image/png');
+    return response($png)->header('Content-Type', 'image/png');
 });
 
 Route::get('/{article:slug}.html', function (Article $article) {
