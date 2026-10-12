@@ -88,7 +88,9 @@ It works, probably, and something might have happened somewhere. But it doesn't 
 
 You don't need a redesign to fix that. A handful of tiny details, most of them a few lines of CSS, make a button feel alive. ==None of them change how it looks==, so they work just as well on a flat, minimal button as they do on a gold-trimmed "Play Game" button in a fantasy game.
 
-I made [a video walking through all of these](link to video), but here they all are with buttons you can actually press.
+I made [a video walking through all of these](https://www.youtube.com/watch?v=EimqTZUoS2Evideo), but here they all are with buttons you can actually press.
+
+<https://www.youtube.com/watch?v=EimqTZUoS2E>
 
 ## Cursor
 
