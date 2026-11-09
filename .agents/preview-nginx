@@ -23,6 +23,9 @@ http {
         listen 0.0.0.0:${PORT:?PORT is required};
         root "$PWD/public";
         location = /_preview/health { return 204; }
+        location /media/ {
+            try_files \$uri =404;
+        }
         location /storage/ {
             try_files \$uri =404;
         }

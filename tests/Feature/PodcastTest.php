@@ -38,7 +38,7 @@ class PodcastTest extends TestCase
     {
         config([
             'app.url' => 'https://podcasts.example.com/',
-            'filesystems.disks.public.url' => 'https://podcasts.example.com/storage',
+            'filesystems.disks.public.url' => 'https://podcasts.example.com/media',
         ]);
         $this->show('brain-dump', ['explicit' => true]);
         $this->show('another-show');
@@ -64,7 +64,7 @@ class PodcastTest extends TestCase
         $this->assertSame('Soup & cookies 🧠', (string) $item->title);
         $this->assertSame('A < B & C > D', (string) $item->description);
         $this->assertSame('Wed, 23 Jul 2025 15:00:00 +0000', (string) $item->pubDate);
-        $this->assertSame('https://podcasts.example.com/storage/podcasts/brain-dump/original-guid.mp3', (string) $item->enclosure['url']);
+        $this->assertSame('https://podcasts.example.com/media/podcasts/brain-dump/original-guid.mp3', (string) $item->enclosure['url']);
         $this->assertSame('123456', (string) $item->enclosure['length']);
         $this->assertSame('audio/mpeg', (string) $item->enclosure['type']);
         $itunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');

@@ -1,6 +1,6 @@
 # Publishing podcasts
 
-Podcast metadata lives in `content/podcasts/<slug>.md`. Episodes live in the flat `content/podcast_episodes/<guid>.md` folder. Commit Markdown, MP3s and artwork together. Podcast media is tracked under `storage/app/public/podcasts/`; other application storage remains ignored. MP3s use ordinary Git binary files, not Git LFS. GUIDs are permanent, including when you change a title or slug.
+Podcast metadata lives in `content/podcasts/<slug>.md`. Episodes live in the flat `content/podcast_episodes/<guid>.md` folder. Commit Markdown, MP3s and artwork together. Podcast media is tracked under `public/media/podcasts/`; application storage remains ignored. MP3s use ordinary Git binary files, not Git LFS. GUIDs are permanent, including when you change a title or slug.
 
 ## Requirements
 
@@ -8,10 +8,9 @@ Use PHP 8.5 with XML, DOM, fileinfo and SQLite, and install `ffprobe` from FFmpe
 
 ```sh
 ffprobe -version
-php artisan storage:link
 ```
 
-The `public` disk must be local storage, normally `storage/app/public`. A Git checkout includes the committed podcast media. `public/storage` must link to the public disk, and `APP_URL` must be the configured canonical public HTTPS origin, not a preview hostname. Feed and enclosure URLs must use that origin consistently. Audio URLs must stay stable. If deployment replaces `storage` with a shared directory, copy the release's tracked podcast media into that shared storage before switching releases; otherwise the symlink can hide the files from the checkout. Retain previously published media when deploying an older release.
+The `public` disk writes directly to `public/media`. A Git checkout includes the committed podcast media, served at `/media/podcasts/<show>/<file>`. No `public/storage` symlink, shared-storage copy step or PHP streaming controller is needed. `APP_URL` must be the configured canonical public HTTPS origin, not a preview hostname. Feed and enclosure URLs must use that origin consistently. Audio URLs must stay stable. Retain previously published media when deploying an older release.
 
 ## Import Brain Dump
 
@@ -40,7 +39,7 @@ php artisan podcast:make-episode brain-dump 'A new episode'
 php artisan podcast:prepare-audio YOUR-EPISODE-UUID /absolute/path/episode.mp3
 ```
 
-The first command writes a draft with an explicit `published_at: null`, editable summary/show-notes placeholders and empty audio defaults. Later Orbit saves may omit null fields; an absent publication field is still a draft. Duplicate episode slugs within a show fail. The audio command copies to `podcasts/<show>/<guid>.mp3` on the public disk, records the exact bytes and MIME type, and rounds `ffprobe` duration to whole seconds, with a minimum of one second. It accepts MP3 audio only. Rerunning with identical bytes is safe; different bytes at an existing destination fail. Review any replacement deliberately rather than silently changing a published enclosure. Commit the generated MP3, any artwork and the episode Markdown together. Draft pages are hidden, but files in public storage and tracked Git history are not private.
+The first command writes a draft with an explicit `published_at: null`, editable summary/show-notes placeholders and empty audio defaults. Later Orbit saves may omit null fields; an absent publication field is still a draft. Duplicate episode slugs within a show fail. The audio command copies to `public/media/podcasts/<show>/<guid>.mp3`, records the exact bytes and MIME type, and rounds `ffprobe` duration to whole seconds, with a minimum of one second. It accepts MP3 audio only. Rerunning with identical bytes is safe; different bytes at an existing destination fail. Review any replacement deliberately rather than silently changing a published enclosure. Commit the generated MP3, any artwork and the episode Markdown together. Draft pages are hidden, but files under `public/` and tracked Git history are not private.
 
 Edit the episode Markdown's summary, show notes and optional episode/season numbers. Keep `episode_type` as `full`, `trailer` or `bonus`. `explicit: null` inherits the show setting. Optional artwork overrides the show artwork. Artwork must be square JPEG or PNG, at least 1400 pixels on each side. Use a timestamp with an explicit UTC offset, for example `published_at: '2026-11-10T09:00:00+00:00'`. An omitted/null publication date is a draft; a future date is scheduled. Storage and feed timestamps use UTC, while human-readable dates display in `Europe/London`, including daylight saving time.
 
@@ -79,10 +78,10 @@ Place artwork on the public disk, then use `podcast:make-episode another-show 'F
 
 ## Deploy and verify delivery
 
-Deploy the application, Markdown and tracked `storage/app/public/podcasts/` files from the same commit. No separate Transistor download is needed for a fresh checkout. If the host uses shared storage, copy the tracked media into it **before** activating the release; preserve existing files and do not use a destructive sync. Then rebuild Orbit's cache and validate:
+Deploy the application, Markdown and tracked `public/media/podcasts/` files from the same commit. No separate Transistor download or storage link is needed for a fresh checkout. The initial `/storage/podcasts/` layout was replaced because it depended on deployment-specific storage links. Current page and feed URLs use `/media/podcasts/`. Set production `APP_URL=https://liamhammett.com`, refresh cached filesystem configuration, rebuild Orbit's cache and validate:
 
 ```sh
-php artisan storage:link
+php artisan config:cache
 php artisan orbit:clear
 php artisan orbit:cache
 php artisan podcast:validate
@@ -92,11 +91,11 @@ Use your actual public feed and enclosure URLs for these checks:
 
 ```sh
 curl -fI 'https://your-site.example/podcasts/brain-dump/feed.xml'
-curl -fI 'https://your-site.example/storage/podcasts/brain-dump/EPISODE-GUID.mp3'
+curl -fI 'https://your-site.example/media/podcasts/brain-dump/EPISODE-GUID.mp3'
 curl -fsS -D - -o /dev/null -H 'Range: bytes=0-1023' \
-  'https://your-site.example/storage/podcasts/brain-dump/EPISODE-GUID.mp3'
+  'https://your-site.example/media/podcasts/brain-dump/EPISODE-GUID.mp3'
 ```
 
-Confirm HEAD returns 200, the feed has an RSS XML content type, and audio reports `audio/mpeg` and the exact `Content-Length`. The range request must return **206 Partial Content**, `Content-Range: bytes 0-1023/<total>`, and 1024 bytes. Configure the web server or CDN to serve public storage directly with byte ranges and HEAD support. Avoid authentication, forced download interstitials or HTML error pages at media URLs.
+Confirm HEAD returns 200, the feed has an RSS XML content type, and audio reports `audio/mpeg` and the exact `Content-Length`. The range request must return **206 Partial Content**, `Content-Range: bytes 0-1023/<total>`, and 1024 bytes. Configure the web server or CDN to serve `public/media/` directly with byte ranges and HEAD support. Avoid authentication, forced download interstitials or HTML error pages at media URLs.
 
-Keep an off-server backup of the repository and any shared `storage/app/public/podcasts/` files, plus the ignored `storage/app/podcast-imports/` snapshots and manifests. Check checksums and periodically restore a backup into a separate environment. Git includes committed media, but not uncommitted uploads or import snapshots. Directory submission, feed ownership verification, redirects and any Transistor cancellation remain separate follow-up work.
+Keep an off-server backup of the repository, plus the ignored `storage/app/podcast-imports/` snapshots and manifests. Check checksums and periodically restore a backup into a separate environment. Git includes committed media, but not uncommitted uploads or import snapshots. Directory submission, feed ownership verification, redirects and any Transistor cancellation remain separate follow-up work.

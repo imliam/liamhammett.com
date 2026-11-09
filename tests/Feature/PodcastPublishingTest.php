@@ -19,8 +19,11 @@ class PodcastPublishingTest extends TestCase
     {
         $this->temporary = sys_get_temp_dir().'/podcast-publishing-'.bin2hex(random_bytes(8));
         mkdir($this->temporary.'/framework/views', 0777, true);
+        mkdir($this->temporary.'/public/media', 0777, true);
+        mkdir($this->temporary.'/app/public', 0777, true);
         $app = require dirname(__DIR__, 2).'/bootstrap/app.php';
         $app->useStoragePath($this->temporary);
+        $app->usePublicPath($this->temporary.'/public');
         $this->traitsUsedByTest = array_flip(class_uses_recursive(static::class));
         $app->make(Kernel::class)->bootstrap();
 
@@ -32,7 +35,6 @@ class PodcastPublishingTest extends TestCase
         parent::setUp();
         config(['orbit.paths.content' => $this->temporary.'/content', 'orbit.paths.cache' => $this->temporary.'/orbit']);
         Podcast::clearBootedModels();
-        Storage::fake('public');
         Http::preventStrayRequests();
     }
 
@@ -99,6 +101,25 @@ class PodcastPublishingTest extends TestCase
         $episode->refresh();
         Storage::disk('public')->put($episode->audio_path, 'truncated');
         $this->artisan('podcast:validate')->assertFailed();
+    }
+
+    public function test_prepared_media_is_directly_public_without_a_storage_symlink(): void
+    {
+        $show = $this->show();
+        $this->artisan('podcast:make-episode', ['podcast' => 'test-show', 'title' => 'Episode'])->assertSuccessful();
+        $episode = PodcastEpisode::firstOrFail();
+        $source = $this->mp3();
+        $this->artisan('podcast:prepare-audio', ['guid' => $episode->guid, 'file' => $source])->assertSuccessful();
+        Storage::disk('public')->put($show->artwork, $this->art());
+        $episode->refresh();
+
+        // A static web server resolves these URLs beneath public/, not shared storage.
+        foreach ([$episode->getAudioUrl() => file_get_contents($source), $show->getArtworkUrl() => Storage::disk('public')->get($show->artwork)] as $url => $bytes) {
+            $path = public_path(ltrim(parse_url($url, PHP_URL_PATH), '/'));
+            $this->assertFileExists($path);
+            $this->assertSame($bytes, file_get_contents($path));
+        }
+        $this->assertFileDoesNotExist(public_path('storage'));
     }
 
     public function test_scheduled_media_must_exist_before_release_but_draft_placeholders_are_allowed(): void
