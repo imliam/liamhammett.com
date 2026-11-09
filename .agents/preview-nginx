@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+runtime="$PWD/storage/framework/cache/nginx"
+mkdir -p "$runtime"
+
+# Match production static-file delivery, including HEAD and byte-range requests.
+cat > "$runtime/nginx.conf" <<EOF
+worker_processes 1;
+pid "$runtime/nginx.pid";
+error_log stderr;
+events { worker_connections 128; }
+http {
+    include /etc/nginx/mime.types;
+    access_log off;
+    client_body_temp_path "$runtime/client";
+    proxy_temp_path "$runtime/proxy";
+    fastcgi_temp_path "$runtime/fastcgi";
+    uwsgi_temp_path "$runtime/uwsgi";
+    scgi_temp_path "$runtime/scgi";
+    server {
+        listen 0.0.0.0:${PORT:?PORT is required};
+        root "$PWD/public";
+        location = /_preview/health { return 204; }
+        location /storage/ {
+            try_files \$uri =404;
+        }
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_set_header Host \$http_host;
+            proxy_set_header X-Forwarded-Proto \$scheme;
+        }
+    }
+}
+EOF
+
+exec /usr/sbin/nginx -p "$runtime/" -c "$runtime/nginx.conf" -g 'daemon off;'

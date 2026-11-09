@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Article;
+use App\Http\Controllers\PodcastController;
 use App\Utilities\JellyOpengraphImage;
 use App\ValueObjects\Tag;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,11 @@ Route::get('/tags/{tag}', function (string $tag) {
 });
 
 Route::feeds();
+
+Route::get('/podcasts', [PodcastController::class, 'index'])->name('podcasts.index');
+Route::get('/podcasts/{podcast}/feed.xml', [PodcastController::class, 'feed'])->withoutMiddleware('web')->name('podcasts.feed');
+Route::get('/podcasts/{podcast}/episodes/{episode}', [PodcastController::class, 'episode'])->name('podcasts.episodes.show');
+Route::get('/podcasts/{podcast}', [PodcastController::class, 'show'])->name('podcasts.show');
 
 require_once __DIR__ . '/redirects.php';
 

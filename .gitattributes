@@ -4,6 +4,7 @@
 *.css diff=css
 *.html diff=html
 *.md diff=markdown
+*.mp3 binary
 *.php diff=php
 
 /.github export-ignore
