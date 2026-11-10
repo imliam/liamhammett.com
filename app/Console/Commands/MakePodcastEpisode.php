@@ -33,6 +33,7 @@ class MakePodcastEpisode extends PodcastCommand
             'audio_type' => 'audio/mpeg', 'duration' => 0,
             'episode_number' => null, 'season_number' => null,
             'episode_type' => 'full', 'explicit' => null, 'artwork' => null,
+            'transcript' => '', 'chapters' => [],
             'content' => 'Write episode show notes here.',
         ])->save();
         // Orbit omits nulls; make the publication switch visible to the editor.

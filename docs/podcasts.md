@@ -50,6 +50,36 @@ php artisan podcast:validate
 
 Validation checks metadata for drafts too. Any dated show needs valid artwork, and any dated episode under a dated show needs valid audio before deployment, including future scheduled releases. A null-dated show's media and a null-dated episode's empty audio path, zero bytes and zero duration are intentional draft placeholders. Validation checks local files, not HTTP delivery. Commands rebuild the two Orbit model tables from Markdown before working, so manual edits are read even with a stale production cache. Run one publishing command at a time.
 
+## Transcripts and chapters
+
+Both are optional episode frontmatter fields. The Markdown body remains the show notes. For example, add this inside an episode's existing frontmatter:
+
+```yaml
+transcript: |
+  **Liam:** Welcome to the show.
+
+  This is the next paragraph of the transcript.
+chapters:
+  - startTime: 0
+    title: Introduction
+  - startTime: 63.5
+    title: The main discussion
+```
+
+Write transcripts as Markdown, with speaker names where useful. They appear below the episode's show notes and at `/podcasts/<show>/episodes/<episode>/transcript`. Raw HTML and unsafe links are stripped. RSS advertises this HTML page with [`podcast:transcript`](https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/tags/transcript.md). This is an untimed transcript, not synchronized captions. There is no automatic transcription, and existing Brain Dump episodes have no transcript until one is supplied and reviewed.
+
+Chapter `startTime` values are unquoted numbers of seconds from the start, including fractions. Titles must be nonempty, times nonnegative and strictly increasing, and each chapter must start before the episode ends. `podcast:validate` checks these rules, including for drafts with a known duration. The first chapter need not start at zero. Version one supports titles and times only, not chapter images or links.
+
+Chapter links seek and start the native audio player. The current chapter is highlighted as playback progresses, including after seeking backward. Without JavaScript, the links open the MP3 at the chapter's media-fragment time. RSS links to `/podcasts/<show>/episodes/<episode>/chapters.json` using [`podcast:chapters`](https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/tags/chapters.md); the endpoint returns Podcasting 2.0 chapter JSON, version 1.2.0. Podcast-app support varies. Empty transcript/chapters fields create no RSS tags or resource pages. Drafts and scheduled episodes cannot be accessed through these endpoints before publication.
+
+## Embed an episode
+
+Open an episode page, expand **Embed this episode**, and copy the iframe HTML into another website. The public `/podcasts/<show>/episodes/<episode>/embed` page has a compact player, chapter navigation when available, and a transcript link. It does not load the site's navigation, Google Analytics or account/session middleware. It never autoplays. Episode and embed players use `preload="metadata"` on the direct media URL so browsers can show the duration before playback without recording a download. On the first Play, JavaScript switches to the tracked URL, preserving any chapter or seek position. Simply loading an iframe does not count a download. Browsers may decline metadata preloading, especially in data-saving modes, and playback without JavaScript uses the untracked media URL. The show listing retains `preload="none"` to avoid preloading every episode at once.
+
+The default iframe is full-width and 400 pixels high. Adjust its height to suit the host website and long episode titles. Chapter lists scroll within the player. Keep the iframe `title` for accessibility. If your website adds `sandbox`, it must allow the player's scripts and same-origin resources for chapter controls to work.
+
+Only the embed response sends `Content-Security-Policy: frame-ancestors *`, permitting cross-origin framing. Modern browsers use this directive instead of `X-Frame-Options: SAMEORIGIN`, so the site's other pages retain their existing frame protection. If the production web server or CDN adds another CSP with a restrictive `frame-ancestors`, make an exception for the `/podcasts/<show>/episodes/<episode>/embed` route only. Multiple CSP headers restrict together, rather than overriding each other. Do not remove frame protection site-wide. After deploying, check the actual headers and play an episode inside an iframe on a different origin; a direct visit to the embed URL does not prove embedding works.
+
 ## Add another show
 
 Create `content/podcasts/another-show.md`, using a new permanent UUID. No database migration or code change is needed:
@@ -99,3 +129,41 @@ curl -fsS -D - -o /dev/null -H 'Range: bytes=0-1023' \
 Confirm HEAD returns 200, the feed has an RSS XML content type, and audio reports `audio/mpeg` and the exact `Content-Length`. The range request must return **206 Partial Content**, `Content-Range: bytes 0-1023/<total>`, and 1024 bytes. Configure the web server or CDN to serve `public/media/` directly with byte ranges and HEAD support. Avoid authentication, forced download interstitials or HTML error pages at media URLs.
 
 Keep an off-server backup of the repository, plus the ignored `storage/app/podcast-imports/` snapshots and manifests. Check checksums and periodically restore a backup into a separate environment. Git includes committed media, but not uncommitted uploads or import snapshots. Directory submission, feed ownership verification, redirects and any Transistor cancellation remain separate follow-up work.
+
+## PHP-side download analytics
+
+Tracking is opt-in. With `PODCAST_X_ACCEL_REDIRECT=true`, feeds, website players and download links use the stable `/podcast-audio/<episode-guid>` endpoint. Laravel checks that the show and episode are published, records an eligible request, then sends `X-Accel-Redirect`. Nginx serves the MP3, including HEAD and byte ranges. PHP never streams the audio. GUIDs, enclosure lengths and media files do not change. Existing `/media/` URLs still work but bypass analytics, including URLs already cached by podcast apps.
+
+### Enable on the production server
+
+1. Back up the application database. It must persist between releases, independently of Orbit's rebuildable Markdown cache. Run `php artisan migrate --force` during deployment.
+2. Add this location inside the site's existing Nginx `server` block. Replace the alias with the absolute **current release** media directory, keeping both trailing slashes. Do not replace the site's PHP-FPM configuration.
+
+```nginx
+location ^~ /_podcast_media/ {
+    internal;
+    alias /home/forge/liamhammett.com/current/public/media/;
+}
+```
+
+3. Ensure `/podcast-audio/` reaches Laravel through the normal front controller. Do not cache that endpoint in Nginx, a reverse proxy or a CDN. Nginx must honor upstream `X-Accel-Redirect`, not ignore or strip it. Test the configuration with `nginx -t`, then reload Nginx through your server's deployment tooling.
+4. Set `PODCAST_X_ACCEL_REDIRECT=true` and run `php artisan config:cache`. The default is `false`, so code-only deployments keep working without this Nginx rule. Keep the rule installed if tracking is later disabled, because apps may retain the tracked URLs. Disabling the flag makes those URLs return 503; re-enable it to restore them.
+5. Check the new feed enclosure, HEAD, full GET, seeking and ranges. The public internal path `/_podcast_media/podcasts/...` must return 404. The tracked URL must return MP3 bytes, **not an empty 200** or a leaked `X-Accel-Redirect` header. A PHP development server alone cannot perform the handoff. The repository's Nginx preview supports it.
+6. Run Laravel's scheduler every minute, normally `* * * * * cd /path/to/current && php artisan schedule:run >> /dev/null 2>&1`. The daily `podcast:prune-analytics` task deletes fingerprints older than 72 hours and daily counts older than 13 months. You can also run that command manually.
+
+If PHP runs behind trusted proxies, configure Laravel's trusted proxy addresses to match the actual deployment so `Request::ip()` identifies the client. Never trust arbitrary forwarded headers from the Internet. Without correct proxy configuration many listeners can share the proxy's address, causing undercounting. The preview proxy deliberately does not trust user-supplied forwarded addresses.
+
+### Read the counts
+
+```sh
+php artisan podcast:stats
+php artisan podcast:stats brain-dump --days=90
+```
+
+The report totals estimated download requests per episode GUID across the selected UTC calendar days, including today. It is private CLI output, not a public analytics page. Database backups must include the two `podcast_download_*` tables. There is no historical backfill for audio downloaded before tracking was enabled.
+
+A qualifying GET counts once per episode/client combination in a rolling 24-hour window. Concurrent requests claim that window with an atomic database write. The client key is an episode-specific HMAC of the IP address and user agent using `APP_KEY`; IPv6 addresses share a /64 key. No raw IP, raw user agent or durable cross-episode listener identifier is stored by this feature. Changing `APP_KEY` resets deduplication identities. Your web server or CDN may independently keep access logs; review their retention separately.
+
+HEAD, empty user agents, obvious bots, conditional requests, malformed/multiple ranges, unsatisfiable ranges and explicit one/two-byte probes do not count. Other valid ranges can count, including a seek. Failed analytics queries are logged without blocking audio delivery. Monitor application errors so database failures do not silently leave gaps in reporting.
+
+These are **estimated download requests**, not confirmed plays, unique people, bytes delivered, completion rates or IAB-certified downloads. PHP records the request before Nginx delivers the file, so interrupted downloads or a later Nginx failure can still count. Shared addresses, user-agent changes, bot detection and app-side caches affect the estimate. Spotify or other services that fetch once and redistribute can hide individual listeners entirely. Do not use these numbers as certified advertising measurements.

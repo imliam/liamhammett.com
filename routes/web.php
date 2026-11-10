@@ -57,8 +57,12 @@ Route::get('/tags/{tag}', function (string $tag) {
 
 Route::feeds();
 
+Route::get('/podcast-audio/{episode}', [PodcastController::class, 'audio'])->where('episode', '[A-Za-z0-9_-]+')->withoutMiddleware('web')->name('podcasts.audio');
 Route::get('/podcasts', [PodcastController::class, 'index'])->name('podcasts.index');
 Route::get('/podcasts/{podcast}/feed.xml', [PodcastController::class, 'feed'])->withoutMiddleware('web')->name('podcasts.feed');
+Route::get('/podcasts/{podcast}/episodes/{episode}/transcript', [PodcastController::class, 'transcript'])->withoutMiddleware('web')->name('podcasts.episodes.transcript');
+Route::get('/podcasts/{podcast}/episodes/{episode}/chapters.json', [PodcastController::class, 'chapters'])->withoutMiddleware('web')->name('podcasts.episodes.chapters');
+Route::get('/podcasts/{podcast}/episodes/{episode}/embed', [PodcastController::class, 'embed'])->withoutMiddleware('web')->name('podcasts.episodes.embed');
 Route::get('/podcasts/{podcast}/episodes/{episode}', [PodcastController::class, 'episode'])->name('podcasts.episodes.show');
 Route::get('/podcasts/{podcast}', [PodcastController::class, 'show'])->name('podcasts.show');
 

@@ -22,7 +22,12 @@ http {
     server {
         listen 0.0.0.0:${PORT:?PORT is required};
         root "$PWD/public";
+        add_header X-Frame-Options SAMEORIGIN always;
         location = /_preview/health { return 204; }
+        location ^~ /_podcast_media/ {
+            internal;
+            alias "$PWD/public/media/";
+        }
         location /media/ {
             try_files \$uri =404;
         }

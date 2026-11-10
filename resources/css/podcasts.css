@@ -197,6 +197,123 @@
     margin-block: 1.5rem;
 }
 
+.dir-jelly .podcast-chapters {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.dir-jelly .podcast-chapters a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.dir-jelly .podcast-chapters a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.dir-jelly .podcast-chapters a[aria-current] {
+    background: var(--j-ink);
+    color: var(--j-cream);
+}
+
+.dir-jelly .podcast-chapter-time {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.dir-jelly .podcast-episode-tools {
+    margin-top: 1.75rem;
+}
+
+.dir-jelly .podcast-embed-code {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.dir-jelly .podcast-embed-code summary {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.dir-jelly .podcast-embed-code label {
+    display: block;
+    margin-block: 1rem 0.5rem;
+}
+
+.dir-jelly .podcast-embed-code textarea {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    background: var(--j-cream);
+    border: 1px solid var(--j-ink-soft);
+    border-radius: 0.5rem;
+    font-family: monospace;
+    font-size: 0.8rem;
+    resize: vertical;
+}
+
+.dir-jelly :is(.podcast-main, .podcast-embed) :is(summary, textarea, a, audio):focus-visible {
+    outline: 3px solid var(--j-ink);
+    outline-offset: 3px;
+}
+
+.dir-jelly .podcast-player-status {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.dir-jelly .podcast-embed {
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.dir-jelly .podcast-embed-head {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dir-jelly .podcast-embed-head img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.dir-jelly .podcast-embed-head h1 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 0.4rem;
+    overflow-wrap: anywhere;
+}
+
+.dir-jelly .podcast-embed audio {
+    width: 100%;
+    display: block;
+    color-scheme: light;
+}
+
+.dir-jelly .podcast-embed .podcast-chapters {
+    max-height: 7rem;
+    overflow-y: auto;
+    scrollbar-color: var(--j-ink-soft) var(--j-cream);
+}
+
+.dir-jelly .podcast-embed > .podcast-text-link {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
 @media (max-width: 640px) {
     .dir-jelly .jelly-nav {
         flex-wrap: wrap;

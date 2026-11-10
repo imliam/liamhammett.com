@@ -44,6 +44,8 @@ class PodcastEpisode extends Model
         $table->string('episode_type')->default('full');
         $table->boolean('explicit')->nullable();
         $table->string('artwork')->nullable();
+        $table->text('transcript')->default('');
+        $table->json('chapters')->nullable();
         $table->unique(['podcast_slug', 'slug']);
     }
 
@@ -56,6 +58,7 @@ class PodcastEpisode extends Model
             'duration' => 'integer',
             'episode_number' => 'integer',
             'season_number' => 'integer',
+            'chapters' => 'array',
         ];
     }
 
@@ -64,6 +67,11 @@ class PodcastEpisode extends Model
         // Orbit's bulk import bypasses the constructor that initialises Eloquent casts.
         if ($key === 'published_at' && $value !== null && ! is_numeric($value)) {
             $value = Carbon::parse($value)->timestamp;
+        }
+        if ($key === 'chapters' && is_array($value)) {
+            $this->attributes[$key] = json_encode($value, JSON_THROW_ON_ERROR);
+
+            return $this;
         }
 
         return parent::setAttribute($key, $value);
@@ -84,8 +92,12 @@ class PodcastEpisode extends Model
         return rtrim(config('app.url'), '/').route('podcasts.episodes.show', ['podcast' => $this->podcast_slug, 'episode' => $this->slug], false);
     }
 
-    public function getAudioUrl(): string
+    public function getAudioUrl(bool $track = true): string
     {
+        if ($track && config('podcasts.x_accel_redirect')) {
+            return rtrim(config('app.url'), '/').route('podcasts.audio', ['episode' => $this->guid], false);
+        }
+
         return url(Storage::disk('public')->url($this->audio_path));
     }
 
@@ -94,6 +106,34 @@ class PodcastEpisode extends Model
         return $this->artwork
             ? url(Storage::disk('public')->url($this->artwork))
             : $this->podcast->getArtworkUrl();
+    }
+
+    public function getTranscriptUrl(): string
+    {
+        return $this->getUrl().'/transcript';
+    }
+
+    public function getChaptersUrl(): string
+    {
+        return $this->getUrl().'/chapters.json';
+    }
+
+    public function getEmbedUrl(): string
+    {
+        return $this->getUrl().'/embed';
+    }
+
+    public function hasTranscript(): bool
+    {
+        return trim($this->transcript ?? '') !== '';
+    }
+
+    public function renderTranscript(): string
+    {
+        return Str::markdown($this->transcript ?? '', [
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
     }
 
     public function formattedDuration(): string

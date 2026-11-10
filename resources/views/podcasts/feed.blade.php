@@ -35,6 +35,12 @@
                 <content:encoded>{{ $episode->render() }}</content:encoded>
                 <enclosure url="{{ $episode->getAudioUrl() }}" length="{{ $episode->audio_bytes }}" type="{{ $episode->audio_type }}" />
                 <itunes:duration>{{ $episode->duration }}</itunes:duration>
+                @if ($episode->hasTranscript())
+                    <podcast:transcript url="{{ $episode->getTranscriptUrl() }}" type="text/html" />
+                @endif
+                @if ($episode->chapters)
+                    <podcast:chapters url="{{ $episode->getChaptersUrl() }}" type="application/json+chapters" />
+                @endif
                 <itunes:episodeType>{{ $episode->episode_type }}</itunes:episodeType>
                 <itunes:explicit>{{ ($episode->explicit ?? $podcast->explicit) ? 'true' : 'false' }}</itunes:explicit>
                 @if ($episode->episode_number !== null)

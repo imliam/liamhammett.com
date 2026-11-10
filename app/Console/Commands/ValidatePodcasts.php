@@ -60,7 +60,20 @@ class ValidatePodcasts extends PodcastCommand
                             'title' => 'required|string', 'episode_type' => 'required|in:full,trailer,bonus',
                             'episode_number' => 'nullable|integer|min:1', 'season_number' => 'nullable|integer|min:1',
                             'explicit' => 'nullable|boolean',
+                            'transcript' => 'nullable|string',
+                            'chapters' => 'nullable|array|list',
+                            'chapters.*' => 'required|array:startTime,title',
+                            'chapters.*.startTime' => 'required|numeric|min:0',
+                            'chapters.*.title' => 'required|string',
                         ]);
+                        $previous = -1;
+                        foreach ($episode->chapters ?? [] as $chapter) {
+                            $start = $chapter['startTime'];
+                            if ((! is_int($start) && ! is_float($start)) || ! is_finite((float) $start) || $start <= $previous || ($episode->duration > 0 && $start >= $episode->duration)) {
+                                throw new RuntimeException('Chapter startTime must be a number in seconds, strictly increasing and before the end of the episode.');
+                            }
+                            $previous = $start;
+                        }
                         if ($showDated && $episode->published_at !== null) {
                             if (trim($episode->summary ?? '') === '') {
                                 throw new RuntimeException('Published or scheduled episode needs a summary.');

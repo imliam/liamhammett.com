@@ -12,3 +12,4 @@ services:
     env:
       APP_URL: ${services.web.publicURL}
       ASSET_URL: ${services.web.publicURL}
+      PODCAST_X_ACCEL_REDIRECT: "true"

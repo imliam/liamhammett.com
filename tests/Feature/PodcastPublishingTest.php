@@ -114,7 +114,7 @@ class PodcastPublishingTest extends TestCase
         $episode->refresh();
 
         // A static web server resolves these URLs beneath public/, not shared storage.
-        foreach ([$episode->getAudioUrl() => file_get_contents($source), $show->getArtworkUrl() => Storage::disk('public')->get($show->artwork)] as $url => $bytes) {
+        foreach ([Storage::disk('public')->url($episode->audio_path) => file_get_contents($source), $show->getArtworkUrl() => Storage::disk('public')->get($show->artwork)] as $url => $bytes) {
             $path = public_path(ltrim(parse_url($url, PHP_URL_PATH), '/'));
             $this->assertFileExists($path);
             $this->assertSame($bytes, file_get_contents($path));
@@ -136,6 +136,33 @@ class PodcastPublishingTest extends TestCase
             'audio_path' => 'podcasts/test-show/missing.mp3',
         ])->save();
         $this->artisan('podcast:validate')->expectsOutputToContain('missing or unreadable')->assertFailed();
+    }
+
+    public function test_chapter_validation_requires_ordered_numeric_times_and_nonempty_titles(): void
+    {
+        $this->show();
+        $this->artisan('podcast:make-episode', ['podcast' => 'test-show', 'title' => 'Episode'])->assertSuccessful();
+        $episode = PodcastEpisode::firstOrFail();
+        $episode->forceFill([
+            'duration' => 90,
+            'transcript' => '**Liam:** A Markdown transcript.',
+            'chapters' => [['startTime' => 0, 'title' => 'Intro'], ['startTime' => 89.5, 'title' => 'Conclusion']],
+        ])->save();
+        $this->artisan('podcast:validate')->assertSuccessful();
+        foreach ([
+            [['startTime' => 90, 'title' => 'Beyond the end']],
+            [['startTime' => -1, 'title' => 'Negative']],
+            [['startTime' => 5, 'title' => 'First'], ['startTime' => 5, 'title' => 'Duplicate']],
+            [['startTime' => 15, 'title' => 'Later'], ['startTime' => 2, 'title' => 'Earlier']],
+            [['startTime' => '12.5', 'title' => 'String instead of JSON number']],
+            [['startTime' => 0, 'title' => '  ']],
+            [['startTime' => 0]],
+            ['not a chapter'],
+        ] as $chapters) {
+            $episode->chapters = $chapters;
+            $episode->save();
+            $this->artisan('podcast:validate')->assertFailed();
+        }
     }
 
     public function test_import_preserves_guids_instants_notes_and_existing_edits_on_repeat(): void

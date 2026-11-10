@@ -1,5 +1,6 @@
 import setScrollbarWidth from 'set-scrollbar-width';
 import './bootstrap';
+import './podcast-player';
 import Alpine from 'alpinejs'
 import Clipboard from "@ryangjchandler/alpine-clipboard"
 import goo from './goo'
